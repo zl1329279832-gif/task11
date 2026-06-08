@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.clinic.appointment.mapper.DepartmentMapper">
+
+    <insert id="insert" parameterType="com.clinic.appointment.model.entity.Department"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO department (name, code, description, enabled)
+        VALUES (#{name}, #{code}, #{description}, #{enabled})
+    </insert>
+
+    <update id="update" parameterType="com.clinic.appointment.model.entity.Department">
+        UPDATE department
+        SET name = #{name},
+            code = #{code},
+            description = #{description},
+            enabled = #{enabled},
+            updated_at = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectById" resultType="com.clinic.appointment.model.entity.Department">
+        SELECT id, name, code, description, enabled, created_at, updated_at
+        FROM department
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectAll" resultType="com.clinic.appointment.model.entity.Department">
+        SELECT id, name, code, description, enabled, created_at, updated_at
+        FROM department
+    </select>
+
+    <select id="selectByCode" resultType="com.clinic.appointment.model.entity.Department">
+        SELECT id, name, code, description, enabled, created_at, updated_at
+        FROM department
+        WHERE code = #{code}
+    </select>
+
+</mapper>

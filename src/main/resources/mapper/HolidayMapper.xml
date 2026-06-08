@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.clinic.appointment.mapper.HolidayMapper">
+
+    <insert id="insert" parameterType="com.clinic.appointment.model.entity.Holiday"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO holiday (holiday_date, name)
+        VALUES (#{holidayDate}, #{name})
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM holiday
+        WHERE id = #{id}
+    </delete>
+
+    <select id="selectById" resultType="com.clinic.appointment.model.entity.Holiday">
+        SELECT id, holiday_date, name, created_at
+        FROM holiday
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectByDate" resultType="com.clinic.appointment.model.entity.Holiday">
+        SELECT id, holiday_date, name, created_at
+        FROM holiday
+        WHERE holiday_date = #{holidayDate}
+    </select>
+
+    <select id="selectByDateRange" resultType="com.clinic.appointment.model.entity.Holiday">
+        SELECT id, holiday_date, name, created_at
+        FROM holiday
+        WHERE holiday_date &gt;= #{startDate} AND holiday_date &lt;= #{endDate}
+    </select>
+
+    <select id="selectAll" resultType="com.clinic.appointment.model.entity.Holiday">
+        SELECT id, holiday_date, name, created_at
+        FROM holiday
+    </select>
+
+</mapper>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.clinic.appointment.mapper.SuspensionMapper">
+
+    <insert id="insert" parameterType="com.clinic.appointment.model.entity.Suspension"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO suspension (doctor_id, schedule_id, suspend_date, period, reason,
+                                action_taken, target_doctor_id)
+        VALUES (#{doctorId}, #{scheduleId}, #{suspendDate}, #{period}, #{reason},
+                #{actionTaken}, #{targetDoctorId})
+    </insert>
+
+    <update id="update" parameterType="com.clinic.appointment.model.entity.Suspension">
+        UPDATE suspension
+        SET doctor_id = #{doctorId},
+            schedule_id = #{scheduleId},
+            suspend_date = #{suspendDate},
+            period = #{period},
+            reason = #{reason},
+            action_taken = #{actionTaken},
+            target_doctor_id = #{targetDoctorId},
+            updated_at = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectById" resultType="com.clinic.appointment.model.entity.Suspension">
+        SELECT id, doctor_id, schedule_id, suspend_date, period, reason,
+               action_taken, target_doctor_id, created_at, updated_at
+        FROM suspension
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectByDoctorAndDate" resultType="com.clinic.appointment.model.entity.Suspension">
+        SELECT id, doctor_id, schedule_id, suspend_date, period, reason,
+               action_taken, target_doctor_id, created_at, updated_at
+        FROM suspension
+        WHERE doctor_id = #{doctorId} AND suspend_date = #{suspendDate}
+    </select>
+
+</mapper>

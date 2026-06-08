@@ -1,0 +1,6 @@
+com\clinic\appointment\TestConfig.class
+com\clinic\appointment\WaitlistBackfillTest$TestData.class
+com\clinic\appointment\ConcurrentBookingTest.class
+com\clinic\appointment\SuspensionMigrationTest.class
+com\clinic\appointment\SuspensionMigrationTest$TestScheduleData.class
+com\clinic\appointment\WaitlistBackfillTest.class

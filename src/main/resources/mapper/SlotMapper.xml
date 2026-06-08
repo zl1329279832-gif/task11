@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.clinic.appointment.mapper.SlotMapper">
+
+    <insert id="insert" parameterType="com.clinic.appointment.model.entity.Slot"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO slot (schedule_id, doctor_id, schedule_date, period, seq_num,
+                          start_time, end_time, status, is_extra, version)
+        VALUES (#{scheduleId}, #{doctorId}, #{scheduleDate}, #{period}, #{seqNum},
+                #{startTime}, #{endTime}, #{status}, #{isExtra}, #{version})
+    </insert>
+
+    <insert id="batchInsert" parameterType="java.util.List">
+        INSERT INTO slot (schedule_id, doctor_id, schedule_date, period, seq_num,
+                          start_time, end_time, status, is_extra, version)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.scheduleId}, #{item.doctorId}, #{item.scheduleDate}, #{item.period}, #{item.seqNum},
+             #{item.startTime}, #{item.endTime}, #{item.status}, #{item.isExtra}, #{item.version})
+        </foreach>
+    </insert>
+
+    <select id="selectById" resultType="com.clinic.appointment.model.entity.Slot">
+        SELECT id, schedule_id, doctor_id, schedule_date, period, seq_num,
+               start_time, end_time, status, is_extra, version, created_at, updated_at
+        FROM slot
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectByScheduleId" resultType="com.clinic.appointment.model.entity.Slot">
+        SELECT id, schedule_id, doctor_id, schedule_date, period, seq_num,
+               start_time, end_time, status, is_extra, version, created_at, updated_at
+        FROM slot
+        WHERE schedule_id = #{scheduleId}
+    </select>
+
+    <select id="selectAvailableByScheduleId" resultType="com.clinic.appointment.model.entity.Slot">
+        SELECT id, schedule_id, doctor_id, schedule_date, period, seq_num,
+               start_time, end_time, status, is_extra, version, created_at, updated_at
+        FROM slot
+        WHERE schedule_id = #{scheduleId} AND status = 'AVAILABLE'
+    </select>
+
+    <update id="updateStatus">
+        UPDATE slot
+        SET status = #{status},
+            version = version + 1,
+            updated_at = NOW()
+        WHERE id = #{id}
+          AND status = #{oldStatus}
+          AND version = #{version}
+    </update>
+
+    <select id="selectByDoctorAndDate" resultType="com.clinic.appointment.model.entity.Slot">
+        SELECT id, schedule_id, doctor_id, schedule_date, period, seq_num,
+               start_time, end_time, status, is_extra, version, created_at, updated_at
+        FROM slot
+        WHERE doctor_id = #{doctorId} AND schedule_date = #{scheduleDate}
+    </select>
+
+    <select id="countByScheduleIdAndStatus" resultType="int">
+        SELECT COUNT(*)
+        FROM slot
+        WHERE schedule_id = #{scheduleId} AND status = #{status}
+    </select>
+
+    <select id="selectByIdForUpdate" resultType="com.clinic.appointment.model.entity.Slot">
+        SELECT id, schedule_id, doctor_id, schedule_date, period, seq_num,
+               start_time, end_time, status, is_extra, version, created_at, updated_at
+        FROM slot
+        WHERE id = #{id}
+    </select>
+
+</mapper>

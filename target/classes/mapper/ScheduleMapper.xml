@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.clinic.appointment.mapper.ScheduleMapper">
+
+    <insert id="insert" parameterType="com.clinic.appointment.model.entity.Schedule"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO schedule (doctor_id, schedule_date, period, start_time, end_time,
+                              total_slots, booked_count, extra_slots, status, template_id)
+        VALUES (#{doctorId}, #{scheduleDate}, #{period}, #{startTime}, #{endTime},
+                #{totalSlots}, #{bookedCount}, #{extraSlots}, #{status}, #{templateId})
+    </insert>
+
+    <update id="update" parameterType="com.clinic.appointment.model.entity.Schedule">
+        UPDATE schedule
+        SET doctor_id = #{doctorId},
+            schedule_date = #{scheduleDate},
+            period = #{period},
+            start_time = #{startTime},
+            end_time = #{endTime},
+            total_slots = #{totalSlots},
+            booked_count = #{bookedCount},
+            extra_slots = #{extraSlots},
+            status = #{status},
+            template_id = #{templateId},
+            updated_at = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectById" resultType="com.clinic.appointment.model.entity.Schedule">
+        SELECT id, doctor_id, schedule_date, period, start_time, end_time,
+               total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at
+        FROM schedule
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectByDoctorAndDate" resultType="com.clinic.appointment.model.entity.Schedule">
+        SELECT id, doctor_id, schedule_date, period, start_time, end_time,
+               total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at
+        FROM schedule
+        WHERE doctor_id = #{doctorId} AND schedule_date = #{scheduleDate}
+    </select>
+
+    <select id="selectByDateRange" resultType="com.clinic.appointment.model.entity.Schedule">
+        SELECT id, doctor_id, schedule_date, period, start_time, end_time,
+               total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at
+        FROM schedule
+        WHERE schedule_date &gt;= #{startDate} AND schedule_date &lt;= #{endDate}
+    </select>
+
+    <select id="selectByDoctorAndDateRange" resultType="com.clinic.appointment.model.entity.Schedule">
+        SELECT id, doctor_id, schedule_date, period, start_time, end_time,
+               total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at
+        FROM schedule
+        WHERE doctor_id = #{doctorId}
+          AND schedule_date &gt;= #{startDate}
+          AND schedule_date &lt;= #{endDate}
+    </select>
+
+    <update id="updateStatus">
+        UPDATE schedule
+        SET status = #{status},
+            updated_at = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <update id="incrementBookedCount">
+        UPDATE schedule
+        SET booked_count = booked_count + 1,
+            updated_at = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <update id="decrementBookedCount">
+        UPDATE schedule
+        SET booked_count = booked_count - 1,
+            updated_at = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectActiveByDoctorAndDate" resultType="com.clinic.appointment.model.entity.Schedule">
+        SELECT id, doctor_id, schedule_date, period, start_time, end_time,
+               total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at
+        FROM schedule
+        WHERE doctor_id = #{doctorId}
+          AND schedule_date = #{scheduleDate}
+          AND period = #{period}
+          AND status = 'ACTIVE'
+    </select>
+
+</mapper>

@@ -1,0 +1,974 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.clinic.appointment.SuspensionMigrationTest" time="0.386" tests="3" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="17"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="GBK"/>
+    <property name="java.class.path" value="C:\Users\13292\Desktop\claudel1\reposNew\task11\target\test-classes;C:\Users\13292\Desktop\claudel1\reposNew\task11\target\classes;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter-web\3.2.5\spring-boot-starter-web-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter\3.2.5\spring-boot-starter-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot\3.2.5\spring-boot-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\3.2.5\spring-boot-autoconfigure-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter-logging\3.2.5\spring-boot-starter-logging-3.2.5.jar;C:\Users\13292\.m2\repository\ch\qos\logback\logback-classic\1.4.14\logback-classic-1.4.14.jar;C:\Users\13292\.m2\repository\ch\qos\logback\logback-core\1.4.14\logback-core-1.4.14.jar;C:\Users\13292\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.21.1\log4j-to-slf4j-2.21.1.jar;C:\Users\13292\.m2\repository\org\apache\logging\log4j\log4j-api\2.21.1\log4j-api-2.21.1.jar;C:\Users\13292\.m2\repository\org\slf4j\jul-to-slf4j\2.0.13\jul-to-slf4j-2.0.13.jar;C:\Users\13292\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar;C:\Users\13292\.m2\repository\org\yaml\snakeyaml\2.2\snakeyaml-2.2.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter-json\3.2.5\spring-boot-starter-json-3.2.5.jar;C:\Users\13292\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.15.4\jackson-databind-2.15.4.jar;C:\Users\13292\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.15.4\jackson-datatype-jdk8-2.15.4.jar;C:\Users\13292\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.15.4\jackson-datatype-jsr310-2.15.4.jar;C:\Users\13292\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.15.4\jackson-module-parameter-names-2.15.4.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\3.2.5\spring-boot-starter-tomcat-3.2.5.jar;C:\Users\13292\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\10.1.20\tomcat-embed-core-10.1.20.jar;C:\Users\13292\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\10.1.20\tomcat-embed-websocket-10.1.20.jar;C:\Users\13292\.m2\repository\org\springframework\spring-web\6.1.6\spring-web-6.1.6.jar;C:\Users\13292\.m2\repository\org\springframework\spring-beans\6.1.6\spring-beans-6.1.6.jar;C:\Users\13292\.m2\repository\io\micrometer\micrometer-observation\1.12.5\micrometer-observation-1.12.5.jar;C:\Users\13292\.m2\repository\io\micrometer\micrometer-commons\1.12.5\micrometer-commons-1.12.5.jar;C:\Users\13292\.m2\repository\org\springframework\spring-webmvc\6.1.6\spring-webmvc-6.1.6.jar;C:\Users\13292\.m2\repository\org\springframework\spring-aop\6.1.6\spring-aop-6.1.6.jar;C:\Users\13292\.m2\repository\org\springframework\spring-context\6.1.6\spring-context-6.1.6.jar;C:\Users\13292\.m2\repository\org\springframework\spring-expression\6.1.6\spring-expression-6.1.6.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter-validation\3.2.5\spring-boot-starter-validation-3.2.5.jar;C:\Users\13292\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\10.1.20\tomcat-embed-el-10.1.20.jar;C:\Users\13292\.m2\repository\org\hibernate\validator\hibernate-validator\8.0.1.Final\hibernate-validator-8.0.1.Final.jar;C:\Users\13292\.m2\repository\jakarta\validation\jakarta.validation-api\3.0.2\jakarta.validation-api-3.0.2.jar;C:\Users\13292\.m2\repository\org\jboss\logging\jboss-logging\3.5.3.Final\jboss-logging-3.5.3.Final.jar;C:\Users\13292\.m2\repository\com\fasterxml\classmate\1.6.0\classmate-1.6.0.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter-data-redis\3.2.5\spring-boot-starter-data-redis-3.2.5.jar;C:\Users\13292\.m2\repository\io\lettuce\lettuce-core\6.3.2.RELEASE\lettuce-core-6.3.2.RELEASE.jar;C:\Users\13292\.m2\repository\io\netty\netty-common\4.1.109.Final\netty-common-4.1.109.Final.jar;C:\Users\13292\.m2\repository\io\netty\netty-handler\4.1.109.Final\netty-handler-4.1.109.Final.jar;C:\Users\13292\.m2\repository\io\netty\netty-transport-native-unix-common\4.1.109.Final\netty-transport-native-unix-common-4.1.109.Final.jar;C:\Users\13292\.m2\repository\io\netty\netty-transport\4.1.109.Final\netty-transport-4.1.109.Final.jar;C:\Users\13292\.m2\repository\io\projectreactor\reactor-core\3.6.5\reactor-core-3.6.5.jar;C:\Users\13292\.m2\repository\org\springframework\data\spring-data-redis\3.2.5\spring-data-redis-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\data\spring-data-keyvalue\3.2.5\spring-data-keyvalue-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\data\spring-data-commons\3.2.5\spring-data-commons-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\spring-tx\6.1.6\spring-tx-6.1.6.jar;C:\Users\13292\.m2\repository\org\springframework\spring-oxm\6.1.6\spring-oxm-6.1.6.jar;C:\Users\13292\.m2\repository\org\springframework\spring-context-support\6.1.6\spring-context-support-6.1.6.jar;C:\Users\13292\.m2\repository\org\slf4j\slf4j-api\2.0.13\slf4j-api-2.0.13.jar;C:\Users\13292\.m2\repository\org\mybatis\spring\boot\mybatis-spring-boot-starter\3.0.3\mybatis-spring-boot-starter-3.0.3.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter-jdbc\3.2.5\spring-boot-starter-jdbc-3.2.5.jar;C:\Users\13292\.m2\repository\com\zaxxer\HikariCP\5.0.1\HikariCP-5.0.1.jar;C:\Users\13292\.m2\repository\org\springframework\spring-jdbc\6.1.6\spring-jdbc-6.1.6.jar;C:\Users\13292\.m2\repository\org\mybatis\spring\boot\mybatis-spring-boot-autoconfigure\3.0.3\mybatis-spring-boot-autoconfigure-3.0.3.jar;C:\Users\13292\.m2\repository\org\mybatis\mybatis\3.5.14\mybatis-3.5.14.jar;C:\Users\13292\.m2\repository\org\mybatis\mybatis-spring\3.0.3\mybatis-spring-3.0.3.jar;C:\Users\13292\.m2\repository\com\mysql\mysql-connector-j\8.3.0\mysql-connector-j-8.3.0.jar;C:\Users\13292\.m2\repository\org\redisson\redisson-spring-boot-starter\3.27.2\redisson-spring-boot-starter-3.27.2.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter-actuator\3.2.5\spring-boot-starter-actuator-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-actuator-autoconfigure\3.2.5\spring-boot-actuator-autoconfigure-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-actuator\3.2.5\spring-boot-actuator-3.2.5.jar;C:\Users\13292\.m2\repository\io\micrometer\micrometer-jakarta9\1.12.5\micrometer-jakarta9-1.12.5.jar;C:\Users\13292\.m2\repository\io\micrometer\micrometer-core\1.12.5\micrometer-core-1.12.5.jar;C:\Users\13292\.m2\repository\org\hdrhistogram\HdrHistogram\2.1.12\HdrHistogram-2.1.12.jar;C:\Users\13292\.m2\repository\org\latencyutils\LatencyUtils\2.0.3\LatencyUtils-2.0.3.jar;C:\Users\13292\.m2\repository\org\redisson\redisson\3.27.2\redisson-3.27.2.jar;C:\Users\13292\.m2\repository\io\netty\netty-codec\4.1.109.Final\netty-codec-4.1.109.Final.jar;C:\Users\13292\.m2\repository\io\netty\netty-buffer\4.1.109.Final\netty-buffer-4.1.109.Final.jar;C:\Users\13292\.m2\repository\io\netty\netty-resolver\4.1.109.Final\netty-resolver-4.1.109.Final.jar;C:\Users\13292\.m2\repository\io\netty\netty-resolver-dns\4.1.109.Final\netty-resolver-dns-4.1.109.Final.jar;C:\Users\13292\.m2\repository\io\netty\netty-codec-dns\4.1.109.Final\netty-codec-dns-4.1.109.Final.jar;C:\Users\13292\.m2\repository\javax\cache\cache-api\1.1.1\cache-api-1.1.1.jar;C:\Users\13292\.m2\repository\org\reactivestreams\reactive-streams\1.0.4\reactive-streams-1.0.4.jar;C:\Users\13292\.m2\repository\io\reactivex\rxjava3\rxjava\3.1.8\rxjava-3.1.8.jar;C:\Users\13292\.m2\repository\org\jboss\marshalling\jboss-marshalling\2.0.11.Final\jboss-marshalling-2.0.11.Final.jar;C:\Users\13292\.m2\repository\org\jboss\marshalling\jboss-marshalling-river\2.0.11.Final\jboss-marshalling-river-2.0.11.Final.jar;C:\Users\13292\.m2\repository\com\esotericsoftware\kryo\5.6.0\kryo-5.6.0.jar;C:\Users\13292\.m2\repository\com\esotericsoftware\reflectasm\1.11.9\reflectasm-1.11.9.jar;C:\Users\13292\.m2\repository\com\esotericsoftware\minlog\1.3.1\minlog-1.3.1.jar;C:\Users\13292\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.15.4\jackson-annotations-2.15.4.jar;C:\Users\13292\.m2\repository\com\fasterxml\jackson\dataformat\jackson-dataformat-yaml\2.15.4\jackson-dataformat-yaml-2.15.4.jar;C:\Users\13292\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.15.4\jackson-core-2.15.4.jar;C:\Users\13292\.m2\repository\net\bytebuddy\byte-buddy\1.14.13\byte-buddy-1.14.13.jar;C:\Users\13292\.m2\repository\org\jodd\jodd-bean\5.1.6\jodd-bean-5.1.6.jar;C:\Users\13292\.m2\repository\org\jodd\jodd-core\5.1.6\jodd-core-5.1.6.jar;C:\Users\13292\.m2\repository\org\redisson\redisson-spring-data-32\3.27.2\redisson-spring-data-32-3.27.2.jar;C:\Users\13292\.m2\repository\org\projectlombok\lombok\1.18.32\lombok-1.18.32.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter-test\3.2.5\spring-boot-starter-test-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-test\3.2.5\spring-boot-test-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\3.2.5\spring-boot-test-autoconfigure-3.2.5.jar;C:\Users\13292\.m2\repository\com\jayway\jsonpath\json-path\2.9.0\json-path-2.9.0.jar;C:\Users\13292\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\4.0.2\jakarta.xml.bind-api-4.0.2.jar;C:\Users\13292\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.3\jakarta.activation-api-2.1.3.jar;C:\Users\13292\.m2\repository\net\minidev\json-smart\2.5.1\json-smart-2.5.1.jar;C:\Users\13292\.m2\repository\net\minidev\accessors-smart\2.5.1\accessors-smart-2.5.1.jar;C:\Users\13292\.m2\repository\org\ow2\asm\asm\9.6\asm-9.6.jar;C:\Users\13292\.m2\repository\org\assertj\assertj-core\3.24.2\assertj-core-3.24.2.jar;C:\Users\13292\.m2\repository\org\awaitility\awaitility\4.2.1\awaitility-4.2.1.jar;C:\Users\13292\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Users\13292\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.2\junit-jupiter-5.10.2.jar;C:\Users\13292\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\13292\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\13292\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\13292\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\13292\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\13292\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\13292\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;C:\Users\13292\.m2\repository\org\mockito\mockito-core\5.7.0\mockito-core-5.7.0.jar;C:\Users\13292\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.13\byte-buddy-agent-1.14.13.jar;C:\Users\13292\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\13292\.m2\repository\org\mockito\mockito-junit-jupiter\5.7.0\mockito-junit-jupiter-5.7.0.jar;C:\Users\13292\.m2\repository\org\skyscreamer\jsonassert\1.5.1\jsonassert-1.5.1.jar;C:\Users\13292\.m2\repository\com\vaadin\external\google\android-json\0.0.20131108.vaadin1\android-json-0.0.20131108.vaadin1.jar;C:\Users\13292\.m2\repository\org\springframework\spring-core\6.1.6\spring-core-6.1.6.jar;C:\Users\13292\.m2\repository\org\springframework\spring-jcl\6.1.6\spring-jcl-6.1.6.jar;C:\Users\13292\.m2\repository\org\springframework\spring-test\6.1.6\spring-test-6.1.6.jar;C:\Users\13292\.m2\repository\org\xmlunit\xmlunit-core\2.9.1\xmlunit-core-2.9.1.jar;C:\Users\13292\.m2\repository\com\h2database\h2\2.2.224\h2-2.2.224.jar;"/>
+    <property name="java.vm.vendor" value="Microsoft"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://www.microsoft.com"/>
+    <property name="user.timezone" value="GMT+08:00"/>
+    <property name="org.jboss.logging.provider" value="slf4j"/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="java.vm.specification.version" value="17"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="CN"/>
+    <property name="sun.boot.library.path" value="C:\Users\13292\.jdks\ms-17.0.19\bin"/>
+    <property name="sun.java.command" value="C:\Users\13292\AppData\Local\Temp\surefire5971228558993190738\surefirebooter-20260608220234923_3.jar C:\Users\13292\AppData\Local\Temp\surefire5971228558993190738 2026-06-08T22-02-34_760-jvmRun1 surefire-20260608220234923_1tmp surefire_0-20260608220234923_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\13292\Desktop\claudel1\reposNew\task11\target\test-classes;C:\Users\13292\Desktop\claudel1\reposNew\task11\target\classes;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter-web\3.2.5\spring-boot-starter-web-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter\3.2.5\spring-boot-starter-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot\3.2.5\spring-boot-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\3.2.5\spring-boot-autoconfigure-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter-logging\3.2.5\spring-boot-starter-logging-3.2.5.jar;C:\Users\13292\.m2\repository\ch\qos\logback\logback-classic\1.4.14\logback-classic-1.4.14.jar;C:\Users\13292\.m2\repository\ch\qos\logback\logback-core\1.4.14\logback-core-1.4.14.jar;C:\Users\13292\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.21.1\log4j-to-slf4j-2.21.1.jar;C:\Users\13292\.m2\repository\org\apache\logging\log4j\log4j-api\2.21.1\log4j-api-2.21.1.jar;C:\Users\13292\.m2\repository\org\slf4j\jul-to-slf4j\2.0.13\jul-to-slf4j-2.0.13.jar;C:\Users\13292\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar;C:\Users\13292\.m2\repository\org\yaml\snakeyaml\2.2\snakeyaml-2.2.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter-json\3.2.5\spring-boot-starter-json-3.2.5.jar;C:\Users\13292\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.15.4\jackson-databind-2.15.4.jar;C:\Users\13292\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.15.4\jackson-datatype-jdk8-2.15.4.jar;C:\Users\13292\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.15.4\jackson-datatype-jsr310-2.15.4.jar;C:\Users\13292\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.15.4\jackson-module-parameter-names-2.15.4.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\3.2.5\spring-boot-starter-tomcat-3.2.5.jar;C:\Users\13292\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\10.1.20\tomcat-embed-core-10.1.20.jar;C:\Users\13292\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\10.1.20\tomcat-embed-websocket-10.1.20.jar;C:\Users\13292\.m2\repository\org\springframework\spring-web\6.1.6\spring-web-6.1.6.jar;C:\Users\13292\.m2\repository\org\springframework\spring-beans\6.1.6\spring-beans-6.1.6.jar;C:\Users\13292\.m2\repository\io\micrometer\micrometer-observation\1.12.5\micrometer-observation-1.12.5.jar;C:\Users\13292\.m2\repository\io\micrometer\micrometer-commons\1.12.5\micrometer-commons-1.12.5.jar;C:\Users\13292\.m2\repository\org\springframework\spring-webmvc\6.1.6\spring-webmvc-6.1.6.jar;C:\Users\13292\.m2\repository\org\springframework\spring-aop\6.1.6\spring-aop-6.1.6.jar;C:\Users\13292\.m2\repository\org\springframework\spring-context\6.1.6\spring-context-6.1.6.jar;C:\Users\13292\.m2\repository\org\springframework\spring-expression\6.1.6\spring-expression-6.1.6.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter-validation\3.2.5\spring-boot-starter-validation-3.2.5.jar;C:\Users\13292\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\10.1.20\tomcat-embed-el-10.1.20.jar;C:\Users\13292\.m2\repository\org\hibernate\validator\hibernate-validator\8.0.1.Final\hibernate-validator-8.0.1.Final.jar;C:\Users\13292\.m2\repository\jakarta\validation\jakarta.validation-api\3.0.2\jakarta.validation-api-3.0.2.jar;C:\Users\13292\.m2\repository\org\jboss\logging\jboss-logging\3.5.3.Final\jboss-logging-3.5.3.Final.jar;C:\Users\13292\.m2\repository\com\fasterxml\classmate\1.6.0\classmate-1.6.0.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter-data-redis\3.2.5\spring-boot-starter-data-redis-3.2.5.jar;C:\Users\13292\.m2\repository\io\lettuce\lettuce-core\6.3.2.RELEASE\lettuce-core-6.3.2.RELEASE.jar;C:\Users\13292\.m2\repository\io\netty\netty-common\4.1.109.Final\netty-common-4.1.109.Final.jar;C:\Users\13292\.m2\repository\io\netty\netty-handler\4.1.109.Final\netty-handler-4.1.109.Final.jar;C:\Users\13292\.m2\repository\io\netty\netty-transport-native-unix-common\4.1.109.Final\netty-transport-native-unix-common-4.1.109.Final.jar;C:\Users\13292\.m2\repository\io\netty\netty-transport\4.1.109.Final\netty-transport-4.1.109.Final.jar;C:\Users\13292\.m2\repository\io\projectreactor\reactor-core\3.6.5\reactor-core-3.6.5.jar;C:\Users\13292\.m2\repository\org\springframework\data\spring-data-redis\3.2.5\spring-data-redis-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\data\spring-data-keyvalue\3.2.5\spring-data-keyvalue-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\data\spring-data-commons\3.2.5\spring-data-commons-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\spring-tx\6.1.6\spring-tx-6.1.6.jar;C:\Users\13292\.m2\repository\org\springframework\spring-oxm\6.1.6\spring-oxm-6.1.6.jar;C:\Users\13292\.m2\repository\org\springframework\spring-context-support\6.1.6\spring-context-support-6.1.6.jar;C:\Users\13292\.m2\repository\org\slf4j\slf4j-api\2.0.13\slf4j-api-2.0.13.jar;C:\Users\13292\.m2\repository\org\mybatis\spring\boot\mybatis-spring-boot-starter\3.0.3\mybatis-spring-boot-starter-3.0.3.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter-jdbc\3.2.5\spring-boot-starter-jdbc-3.2.5.jar;C:\Users\13292\.m2\repository\com\zaxxer\HikariCP\5.0.1\HikariCP-5.0.1.jar;C:\Users\13292\.m2\repository\org\springframework\spring-jdbc\6.1.6\spring-jdbc-6.1.6.jar;C:\Users\13292\.m2\repository\org\mybatis\spring\boot\mybatis-spring-boot-autoconfigure\3.0.3\mybatis-spring-boot-autoconfigure-3.0.3.jar;C:\Users\13292\.m2\repository\org\mybatis\mybatis\3.5.14\mybatis-3.5.14.jar;C:\Users\13292\.m2\repository\org\mybatis\mybatis-spring\3.0.3\mybatis-spring-3.0.3.jar;C:\Users\13292\.m2\repository\com\mysql\mysql-connector-j\8.3.0\mysql-connector-j-8.3.0.jar;C:\Users\13292\.m2\repository\org\redisson\redisson-spring-boot-starter\3.27.2\redisson-spring-boot-starter-3.27.2.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter-actuator\3.2.5\spring-boot-starter-actuator-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-actuator-autoconfigure\3.2.5\spring-boot-actuator-autoconfigure-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-actuator\3.2.5\spring-boot-actuator-3.2.5.jar;C:\Users\13292\.m2\repository\io\micrometer\micrometer-jakarta9\1.12.5\micrometer-jakarta9-1.12.5.jar;C:\Users\13292\.m2\repository\io\micrometer\micrometer-core\1.12.5\micrometer-core-1.12.5.jar;C:\Users\13292\.m2\repository\org\hdrhistogram\HdrHistogram\2.1.12\HdrHistogram-2.1.12.jar;C:\Users\13292\.m2\repository\org\latencyutils\LatencyUtils\2.0.3\LatencyUtils-2.0.3.jar;C:\Users\13292\.m2\repository\org\redisson\redisson\3.27.2\redisson-3.27.2.jar;C:\Users\13292\.m2\repository\io\netty\netty-codec\4.1.109.Final\netty-codec-4.1.109.Final.jar;C:\Users\13292\.m2\repository\io\netty\netty-buffer\4.1.109.Final\netty-buffer-4.1.109.Final.jar;C:\Users\13292\.m2\repository\io\netty\netty-resolver\4.1.109.Final\netty-resolver-4.1.109.Final.jar;C:\Users\13292\.m2\repository\io\netty\netty-resolver-dns\4.1.109.Final\netty-resolver-dns-4.1.109.Final.jar;C:\Users\13292\.m2\repository\io\netty\netty-codec-dns\4.1.109.Final\netty-codec-dns-4.1.109.Final.jar;C:\Users\13292\.m2\repository\javax\cache\cache-api\1.1.1\cache-api-1.1.1.jar;C:\Users\13292\.m2\repository\org\reactivestreams\reactive-streams\1.0.4\reactive-streams-1.0.4.jar;C:\Users\13292\.m2\repository\io\reactivex\rxjava3\rxjava\3.1.8\rxjava-3.1.8.jar;C:\Users\13292\.m2\repository\org\jboss\marshalling\jboss-marshalling\2.0.11.Final\jboss-marshalling-2.0.11.Final.jar;C:\Users\13292\.m2\repository\org\jboss\marshalling\jboss-marshalling-river\2.0.11.Final\jboss-marshalling-river-2.0.11.Final.jar;C:\Users\13292\.m2\repository\com\esotericsoftware\kryo\5.6.0\kryo-5.6.0.jar;C:\Users\13292\.m2\repository\com\esotericsoftware\reflectasm\1.11.9\reflectasm-1.11.9.jar;C:\Users\13292\.m2\repository\com\esotericsoftware\minlog\1.3.1\minlog-1.3.1.jar;C:\Users\13292\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.15.4\jackson-annotations-2.15.4.jar;C:\Users\13292\.m2\repository\com\fasterxml\jackson\dataformat\jackson-dataformat-yaml\2.15.4\jackson-dataformat-yaml-2.15.4.jar;C:\Users\13292\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.15.4\jackson-core-2.15.4.jar;C:\Users\13292\.m2\repository\net\bytebuddy\byte-buddy\1.14.13\byte-buddy-1.14.13.jar;C:\Users\13292\.m2\repository\org\jodd\jodd-bean\5.1.6\jodd-bean-5.1.6.jar;C:\Users\13292\.m2\repository\org\jodd\jodd-core\5.1.6\jodd-core-5.1.6.jar;C:\Users\13292\.m2\repository\org\redisson\redisson-spring-data-32\3.27.2\redisson-spring-data-32-3.27.2.jar;C:\Users\13292\.m2\repository\org\projectlombok\lombok\1.18.32\lombok-1.18.32.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter-test\3.2.5\spring-boot-starter-test-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-test\3.2.5\spring-boot-test-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\3.2.5\spring-boot-test-autoconfigure-3.2.5.jar;C:\Users\13292\.m2\repository\com\jayway\jsonpath\json-path\2.9.0\json-path-2.9.0.jar;C:\Users\13292\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\4.0.2\jakarta.xml.bind-api-4.0.2.jar;C:\Users\13292\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.3\jakarta.activation-api-2.1.3.jar;C:\Users\13292\.m2\repository\net\minidev\json-smart\2.5.1\json-smart-2.5.1.jar;C:\Users\13292\.m2\repository\net\minidev\accessors-smart\2.5.1\accessors-smart-2.5.1.jar;C:\Users\13292\.m2\repository\org\ow2\asm\asm\9.6\asm-9.6.jar;C:\Users\13292\.m2\repository\org\assertj\assertj-core\3.24.2\assertj-core-3.24.2.jar;C:\Users\13292\.m2\repository\org\awaitility\awaitility\4.2.1\awaitility-4.2.1.jar;C:\Users\13292\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Users\13292\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.2\junit-jupiter-5.10.2.jar;C:\Users\13292\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\13292\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\13292\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\13292\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\13292\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\13292\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\13292\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;C:\Users\13292\.m2\repository\org\mockito\mockito-core\5.7.0\mockito-core-5.7.0.jar;C:\Users\13292\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.13\byte-buddy-agent-1.14.13.jar;C:\Users\13292\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\13292\.m2\repository\org\mockito\mockito-junit-jupiter\5.7.0\mockito-junit-jupiter-5.7.0.jar;C:\Users\13292\.m2\repository\org\skyscreamer\jsonassert\1.5.1\jsonassert-1.5.1.jar;C:\Users\13292\.m2\repository\com\vaadin\external\google\android-json\0.0.20131108.vaadin1\android-json-0.0.20131108.vaadin1.jar;C:\Users\13292\.m2\repository\org\springframework\spring-core\6.1.6\spring-core-6.1.6.jar;C:\Users\13292\.m2\repository\org\springframework\spring-jcl\6.1.6\spring-jcl-6.1.6.jar;C:\Users\13292\.m2\repository\org\springframework\spring-test\6.1.6\spring-test-6.1.6.jar;C:\Users\13292\.m2\repository\org\xmlunit\xmlunit-core\2.9.1\xmlunit-core-2.9.1.jar;C:\Users\13292\.m2\repository\com\h2database\h2\2.2.224\h2-2.2.224.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\13292"/>
+    <property name="user.language" value="zh"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2026-04-21"/>
+    <property name="java.home" value="C:\Users\13292\.jdks\ms-17.0.19"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\13292\Desktop\claudel1\reposNew\task11"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="FILE_LOG_CHARSET" value="GBK"/>
+    <property name="java.awt.headless" value="true"/>
+    <property name="surefire.real.class.path" value="C:\Users\13292\AppData\Local\Temp\surefire5971228558993190738\surefirebooter-20260608220234923_3.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="17.0.19+10-LTS"/>
+    <property name="user.name" value="13292"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="GBK"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="Microsoft-13877129"/>
+    <property name="localRepository" value="C:\Users\13292\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://github.com/microsoft/openjdk/issues"/>
+    <property name="java.io.tmpdir" value="C:\Users\13292\AppData\Local\Temp\"/>
+    <property name="com.zaxxer.hikari.pool_number" value="1"/>
+    <property name="java.version" value="17.0.19"/>
+    <property name="user.dir" value="C:\Users\13292\Desktop\claudel1\reposNew\task11"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="PID" value="26000"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="CONSOLE_LOG_CHARSET" value="GBK"/>
+    <property name="native.encoding" value="GBK"/>
+    <property name="java.library.path" value="C:\Users\13292\.jdks\ms-17.0.19\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\13292\bin;C:\Users\13292\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\13292\bin;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0;C:\windows\System32\OpenSSH;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files\dotnet;C:\Users\13292\AppData\Local\nvm;C:\nvm4w\nodejs;C:\serverPath\apache-maven-3.9.16\bin;C:\Program Files\Git\cmd;C:\Program Files\cursor\resources\app\bin;C:\Users\13292\.jdks\ms-17.0.19\bin;C:\Program Files\Go\bin;C:\Program Files\GitHub CLI;C:\Users\13292\AppData\Local\Programs\Python\Python312\Scripts;C:\Users\13292\AppData\Local\Programs\Python\Python312;C:\Users\13292\AppData\Local\Microsoft\WindowsApps;C:\Users\13292\AppData\Local\nvm;C:\nvm4w\nodejs;C:\Program Files\JetBrains\IntelliJ IDEA 2026.1.2\bin;C:\Users\13292\go\bin;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.vendor" value="Microsoft"/>
+    <property name="java.vm.version" value="17.0.19+10-LTS"/>
+    <property name="java.specification.maintenance.version" value="1"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="61.0"/>
+  </properties>
+  <testcase name="testSuspendWithCancelAll" classname="com.clinic.appointment.SuspensionMigrationTest" time="0.164">
+    <system-out><![CDATA[2026-06-08T22:02:43.850+08:00  INFO 26000 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.clinic.appointment.SuspensionMigrationTest]: SuspensionMigrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-06-08T22:02:43.853+08:00  INFO 26000 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.clinic.appointment.ClinicAppointmentApplication for test class com.clinic.appointment.SuspensionMigrationTest
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+JDBC Connection [HikariProxyConnection@1449109458 wrapping conn0: url=jdbc:h2:mem:clinic_test user=SA] will be managed by Spring
+==>  Preparing: INSERT INTO department (name, code, description, enabled) VALUES (?, ?, ?, ?)
+==> Parameters: Susp Dept CANCEL(String), SDEPT_CANCEL(String), null, true(Boolean)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df] from current transaction
+==>  Preparing: INSERT INTO doctor (name, code, title, department_id, enabled) VALUES (?, ?, ?, ?, ?)
+==> Parameters: Dr. CANCEL(String), SDOC_CANCEL(String), Attending(String), 4(Long), true(Boolean)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df] from current transaction
+==>  Preparing: INSERT INTO schedule (doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+==> Parameters: 4(Long), 2026-06-09(LocalDate), AM(String), 08:00(LocalTime), 12:00(LocalTime), 3(Integer), 0(Integer), 0(Integer), ACTIVE(String), null
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df] from current transaction
+==>  Preparing: INSERT INTO slot (schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+==> Parameters: 4(Long), 4(Long), 2026-06-09(LocalDate), AM(String), 1(Integer), 08:00(LocalTime), 08:30(LocalTime), AVAILABLE(String), false(Boolean), 0(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df] from current transaction
+==>  Preparing: INSERT INTO slot (schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+==> Parameters: 4(Long), 4(Long), 2026-06-09(LocalDate), AM(String), 2(Integer), 09:00(LocalTime), 09:30(LocalTime), AVAILABLE(String), false(Boolean), 0(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df] from current transaction
+==>  Preparing: INSERT INTO slot (schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+==> Parameters: 4(Long), 4(Long), 2026-06-09(LocalDate), AM(String), 3(Integer), 10:00(LocalTime), 10:30(LocalTime), AVAILABLE(String), false(Boolean), 0(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df] from current transaction
+==>  Preparing: SELECT id, schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version, created_at, updated_at FROM slot WHERE id = ?
+==> Parameters: 4(Long)
+<==    Columns: id, schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version, created_at, updated_at
+<==        Row: 4, 4, 4, 2026-06-09, AM, 1, 08:00:00, 08:30:00, AVAILABLE, FALSE, 0, 2026-06-08 22:02:43.869016, 2026-06-08 22:02:43.869016
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df] from current transaction
+==>  Preparing: UPDATE slot SET status = ?, version = version + 1, updated_at = NOW() WHERE id = ? AND status = ? AND version = ?
+==> Parameters: BOOKED(String), 4(Long), AVAILABLE(String), 0(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df] from current transaction
+==>  Preparing: SELECT id, doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at FROM schedule WHERE id = ?
+==> Parameters: 4(Long)
+<==    Columns: id, doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at
+<==        Row: 4, 4, 2026-06-09, AM, 08:00:00, 12:00:00, 3, 0, 0, ACTIVE, null, 2026-06-08 22:02:43.86702, 2026-06-08 22:02:43.86702
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df] from current transaction
+==>  Preparing: SELECT id, name, code, title, department_id, enabled, created_at, updated_at FROM doctor WHERE id = ?
+==> Parameters: 4(Long)
+<==    Columns: id, name, code, title, department_id, enabled, created_at, updated_at
+<==        Row: 4, Dr. CANCEL, SDOC_CANCEL, Attending, 4, TRUE, 2026-06-08 22:02:43.865025, 2026-06-08 22:02:43.865025
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df] from current transaction
+==>  Preparing: INSERT INTO appointment (patient_id, patient_name, slot_id, schedule_id, doctor_id, department_id, schedule_date, period, seq_num, status, source, original_appointment_id, cancel_reason, checked_in_at, cancelled_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+==> Parameters: PC1(String), Patient Cancel 1(String), 4(Long), 4(Long), 4(Long), 4(Long), 2026-06-09(LocalDate), AM(String), 1(Integer), BOOKED(String), NORMAL(String), null, null, null, null
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df] from current transaction
+==>  Preparing: UPDATE schedule SET booked_count = booked_count + 1, updated_at = NOW() WHERE id = ?
+==> Parameters: 4(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df] from current transaction
+==>  Preparing: INSERT INTO audit_log (entity_type, entity_id, action, operator, detail) VALUES (?, ?, ?, ?, ?)
+==> Parameters: APPOINTMENT(String), 4(Long), BOOK(String), PC1(String), Booked slot 4(String)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+2026-06-08T22:02:43.894+08:00  INFO 26000 --- [           main] c.c.a.s.impl.AppointmentServiceImpl      : Appointment 4 booked for patient PC1 on slot 4
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df] from current transaction
+==>  Preparing: SELECT id, schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version, created_at, updated_at FROM slot WHERE id = ?
+==> Parameters: 5(Long)
+<==    Columns: id, schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version, created_at, updated_at
+<==        Row: 5, 4, 4, 2026-06-09, AM, 2, 09:00:00, 09:30:00, AVAILABLE, FALSE, 0, 2026-06-08 22:02:43.87221, 2026-06-08 22:02:43.87221
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df] from current transaction
+==>  Preparing: UPDATE slot SET status = ?, version = version + 1, updated_at = NOW() WHERE id = ? AND status = ? AND version = ?
+==> Parameters: BOOKED(String), 5(Long), AVAILABLE(String), 0(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df] from current transaction
+==>  Preparing: SELECT id, doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at FROM schedule WHERE id = ?
+==> Parameters: 4(Long)
+<==    Columns: id, doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at
+<==        Row: 4, 4, 2026-06-09, AM, 08:00:00, 12:00:00, 3, 1, 0, ACTIVE, null, 2026-06-08 22:02:43.86702, 2026-06-08 22:02:43.892141
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df] from current transaction
+==>  Preparing: SELECT id, name, code, title, department_id, enabled, created_at, updated_at FROM doctor WHERE id = ?
+==> Parameters: 4(Long)
+<==    Columns: id, name, code, title, department_id, enabled, created_at, updated_at
+<==        Row: 4, Dr. CANCEL, SDOC_CANCEL, Attending, 4, TRUE, 2026-06-08 22:02:43.865025, 2026-06-08 22:02:43.865025
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df] from current transaction
+==>  Preparing: INSERT INTO appointment (patient_id, patient_name, slot_id, schedule_id, doctor_id, department_id, schedule_date, period, seq_num, status, source, original_appointment_id, cancel_reason, checked_in_at, cancelled_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+==> Parameters: PC2(String), Patient Cancel 2(String), 5(Long), 4(Long), 4(Long), 4(Long), 2026-06-09(LocalDate), AM(String), 2(Integer), BOOKED(String), NORMAL(String), null, null, null, null
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df] from current transaction
+==>  Preparing: UPDATE schedule SET booked_count = booked_count + 1, updated_at = NOW() WHERE id = ?
+==> Parameters: 4(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df] from current transaction
+==>  Preparing: INSERT INTO audit_log (entity_type, entity_id, action, operator, detail) VALUES (?, ?, ?, ?, ?)
+==> Parameters: APPOINTMENT(String), 5(Long), BOOK(String), PC2(String), Booked slot 5(String)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+2026-06-08T22:02:43.902+08:00  INFO 26000 --- [           main] c.c.a.s.impl.AppointmentServiceImpl      : Appointment 5 booked for patient PC2 on slot 5
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df] from current transaction
+==>  Preparing: SELECT id, doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at FROM schedule WHERE doctor_id = ? AND schedule_date = ? AND period = ? AND status = 'ACTIVE'
+==> Parameters: 4(Long), 2026-06-09(LocalDate), AM(String)
+<==    Columns: id, doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at
+<==        Row: 4, 4, 2026-06-09, AM, 08:00:00, 12:00:00, 3, 2, 0, ACTIVE, null, 2026-06-08 22:02:43.86702, 2026-06-08 22:02:43.900189
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df] from current transaction
+==>  Preparing: SELECT id, doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at FROM schedule WHERE id = ?
+==> Parameters: 4(Long)
+<==    Columns: id, doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at
+<==        Row: 4, 4, 2026-06-09, AM, 08:00:00, 12:00:00, 3, 2, 0, ACTIVE, null, 2026-06-08 22:02:43.86702, 2026-06-08 22:02:43.900189
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df] from current transaction
+==>  Preparing: UPDATE schedule SET status = ?, updated_at = NOW() WHERE id = ?
+==> Parameters: SUSPENDED(String), 4(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df] from current transaction
+==>  Preparing: INSERT INTO audit_log (entity_type, entity_id, action, operator, detail) VALUES (?, ?, ?, ?, ?)
+==> Parameters: SCHEDULE(String), 4(Long), SUSPEND(String), SYSTEM(String), Suspended schedule 4(String)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+2026-06-08T22:02:43.914+08:00  INFO 26000 --- [           main] c.c.a.service.impl.ScheduleServiceImpl   : Suspended schedule 4
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df] from current transaction
+==>  Preparing: SELECT id, patient_id, patient_name, slot_id, schedule_id, doctor_id, department_id, schedule_date, period, seq_num, status, source, original_appointment_id, cancel_reason, checked_in_at, cancelled_at, created_at, updated_at FROM appointment WHERE schedule_id = ? AND status IN ('BOOKED', 'CHECKED_IN')
+==> Parameters: 4(Long)
+<==    Columns: id, patient_id, patient_name, slot_id, schedule_id, doctor_id, department_id, schedule_date, period, seq_num, status, source, original_appointment_id, cancel_reason, checked_in_at, cancelled_at, created_at, updated_at
+<==        Row: 4, PC1, Patient Cancel 1, 4, 4, 4, 4, 2026-06-09, AM, 1, BOOKED, NORMAL, null, null, null, null, 2026-06-08 22:02:43.891144, 2026-06-08 22:02:43.891144
+<==        Row: 5, PC2, Patient Cancel 2, 5, 4, 4, 4, 2026-06-09, AM, 2, BOOKED, NORMAL, null, null, null, null, 2026-06-08 22:02:43.89919, 2026-06-08 22:02:43.89919
+<==      Total: 2
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df] from current transaction
+==>  Preparing: UPDATE appointment SET status = ?, cancel_reason = ?, cancelled_at = NOW(), updated_at = NOW() WHERE id IN ( ? , ? )
+==> Parameters: CANCELLED(String), Doctor suspension: Doctor emergency(String), 4(Long), 5(Long)
+<==    Updates: 2
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df] from current transaction
+==>  Preparing: SELECT id, schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version, created_at, updated_at FROM slot WHERE id = ?
+==> Parameters: 4(Long)
+<==    Columns: id, schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version, created_at, updated_at
+<==        Row: 4, 4, 4, 2026-06-09, AM, 1, 08:00:00, 08:30:00, BOOKED, FALSE, 1, 2026-06-08 22:02:43.869016, 2026-06-08 22:02:43.888152
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df] from current transaction
+==>  Preparing: UPDATE slot SET status = ?, version = version + 1, updated_at = NOW() WHERE id = ? AND status = ? AND version = ?
+==> Parameters: AVAILABLE(String), 4(Long), BOOKED(String), 1(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df] from current transaction
+==>  Preparing: SELECT id, schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version, created_at, updated_at FROM slot WHERE id = ?
+==> Parameters: 5(Long)
+<==    Columns: id, schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version, created_at, updated_at
+<==        Row: 5, 4, 4, 2026-06-09, AM, 2, 09:00:00, 09:30:00, BOOKED, FALSE, 1, 2026-06-08 22:02:43.87221, 2026-06-08 22:02:43.897196
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df] from current transaction
+==>  Preparing: UPDATE slot SET status = ?, version = version + 1, updated_at = NOW() WHERE id = ? AND status = ? AND version = ?
+==> Parameters: AVAILABLE(String), 5(Long), BOOKED(String), 1(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+2026-06-08T22:02:43.982+08:00  INFO 26000 --- [           main] c.c.a.s.impl.SuspensionServiceImpl       : Cancelled 2 appointments for schedule 4 due to suspension
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df] from current transaction
+==>  Preparing: SELECT id, patient_id, patient_name, schedule_id, doctor_id, department_id, schedule_date, period, queue_position, status, offered_at, expired_at, created_at, updated_at FROM waitlist WHERE schedule_id = ? AND status = ?
+==> Parameters: 4(Long), WAITING(String)
+<==      Total: 0
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df] from current transaction
+==>  Preparing: INSERT INTO suspension (doctor_id, schedule_id, suspend_date, period, reason, action_taken, target_doctor_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+==> Parameters: 4(Long), 4(Long), 2026-06-09(LocalDate), AM(String), Doctor emergency(String), CANCEL(String), null
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df] from current transaction
+==>  Preparing: INSERT INTO audit_log (entity_type, entity_id, action, operator, detail) VALUES (?, ?, ?, ?, ?)
+==> Parameters: SUSPENSION(String), 1(Long), SUSPEND(String), SYSTEM(String), Doctor 4 suspended on 2026-06-09. Action: CANCEL. Reason: Doctor emergency(String)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+2026-06-08T22:02:43.998+08:00  INFO 26000 --- [           main] c.c.a.s.impl.SuspensionServiceImpl       : Suspension 1 created for doctor 4 on 2026-06-09 with action CANCEL
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df] from current transaction
+==>  Preparing: SELECT id, doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at FROM schedule WHERE id = ?
+==> Parameters: 4(Long)
+<==    Columns: id, doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at
+<==        Row: 4, 4, 2026-06-09, AM, 08:00:00, 12:00:00, 3, 2, 0, SUSPENDED, null, 2026-06-08 22:02:43.86702, 2026-06-08 22:02:43.912972
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df] from current transaction
+==>  Preparing: SELECT id, patient_id, patient_name, slot_id, schedule_id, doctor_id, department_id, schedule_date, period, seq_num, status, source, original_appointment_id, cancel_reason, checked_in_at, cancelled_at, created_at, updated_at FROM appointment WHERE schedule_id = ?
+==> Parameters: 4(Long)
+<==    Columns: id, patient_id, patient_name, slot_id, schedule_id, doctor_id, department_id, schedule_date, period, seq_num, status, source, original_appointment_id, cancel_reason, checked_in_at, cancelled_at, created_at, updated_at
+<==        Row: 4, PC1, Patient Cancel 1, 4, 4, 4, 4, 2026-06-09, AM, 1, CANCELLED, NORMAL, null, Doctor suspension: Doctor emergency, null, 2026-06-08 22:02:43.969043, 2026-06-08 22:02:43.891144, 2026-06-08 22:02:43.969043
+<==        Row: 5, PC2, Patient Cancel 2, 5, 4, 4, 4, 2026-06-09, AM, 2, CANCELLED, NORMAL, null, Doctor suspension: Doctor emergency, null, 2026-06-08 22:02:43.969043, 2026-06-08 22:02:43.89919, 2026-06-08 22:02:43.969043
+<==      Total: 2
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df] from current transaction
+==>  Preparing: SELECT id, schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version, created_at, updated_at FROM slot WHERE id = ?
+==> Parameters: 4(Long)
+<==    Columns: id, schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version, created_at, updated_at
+<==        Row: 4, 4, 4, 2026-06-09, AM, 1, 08:00:00, 08:30:00, AVAILABLE, FALSE, 2, 2026-06-08 22:02:43.869016, 2026-06-08 22:02:43.975537
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df] from current transaction
+==>  Preparing: SELECT id, schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version, created_at, updated_at FROM slot WHERE id = ?
+==> Parameters: 5(Long)
+<==    Columns: id, schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version, created_at, updated_at
+<==        Row: 5, 4, 4, 2026-06-09, AM, 2, 09:00:00, 09:30:00, AVAILABLE, FALSE, 2, 2026-06-08 22:02:43.87221, 2026-06-08 22:02:43.981519
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df] from current transaction
+==>  Preparing: SELECT id, schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version, created_at, updated_at FROM slot WHERE id = ?
+==> Parameters: 6(Long)
+<==    Columns: id, schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version, created_at, updated_at
+<==        Row: 6, 4, 4, 2026-06-09, AM, 3, 10:00:00, 10:30:00, AVAILABLE, FALSE, 0, 2026-06-08 22:02:43.875188, 2026-06-08 22:02:43.875188
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78b888df]
+]]></system-out>
+  </testcase>
+  <testcase name="testSuspendWithMigration" classname="com.clinic.appointment.SuspensionMigrationTest" time="0.116">
+    <system-out><![CDATA[Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+JDBC Connection [HikariProxyConnection@1062195420 wrapping conn0: url=jdbc:h2:mem:clinic_test user=SA] will be managed by Spring
+==>  Preparing: INSERT INTO department (name, code, description, enabled) VALUES (?, ?, ?, ?)
+==> Parameters: Migration Dept(String), MDEPT_MIG(String), null, true(Boolean)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: INSERT INTO doctor (name, code, title, department_id, enabled) VALUES (?, ?, ?, ?, ?)
+==> Parameters: Dr. MIGA(String), SDOC_MIGA(String), Attending(String), 5(Long), true(Boolean)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: INSERT INTO schedule (doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+==> Parameters: 5(Long), 2026-06-09(LocalDate), AM(String), 08:00(LocalTime), 12:00(LocalTime), 3(Integer), 0(Integer), 0(Integer), ACTIVE(String), null
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: INSERT INTO slot (schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+==> Parameters: 5(Long), 5(Long), 2026-06-09(LocalDate), AM(String), 1(Integer), 08:00(LocalTime), 08:30(LocalTime), AVAILABLE(String), false(Boolean), 0(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: INSERT INTO slot (schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+==> Parameters: 5(Long), 5(Long), 2026-06-09(LocalDate), AM(String), 2(Integer), 09:00(LocalTime), 09:30(LocalTime), AVAILABLE(String), false(Boolean), 0(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: INSERT INTO slot (schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+==> Parameters: 5(Long), 5(Long), 2026-06-09(LocalDate), AM(String), 3(Integer), 10:00(LocalTime), 10:30(LocalTime), AVAILABLE(String), false(Boolean), 0(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: SELECT id, schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version, created_at, updated_at FROM slot WHERE id = ?
+==> Parameters: 7(Long)
+<==    Columns: id, schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version, created_at, updated_at
+<==        Row: 7, 5, 5, 2026-06-09, AM, 1, 08:00:00, 08:30:00, AVAILABLE, FALSE, 0, 2026-06-08 22:02:44.033381, 2026-06-08 22:02:44.033381
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: UPDATE slot SET status = ?, version = version + 1, updated_at = NOW() WHERE id = ? AND status = ? AND version = ?
+==> Parameters: BOOKED(String), 7(Long), AVAILABLE(String), 0(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: SELECT id, doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at FROM schedule WHERE id = ?
+==> Parameters: 5(Long)
+<==    Columns: id, doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at
+<==        Row: 5, 5, 2026-06-09, AM, 08:00:00, 12:00:00, 3, 0, 0, ACTIVE, null, 2026-06-08 22:02:44.032383, 2026-06-08 22:02:44.032383
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: SELECT id, name, code, title, department_id, enabled, created_at, updated_at FROM doctor WHERE id = ?
+==> Parameters: 5(Long)
+<==    Columns: id, name, code, title, department_id, enabled, created_at, updated_at
+<==        Row: 5, Dr. MIGA, SDOC_MIGA, Attending, 5, TRUE, 2026-06-08 22:02:44.030389, 2026-06-08 22:02:44.030389
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: INSERT INTO appointment (patient_id, patient_name, slot_id, schedule_id, doctor_id, department_id, schedule_date, period, seq_num, status, source, original_appointment_id, cancel_reason, checked_in_at, cancelled_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+==> Parameters: PM1(String), Patient Migrate 1(String), 7(Long), 5(Long), 5(Long), 5(Long), 2026-06-09(LocalDate), AM(String), 1(Integer), BOOKED(String), NORMAL(String), null, null, null, null
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: UPDATE schedule SET booked_count = booked_count + 1, updated_at = NOW() WHERE id = ?
+==> Parameters: 5(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: INSERT INTO audit_log (entity_type, entity_id, action, operator, detail) VALUES (?, ?, ?, ?, ?)
+==> Parameters: APPOINTMENT(String), 6(Long), BOOK(String), PM1(String), Booked slot 7(String)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+2026-06-08T22:02:44.047+08:00  INFO 26000 --- [           main] c.c.a.s.impl.AppointmentServiceImpl      : Appointment 6 booked for patient PM1 on slot 7
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: SELECT id, schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version, created_at, updated_at FROM slot WHERE id = ?
+==> Parameters: 8(Long)
+<==    Columns: id, schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version, created_at, updated_at
+<==        Row: 8, 5, 5, 2026-06-09, AM, 2, 09:00:00, 09:30:00, AVAILABLE, FALSE, 0, 2026-06-08 22:02:44.033381, 2026-06-08 22:02:44.033381
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: UPDATE slot SET status = ?, version = version + 1, updated_at = NOW() WHERE id = ? AND status = ? AND version = ?
+==> Parameters: BOOKED(String), 8(Long), AVAILABLE(String), 0(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: SELECT id, doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at FROM schedule WHERE id = ?
+==> Parameters: 5(Long)
+<==    Columns: id, doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at
+<==        Row: 5, 5, 2026-06-09, AM, 08:00:00, 12:00:00, 3, 1, 0, ACTIVE, null, 2026-06-08 22:02:44.032383, 2026-06-08 22:02:44.046346
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: SELECT id, name, code, title, department_id, enabled, created_at, updated_at FROM doctor WHERE id = ?
+==> Parameters: 5(Long)
+<==    Columns: id, name, code, title, department_id, enabled, created_at, updated_at
+<==        Row: 5, Dr. MIGA, SDOC_MIGA, Attending, 5, TRUE, 2026-06-08 22:02:44.030389, 2026-06-08 22:02:44.030389
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: INSERT INTO appointment (patient_id, patient_name, slot_id, schedule_id, doctor_id, department_id, schedule_date, period, seq_num, status, source, original_appointment_id, cancel_reason, checked_in_at, cancelled_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+==> Parameters: PM2(String), Patient Migrate 2(String), 8(Long), 5(Long), 5(Long), 5(Long), 2026-06-09(LocalDate), AM(String), 2(Integer), BOOKED(String), NORMAL(String), null, null, null, null
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: UPDATE schedule SET booked_count = booked_count + 1, updated_at = NOW() WHERE id = ?
+==> Parameters: 5(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: INSERT INTO audit_log (entity_type, entity_id, action, operator, detail) VALUES (?, ?, ?, ?, ?)
+==> Parameters: APPOINTMENT(String), 7(Long), BOOK(String), PM2(String), Booked slot 8(String)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+2026-06-08T22:02:44.067+08:00  INFO 26000 --- [           main] c.c.a.s.impl.AppointmentServiceImpl      : Appointment 7 booked for patient PM2 on slot 8
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: INSERT INTO doctor (name, code, title, department_id, enabled) VALUES (?, ?, ?, ?, ?)
+==> Parameters: Dr. MIGB(String), SDOC_MIGB(String), Attending(String), 5(Long), true(Boolean)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: INSERT INTO schedule (doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+==> Parameters: 6(Long), 2026-06-09(LocalDate), AM(String), 08:00(LocalTime), 12:00(LocalTime), 3(Integer), 0(Integer), 0(Integer), ACTIVE(String), null
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: INSERT INTO slot (schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+==> Parameters: 6(Long), 6(Long), 2026-06-09(LocalDate), AM(String), 1(Integer), 08:00(LocalTime), 08:30(LocalTime), AVAILABLE(String), false(Boolean), 0(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: INSERT INTO slot (schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+==> Parameters: 6(Long), 6(Long), 2026-06-09(LocalDate), AM(String), 2(Integer), 09:00(LocalTime), 09:30(LocalTime), AVAILABLE(String), false(Boolean), 0(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: INSERT INTO slot (schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+==> Parameters: 6(Long), 6(Long), 2026-06-09(LocalDate), AM(String), 3(Integer), 10:00(LocalTime), 10:30(LocalTime), AVAILABLE(String), false(Boolean), 0(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: SELECT id, doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at FROM schedule WHERE doctor_id = ? AND schedule_date = ? AND period = ? AND status = 'ACTIVE'
+==> Parameters: 5(Long), 2026-06-09(LocalDate), AM(String)
+<==    Columns: id, doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at
+<==        Row: 5, 5, 2026-06-09, AM, 08:00:00, 12:00:00, 3, 2, 0, ACTIVE, null, 2026-06-08 22:02:44.032383, 2026-06-08 22:02:44.065295
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: SELECT id, doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at FROM schedule WHERE id = ?
+==> Parameters: 5(Long)
+<==    Columns: id, doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at
+<==        Row: 5, 5, 2026-06-09, AM, 08:00:00, 12:00:00, 3, 2, 0, ACTIVE, null, 2026-06-08 22:02:44.032383, 2026-06-08 22:02:44.065295
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: UPDATE schedule SET status = ?, updated_at = NOW() WHERE id = ?
+==> Parameters: SUSPENDED(String), 5(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: INSERT INTO audit_log (entity_type, entity_id, action, operator, detail) VALUES (?, ?, ?, ?, ?)
+==> Parameters: SCHEDULE(String), 5(Long), SUSPEND(String), SYSTEM(String), Suspended schedule 5(String)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+2026-06-08T22:02:44.084+08:00  INFO 26000 --- [           main] c.c.a.service.impl.ScheduleServiceImpl   : Suspended schedule 5
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: SELECT id, patient_id, patient_name, slot_id, schedule_id, doctor_id, department_id, schedule_date, period, seq_num, status, source, original_appointment_id, cancel_reason, checked_in_at, cancelled_at, created_at, updated_at FROM appointment WHERE schedule_id = ? AND status IN ('BOOKED', 'CHECKED_IN')
+==> Parameters: 5(Long)
+<==    Columns: id, patient_id, patient_name, slot_id, schedule_id, doctor_id, department_id, schedule_date, period, seq_num, status, source, original_appointment_id, cancel_reason, checked_in_at, cancelled_at, created_at, updated_at
+<==        Row: 6, PM1, Patient Migrate 1, 7, 5, 5, 5, 2026-06-09, AM, 1, BOOKED, NORMAL, null, null, null, null, 2026-06-08 22:02:44.044352, 2026-06-08 22:02:44.044352
+<==        Row: 7, PM2, Patient Migrate 2, 8, 5, 5, 5, 2026-06-09, AM, 2, BOOKED, NORMAL, null, null, null, null, 2026-06-08 22:02:44.064298, 2026-06-08 22:02:44.064298
+<==      Total: 2
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: SELECT id, doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at FROM schedule WHERE doctor_id = ? AND schedule_date = ? AND period = ? AND status = 'ACTIVE'
+==> Parameters: 6(Long), 2026-06-09(LocalDate), AM(String)
+<==    Columns: id, doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at
+<==        Row: 6, 6, 2026-06-09, AM, 08:00:00, 12:00:00, 3, 0, 0, ACTIVE, null, 2026-06-08 22:02:44.069285, 2026-06-08 22:02:44.069285
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: SELECT id, schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version, created_at, updated_at FROM slot WHERE schedule_id = ? AND status = 'AVAILABLE'
+==> Parameters: 6(Long)
+<==    Columns: id, schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version, created_at, updated_at
+<==        Row: 10, 6, 6, 2026-06-09, AM, 1, 08:00:00, 08:30:00, AVAILABLE, FALSE, 0, 2026-06-08 22:02:44.07128, 2026-06-08 22:02:44.07128
+<==        Row: 11, 6, 6, 2026-06-09, AM, 2, 09:00:00, 09:30:00, AVAILABLE, FALSE, 0, 2026-06-08 22:02:44.074272, 2026-06-08 22:02:44.074272
+<==        Row: 12, 6, 6, 2026-06-09, AM, 3, 10:00:00, 10:30:00, AVAILABLE, FALSE, 0, 2026-06-08 22:02:44.076266, 2026-06-08 22:02:44.076266
+<==      Total: 3
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: SELECT id, name, code, title, department_id, enabled, created_at, updated_at FROM doctor WHERE id = ?
+==> Parameters: 6(Long)
+<==    Columns: id, name, code, title, department_id, enabled, created_at, updated_at
+<==        Row: 6, Dr. MIGB, SDOC_MIGB, Attending, 5, TRUE, 2026-06-08 22:02:44.068288, 2026-06-08 22:02:44.068288
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: UPDATE slot SET status = ?, version = version + 1, updated_at = NOW() WHERE id = ? AND status = ? AND version = ?
+==> Parameters: BOOKED(String), 10(Long), AVAILABLE(String), 0(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: UPDATE appointment SET status = ?, updated_at = NOW() WHERE id = ?
+==> Parameters: RESCHEDULED(String), 6(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: SELECT id, schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version, created_at, updated_at FROM slot WHERE id = ?
+==> Parameters: 7(Long)
+<==    Columns: id, schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version, created_at, updated_at
+<==        Row: 7, 5, 5, 2026-06-09, AM, 1, 08:00:00, 08:30:00, BOOKED, FALSE, 1, 2026-06-08 22:02:44.033381, 2026-06-08 22:02:44.039368
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: UPDATE slot SET status = ?, version = version + 1, updated_at = NOW() WHERE id = ? AND status = ? AND version = ?
+==> Parameters: AVAILABLE(String), 7(Long), BOOKED(String), 1(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: INSERT INTO appointment (patient_id, patient_name, slot_id, schedule_id, doctor_id, department_id, schedule_date, period, seq_num, status, source, original_appointment_id, cancel_reason, checked_in_at, cancelled_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+==> Parameters: PM1(String), Patient Migrate 1(String), 10(Long), 6(Long), 6(Long), 5(Long), 2026-06-09(LocalDate), AM(String), 1(Integer), BOOKED(String), MIGRATION(String), 6(Long), null, null, null
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: UPDATE schedule SET booked_count = booked_count + 1, updated_at = NOW() WHERE id = ?
+==> Parameters: 6(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+2026-06-08T22:02:44.097+08:00 DEBUG 26000 --- [           main] c.c.a.s.impl.SuspensionServiceImpl       : Migrated appointment 6 to new appointment 8 on target schedule 6
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: UPDATE slot SET status = ?, version = version + 1, updated_at = NOW() WHERE id = ? AND status = ? AND version = ?
+==> Parameters: BOOKED(String), 11(Long), AVAILABLE(String), 0(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: UPDATE appointment SET status = ?, updated_at = NOW() WHERE id = ?
+==> Parameters: RESCHEDULED(String), 7(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: SELECT id, schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version, created_at, updated_at FROM slot WHERE id = ?
+==> Parameters: 8(Long)
+<==    Columns: id, schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version, created_at, updated_at
+<==        Row: 8, 5, 5, 2026-06-09, AM, 2, 09:00:00, 09:30:00, BOOKED, FALSE, 1, 2026-06-08 22:02:44.033381, 2026-06-08 22:02:44.055322
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: UPDATE slot SET status = ?, version = version + 1, updated_at = NOW() WHERE id = ? AND status = ? AND version = ?
+==> Parameters: AVAILABLE(String), 8(Long), BOOKED(String), 1(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: INSERT INTO appointment (patient_id, patient_name, slot_id, schedule_id, doctor_id, department_id, schedule_date, period, seq_num, status, source, original_appointment_id, cancel_reason, checked_in_at, cancelled_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+==> Parameters: PM2(String), Patient Migrate 2(String), 11(Long), 6(Long), 6(Long), 5(Long), 2026-06-09(LocalDate), AM(String), 2(Integer), BOOKED(String), MIGRATION(String), 7(Long), null, null, null
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: UPDATE schedule SET booked_count = booked_count + 1, updated_at = NOW() WHERE id = ?
+==> Parameters: 6(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+2026-06-08T22:02:44.117+08:00 DEBUG 26000 --- [           main] c.c.a.s.impl.SuspensionServiceImpl       : Migrated appointment 7 to new appointment 9 on target schedule 6
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: UPDATE schedule SET booked_count = booked_count - 1, updated_at = NOW() WHERE id = ?
+==> Parameters: 5(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: UPDATE schedule SET booked_count = booked_count - 1, updated_at = NOW() WHERE id = ?
+==> Parameters: 5(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+2026-06-08T22:02:44.120+08:00  INFO 26000 --- [           main] c.c.a.s.impl.SuspensionServiceImpl       : Migrated 2/2 appointments from schedule 5 to target doctor 6
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: SELECT id, patient_id, patient_name, schedule_id, doctor_id, department_id, schedule_date, period, queue_position, status, offered_at, expired_at, created_at, updated_at FROM waitlist WHERE schedule_id = ? AND status = ?
+==> Parameters: 5(Long), WAITING(String)
+<==      Total: 0
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: INSERT INTO suspension (doctor_id, schedule_id, suspend_date, period, reason, action_taken, target_doctor_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+==> Parameters: 5(Long), 5(Long), 2026-06-09(LocalDate), AM(String), Doctor leave(String), MIGRATE(String), 6(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: INSERT INTO audit_log (entity_type, entity_id, action, operator, detail) VALUES (?, ?, ?, ?, ?)
+==> Parameters: SUSPENSION(String), 2(Long), MIGRATE(String), SYSTEM(String), Doctor 5 suspended on 2026-06-09. Action: MIGRATE. Reason: Doctor leave(String)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+2026-06-08T22:02:44.125+08:00  INFO 26000 --- [           main] c.c.a.s.impl.SuspensionServiceImpl       : Suspension 2 created for doctor 5 on 2026-06-09 with action MIGRATE
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: SELECT id, doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at FROM schedule WHERE id = ?
+==> Parameters: 5(Long)
+<==    Columns: id, doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at
+<==        Row: 5, 5, 2026-06-09, AM, 08:00:00, 12:00:00, 3, 0, 0, SUSPENDED, null, 2026-06-08 22:02:44.032383, 2026-06-08 22:02:44.119618
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: SELECT id, patient_id, patient_name, slot_id, schedule_id, doctor_id, department_id, schedule_date, period, seq_num, status, source, original_appointment_id, cancel_reason, checked_in_at, cancelled_at, created_at, updated_at FROM appointment WHERE schedule_id = ?
+==> Parameters: 5(Long)
+<==    Columns: id, patient_id, patient_name, slot_id, schedule_id, doctor_id, department_id, schedule_date, period, seq_num, status, source, original_appointment_id, cancel_reason, checked_in_at, cancelled_at, created_at, updated_at
+<==        Row: 6, PM1, Patient Migrate 1, 7, 5, 5, 5, 2026-06-09, AM, 1, RESCHEDULED, NORMAL, null, null, null, null, 2026-06-08 22:02:44.044352, 2026-06-08 22:02:44.092126
+<==        Row: 7, PM2, Patient Migrate 2, 8, 5, 5, 5, 2026-06-09, AM, 2, RESCHEDULED, NORMAL, null, null, null, null, 2026-06-08 22:02:44.064298, 2026-06-08 22:02:44.098529
+<==      Total: 2
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: SELECT id, patient_id, patient_name, slot_id, schedule_id, doctor_id, department_id, schedule_date, period, seq_num, status, source, original_appointment_id, cancel_reason, checked_in_at, cancelled_at, created_at, updated_at FROM appointment WHERE schedule_id = ?
+==> Parameters: 6(Long)
+<==    Columns: id, patient_id, patient_name, slot_id, schedule_id, doctor_id, department_id, schedule_date, period, seq_num, status, source, original_appointment_id, cancel_reason, checked_in_at, cancelled_at, created_at, updated_at
+<==        Row: 8, PM1, Patient Migrate 1, 10, 6, 6, 5, 2026-06-09, AM, 1, BOOKED, MIGRATION, 6, null, null, null, 2026-06-08 22:02:44.095895, 2026-06-08 22:02:44.095895
+<==        Row: 9, PM2, Patient Migrate 2, 11, 6, 6, 5, 2026-06-09, AM, 2, BOOKED, MIGRATION, 7, null, null, null, 2026-06-08 22:02:44.114762, 2026-06-08 22:02:44.114762
+<==      Total: 2
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e] from current transaction
+==>  Preparing: SELECT id, doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at FROM schedule WHERE id = ?
+==> Parameters: 6(Long)
+<==    Columns: id, doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at
+<==        Row: 6, 6, 2026-06-09, AM, 08:00:00, 12:00:00, 3, 2, 0, ACTIVE, null, 2026-06-08 22:02:44.069285, 2026-06-08 22:02:44.116756
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3725242e]
+]]></system-out>
+  </testcase>
+  <testcase name="testSuspendWithPartialMigration" classname="com.clinic.appointment.SuspensionMigrationTest" time="0.085">
+    <system-out><![CDATA[Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+JDBC Connection [HikariProxyConnection@904861071 wrapping conn0: url=jdbc:h2:mem:clinic_test user=SA] will be managed by Spring
+==>  Preparing: INSERT INTO department (name, code, description, enabled) VALUES (?, ?, ?, ?)
+==> Parameters: Partial Dept(String), PDEPT_PART(String), null, true(Boolean)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: INSERT INTO doctor (name, code, title, department_id, enabled) VALUES (?, ?, ?, ?, ?)
+==> Parameters: Dr. PARTA(String), SDOC_PARTA(String), Attending(String), 6(Long), true(Boolean)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: INSERT INTO schedule (doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+==> Parameters: 7(Long), 2026-06-09(LocalDate), AM(String), 08:00(LocalTime), 12:00(LocalTime), 3(Integer), 0(Integer), 0(Integer), ACTIVE(String), null
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: INSERT INTO slot (schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+==> Parameters: 7(Long), 7(Long), 2026-06-09(LocalDate), AM(String), 1(Integer), 08:00(LocalTime), 08:30(LocalTime), AVAILABLE(String), false(Boolean), 0(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: INSERT INTO slot (schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+==> Parameters: 7(Long), 7(Long), 2026-06-09(LocalDate), AM(String), 2(Integer), 09:00(LocalTime), 09:30(LocalTime), AVAILABLE(String), false(Boolean), 0(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: INSERT INTO slot (schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+==> Parameters: 7(Long), 7(Long), 2026-06-09(LocalDate), AM(String), 3(Integer), 10:00(LocalTime), 10:30(LocalTime), AVAILABLE(String), false(Boolean), 0(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: SELECT id, schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version, created_at, updated_at FROM slot WHERE id = ?
+==> Parameters: 13(Long)
+<==    Columns: id, schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version, created_at, updated_at
+<==        Row: 13, 7, 7, 2026-06-09, AM, 1, 08:00:00, 08:30:00, AVAILABLE, FALSE, 0, 2026-06-08 22:02:44.15304, 2026-06-08 22:02:44.15304
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: UPDATE slot SET status = ?, version = version + 1, updated_at = NOW() WHERE id = ? AND status = ? AND version = ?
+==> Parameters: BOOKED(String), 13(Long), AVAILABLE(String), 0(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: SELECT id, doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at FROM schedule WHERE id = ?
+==> Parameters: 7(Long)
+<==    Columns: id, doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at
+<==        Row: 7, 7, 2026-06-09, AM, 08:00:00, 12:00:00, 3, 0, 0, ACTIVE, null, 2026-06-08 22:02:44.15304, 2026-06-08 22:02:44.15304
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: SELECT id, name, code, title, department_id, enabled, created_at, updated_at FROM doctor WHERE id = ?
+==> Parameters: 7(Long)
+<==    Columns: id, name, code, title, department_id, enabled, created_at, updated_at
+<==        Row: 7, Dr. PARTA, SDOC_PARTA, Attending, 6, TRUE, 2026-06-08 22:02:44.151045, 2026-06-08 22:02:44.151045
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: INSERT INTO appointment (patient_id, patient_name, slot_id, schedule_id, doctor_id, department_id, schedule_date, period, seq_num, status, source, original_appointment_id, cancel_reason, checked_in_at, cancelled_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+==> Parameters: PP1(String), Patient Partial 1(String), 13(Long), 7(Long), 7(Long), 6(Long), 2026-06-09(LocalDate), AM(String), 1(Integer), BOOKED(String), NORMAL(String), null, null, null, null
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: UPDATE schedule SET booked_count = booked_count + 1, updated_at = NOW() WHERE id = ?
+==> Parameters: 7(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: INSERT INTO audit_log (entity_type, entity_id, action, operator, detail) VALUES (?, ?, ?, ?, ?)
+==> Parameters: APPOINTMENT(String), 10(Long), BOOK(String), PP1(String), Booked slot 13(String)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+2026-06-08T22:02:44.167+08:00  INFO 26000 --- [           main] c.c.a.s.impl.AppointmentServiceImpl      : Appointment 10 booked for patient PP1 on slot 13
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: SELECT id, schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version, created_at, updated_at FROM slot WHERE id = ?
+==> Parameters: 14(Long)
+<==    Columns: id, schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version, created_at, updated_at
+<==        Row: 14, 7, 7, 2026-06-09, AM, 2, 09:00:00, 09:30:00, AVAILABLE, FALSE, 0, 2026-06-08 22:02:44.155035, 2026-06-08 22:02:44.155035
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: UPDATE slot SET status = ?, version = version + 1, updated_at = NOW() WHERE id = ? AND status = ? AND version = ?
+==> Parameters: BOOKED(String), 14(Long), AVAILABLE(String), 0(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: SELECT id, doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at FROM schedule WHERE id = ?
+==> Parameters: 7(Long)
+<==    Columns: id, doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at
+<==        Row: 7, 7, 2026-06-09, AM, 08:00:00, 12:00:00, 3, 1, 0, ACTIVE, null, 2026-06-08 22:02:44.15304, 2026-06-08 22:02:44.167003
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: SELECT id, name, code, title, department_id, enabled, created_at, updated_at FROM doctor WHERE id = ?
+==> Parameters: 7(Long)
+<==    Columns: id, name, code, title, department_id, enabled, created_at, updated_at
+<==        Row: 7, Dr. PARTA, SDOC_PARTA, Attending, 6, TRUE, 2026-06-08 22:02:44.151045, 2026-06-08 22:02:44.151045
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: INSERT INTO appointment (patient_id, patient_name, slot_id, schedule_id, doctor_id, department_id, schedule_date, period, seq_num, status, source, original_appointment_id, cancel_reason, checked_in_at, cancelled_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+==> Parameters: PP2(String), Patient Partial 2(String), 14(Long), 7(Long), 7(Long), 6(Long), 2026-06-09(LocalDate), AM(String), 2(Integer), BOOKED(String), NORMAL(String), null, null, null, null
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: UPDATE schedule SET booked_count = booked_count + 1, updated_at = NOW() WHERE id = ?
+==> Parameters: 7(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: INSERT INTO audit_log (entity_type, entity_id, action, operator, detail) VALUES (?, ?, ?, ?, ?)
+==> Parameters: APPOINTMENT(String), 11(Long), BOOK(String), PP2(String), Booked slot 14(String)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+2026-06-08T22:02:44.181+08:00  INFO 26000 --- [           main] c.c.a.s.impl.AppointmentServiceImpl      : Appointment 11 booked for patient PP2 on slot 14
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: SELECT id, schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version, created_at, updated_at FROM slot WHERE id = ?
+==> Parameters: 15(Long)
+<==    Columns: id, schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version, created_at, updated_at
+<==        Row: 15, 7, 7, 2026-06-09, AM, 3, 10:00:00, 10:30:00, AVAILABLE, FALSE, 0, 2026-06-08 22:02:44.15703, 2026-06-08 22:02:44.15703
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: UPDATE slot SET status = ?, version = version + 1, updated_at = NOW() WHERE id = ? AND status = ? AND version = ?
+==> Parameters: BOOKED(String), 15(Long), AVAILABLE(String), 0(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: SELECT id, doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at FROM schedule WHERE id = ?
+==> Parameters: 7(Long)
+<==    Columns: id, doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at
+<==        Row: 7, 7, 2026-06-09, AM, 08:00:00, 12:00:00, 3, 2, 0, ACTIVE, null, 2026-06-08 22:02:44.15304, 2026-06-08 22:02:44.177217
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: SELECT id, name, code, title, department_id, enabled, created_at, updated_at FROM doctor WHERE id = ?
+==> Parameters: 7(Long)
+<==    Columns: id, name, code, title, department_id, enabled, created_at, updated_at
+<==        Row: 7, Dr. PARTA, SDOC_PARTA, Attending, 6, TRUE, 2026-06-08 22:02:44.151045, 2026-06-08 22:02:44.151045
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: INSERT INTO appointment (patient_id, patient_name, slot_id, schedule_id, doctor_id, department_id, schedule_date, period, seq_num, status, source, original_appointment_id, cancel_reason, checked_in_at, cancelled_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+==> Parameters: PP3(String), Patient Partial 3(String), 15(Long), 7(Long), 7(Long), 6(Long), 2026-06-09(LocalDate), AM(String), 3(Integer), BOOKED(String), NORMAL(String), null, null, null, null
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: UPDATE schedule SET booked_count = booked_count + 1, updated_at = NOW() WHERE id = ?
+==> Parameters: 7(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: INSERT INTO audit_log (entity_type, entity_id, action, operator, detail) VALUES (?, ?, ?, ?, ?)
+==> Parameters: APPOINTMENT(String), 12(Long), BOOK(String), PP3(String), Booked slot 15(String)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+2026-06-08T22:02:44.188+08:00  INFO 26000 --- [           main] c.c.a.s.impl.AppointmentServiceImpl      : Appointment 12 booked for patient PP3 on slot 15
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: INSERT INTO doctor (name, code, title, department_id, enabled) VALUES (?, ?, ?, ?, ?)
+==> Parameters: Dr. PARTB(String), SDOC_PARTB(String), Attending(String), 6(Long), true(Boolean)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: INSERT INTO schedule (doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+==> Parameters: 8(Long), 2026-06-09(LocalDate), AM(String), 08:00(LocalTime), 12:00(LocalTime), 1(Integer), 0(Integer), 0(Integer), ACTIVE(String), null
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: INSERT INTO slot (schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+==> Parameters: 8(Long), 8(Long), 2026-06-09(LocalDate), AM(String), 1(Integer), 08:00(LocalTime), 08:30(LocalTime), AVAILABLE(String), false(Boolean), 0(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: SELECT id, doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at FROM schedule WHERE doctor_id = ? AND schedule_date = ? AND period = ? AND status = 'ACTIVE'
+==> Parameters: 7(Long), 2026-06-09(LocalDate), AM(String)
+<==    Columns: id, doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at
+<==        Row: 7, 7, 2026-06-09, AM, 08:00:00, 12:00:00, 3, 3, 0, ACTIVE, null, 2026-06-08 22:02:44.15304, 2026-06-08 22:02:44.187398
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: SELECT id, doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at FROM schedule WHERE id = ?
+==> Parameters: 7(Long)
+<==    Columns: id, doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at
+<==        Row: 7, 7, 2026-06-09, AM, 08:00:00, 12:00:00, 3, 3, 0, ACTIVE, null, 2026-06-08 22:02:44.15304, 2026-06-08 22:02:44.187398
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: UPDATE schedule SET status = ?, updated_at = NOW() WHERE id = ?
+==> Parameters: SUSPENDED(String), 7(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: INSERT INTO audit_log (entity_type, entity_id, action, operator, detail) VALUES (?, ?, ?, ?, ?)
+==> Parameters: SCHEDULE(String), 7(Long), SUSPEND(String), SYSTEM(String), Suspended schedule 7(String)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+2026-06-08T22:02:44.196+08:00  INFO 26000 --- [           main] c.c.a.service.impl.ScheduleServiceImpl   : Suspended schedule 7
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: SELECT id, patient_id, patient_name, slot_id, schedule_id, doctor_id, department_id, schedule_date, period, seq_num, status, source, original_appointment_id, cancel_reason, checked_in_at, cancelled_at, created_at, updated_at FROM appointment WHERE schedule_id = ? AND status IN ('BOOKED', 'CHECKED_IN')
+==> Parameters: 7(Long)
+<==    Columns: id, patient_id, patient_name, slot_id, schedule_id, doctor_id, department_id, schedule_date, period, seq_num, status, source, original_appointment_id, cancel_reason, checked_in_at, cancelled_at, created_at, updated_at
+<==        Row: 10, PP1, Patient Partial 1, 13, 7, 7, 6, 2026-06-09, AM, 1, BOOKED, NORMAL, null, null, null, null, 2026-06-08 22:02:44.166005, 2026-06-08 22:02:44.166005
+<==        Row: 11, PP2, Patient Partial 2, 14, 7, 7, 6, 2026-06-09, AM, 2, BOOKED, NORMAL, null, null, null, null, 2026-06-08 22:02:44.175219, 2026-06-08 22:02:44.175219
+<==        Row: 12, PP3, Patient Partial 3, 15, 7, 7, 6, 2026-06-09, AM, 3, BOOKED, NORMAL, null, null, null, null, 2026-06-08 22:02:44.186622, 2026-06-08 22:02:44.186622
+<==      Total: 3
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: SELECT id, doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at FROM schedule WHERE doctor_id = ? AND schedule_date = ? AND period = ? AND status = 'ACTIVE'
+==> Parameters: 8(Long), 2026-06-09(LocalDate), AM(String)
+<==    Columns: id, doctor_id, schedule_date, period, start_time, end_time, total_slots, booked_count, extra_slots, status, template_id, created_at, updated_at
+<==        Row: 8, 8, 2026-06-09, AM, 08:00:00, 12:00:00, 1, 0, 0, ACTIVE, null, 2026-06-08 22:02:44.190031, 2026-06-08 22:02:44.190031
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: SELECT id, schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version, created_at, updated_at FROM slot WHERE schedule_id = ? AND status = 'AVAILABLE'
+==> Parameters: 8(Long)
+<==    Columns: id, schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version, created_at, updated_at
+<==        Row: 16, 8, 8, 2026-06-09, AM, 1, 08:00:00, 08:30:00, AVAILABLE, FALSE, 0, 2026-06-08 22:02:44.192676, 2026-06-08 22:02:44.192676
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: SELECT id, name, code, title, department_id, enabled, created_at, updated_at FROM doctor WHERE id = ?
+==> Parameters: 8(Long)
+<==    Columns: id, name, code, title, department_id, enabled, created_at, updated_at
+<==        Row: 8, Dr. PARTB, SDOC_PARTB, Attending, 6, TRUE, 2026-06-08 22:02:44.188979, 2026-06-08 22:02:44.188979
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: UPDATE slot SET status = ?, version = version + 1, updated_at = NOW() WHERE id = ? AND status = ? AND version = ?
+==> Parameters: BOOKED(String), 16(Long), AVAILABLE(String), 0(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: UPDATE appointment SET status = ?, updated_at = NOW() WHERE id = ?
+==> Parameters: RESCHEDULED(String), 10(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: SELECT id, schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version, created_at, updated_at FROM slot WHERE id = ?
+==> Parameters: 13(Long)
+<==    Columns: id, schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version, created_at, updated_at
+<==        Row: 13, 7, 7, 2026-06-09, AM, 1, 08:00:00, 08:30:00, BOOKED, FALSE, 1, 2026-06-08 22:02:44.15304, 2026-06-08 22:02:44.160022
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: UPDATE slot SET status = ?, version = version + 1, updated_at = NOW() WHERE id = ? AND status = ? AND version = ?
+==> Parameters: AVAILABLE(String), 13(Long), BOOKED(String), 1(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: INSERT INTO appointment (patient_id, patient_name, slot_id, schedule_id, doctor_id, department_id, schedule_date, period, seq_num, status, source, original_appointment_id, cancel_reason, checked_in_at, cancelled_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+==> Parameters: PP1(String), Patient Partial 1(String), 16(Long), 8(Long), 8(Long), 6(Long), 2026-06-09(LocalDate), AM(String), 1(Integer), BOOKED(String), MIGRATION(String), 10(Long), null, null, null
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: UPDATE schedule SET booked_count = booked_count + 1, updated_at = NOW() WHERE id = ?
+==> Parameters: 8(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+2026-06-08T22:02:44.208+08:00 DEBUG 26000 --- [           main] c.c.a.s.impl.SuspensionServiceImpl       : Migrated appointment 10 to new appointment 13 on target schedule 8
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: UPDATE schedule SET booked_count = booked_count - 1, updated_at = NOW() WHERE id = ?
+==> Parameters: 7(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: UPDATE schedule SET booked_count = booked_count - 1, updated_at = NOW() WHERE id = ?
+==> Parameters: 7(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: UPDATE schedule SET booked_count = booked_count - 1, updated_at = NOW() WHERE id = ?
+==> Parameters: 7(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: UPDATE appointment SET status = ?, cancel_reason = ?, cancelled_at = NOW(), updated_at = NOW() WHERE id IN ( ? , ? )
+==> Parameters: CANCELLED(String), Doctor suspension: not enough slots for migration(String), 11(Long), 12(Long)
+<==    Updates: 2
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: SELECT id, schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version, created_at, updated_at FROM slot WHERE id = ?
+==> Parameters: 14(Long)
+<==    Columns: id, schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version, created_at, updated_at
+<==        Row: 14, 7, 7, 2026-06-09, AM, 2, 09:00:00, 09:30:00, BOOKED, FALSE, 1, 2026-06-08 22:02:44.155035, 2026-06-08 22:02:44.170237
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: UPDATE slot SET status = ?, version = version + 1, updated_at = NOW() WHERE id = ? AND status = ? AND version = ?
+==> Parameters: AVAILABLE(String), 14(Long), BOOKED(String), 1(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: SELECT id, schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version, created_at, updated_at FROM slot WHERE id = ?
+==> Parameters: 15(Long)
+<==    Columns: id, schedule_id, doctor_id, schedule_date, period, seq_num, start_time, end_time, status, is_extra, version, created_at, updated_at
+<==        Row: 15, 7, 7, 2026-06-09, AM, 3, 10:00:00, 10:30:00, BOOKED, FALSE, 1, 2026-06-08 22:02:44.15703, 2026-06-08 22:02:44.184331
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: UPDATE slot SET status = ?, version = version + 1, updated_at = NOW() WHERE id = ? AND status = ? AND version = ?
+==> Parameters: AVAILABLE(String), 15(Long), BOOKED(String), 1(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+2026-06-08T22:02:44.217+08:00  WARN 26000 --- [           main] c.c.a.s.impl.SuspensionServiceImpl       : Could not migrate 2 appointments for schedule 7 due to insufficient target slots
+2026-06-08T22:02:44.217+08:00  INFO 26000 --- [           main] c.c.a.s.impl.SuspensionServiceImpl       : Migrated 1/3 appointments from schedule 7 to target doctor 8
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: SELECT id, patient_id, patient_name, schedule_id, doctor_id, department_id, schedule_date, period, queue_position, status, offered_at, expired_at, created_at, updated_at FROM waitlist WHERE schedule_id = ? AND status = ?
+==> Parameters: 7(Long), WAITING(String)
+<==      Total: 0
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: INSERT INTO suspension (doctor_id, schedule_id, suspend_date, period, reason, action_taken, target_doctor_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+==> Parameters: 7(Long), 7(Long), 2026-06-09(LocalDate), AM(String), Partial migration test(String), MIGRATE(String), 8(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: INSERT INTO audit_log (entity_type, entity_id, action, operator, detail) VALUES (?, ?, ?, ?, ?)
+==> Parameters: SUSPENSION(String), 3(Long), MIGRATE(String), SYSTEM(String), Doctor 7 suspended on 2026-06-09. Action: MIGRATE. Reason: Partial migration test(String)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+2026-06-08T22:02:44.220+08:00  INFO 26000 --- [           main] c.c.a.s.impl.SuspensionServiceImpl       : Suspension 3 created for doctor 7 on 2026-06-09 with action MIGRATE
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: SELECT id, patient_id, patient_name, slot_id, schedule_id, doctor_id, department_id, schedule_date, period, seq_num, status, source, original_appointment_id, cancel_reason, checked_in_at, cancelled_at, created_at, updated_at FROM appointment WHERE schedule_id = ?
+==> Parameters: 7(Long)
+<==    Columns: id, patient_id, patient_name, slot_id, schedule_id, doctor_id, department_id, schedule_date, period, seq_num, status, source, original_appointment_id, cancel_reason, checked_in_at, cancelled_at, created_at, updated_at
+<==        Row: 10, PP1, Patient Partial 1, 13, 7, 7, 6, 2026-06-09, AM, 1, RESCHEDULED, NORMAL, null, null, null, null, 2026-06-08 22:02:44.166005, 2026-06-08 22:02:44.201653
+<==        Row: 11, PP2, Patient Partial 2, 14, 7, 7, 6, 2026-06-09, AM, 2, CANCELLED, NORMAL, null, Doctor suspension: not enough slots for migration, null, 2026-06-08 22:02:44.21426, 2026-06-08 22:02:44.175219, 2026-06-08 22:02:44.21426
+<==        Row: 12, PP3, Patient Partial 3, 15, 7, 7, 6, 2026-06-09, AM, 3, CANCELLED, NORMAL, null, Doctor suspension: not enough slots for migration, null, 2026-06-08 22:02:44.21426, 2026-06-08 22:02:44.186622, 2026-06-08 22:02:44.21426
+<==      Total: 3
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de] from current transaction
+==>  Preparing: SELECT id, patient_id, patient_name, slot_id, schedule_id, doctor_id, department_id, schedule_date, period, seq_num, status, source, original_appointment_id, cancel_reason, checked_in_at, cancelled_at, created_at, updated_at FROM appointment WHERE schedule_id = ?
+==> Parameters: 8(Long)
+<==    Columns: id, patient_id, patient_name, slot_id, schedule_id, doctor_id, department_id, schedule_date, period, seq_num, status, source, original_appointment_id, cancel_reason, checked_in_at, cancelled_at, created_at, updated_at
+<==        Row: 13, PP1, Patient Partial 1, 16, 8, 8, 6, 2026-06-09, AM, 1, BOOKED, MIGRATION, 10, null, null, null, 2026-06-08 22:02:44.206271, 2026-06-08 22:02:44.206271
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@796687de]
+]]></system-out>
+  </testcase>
+</testsuite>

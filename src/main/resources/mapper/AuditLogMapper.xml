@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.clinic.appointment.mapper.AuditLogMapper">
+
+    <insert id="insert" parameterType="com.clinic.appointment.model.entity.AuditLog"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO audit_log (entity_type, entity_id, action, operator, detail)
+        VALUES (#{entityType}, #{entityId}, #{action}, #{operator}, #{detail})
+    </insert>
+
+    <select id="selectByEntity" resultType="com.clinic.appointment.model.entity.AuditLog">
+        SELECT id, entity_type, entity_id, action, operator, detail, created_at
+        FROM audit_log
+        WHERE entity_type = #{entityType} AND entity_id = #{entityId}
+    </select>
+
+    <select id="selectByAction" resultType="com.clinic.appointment.model.entity.AuditLog">
+        SELECT id, entity_type, entity_id, action, operator, detail, created_at
+        FROM audit_log
+        WHERE action = #{action}
+    </select>
+
+    <select id="selectRecent" resultType="com.clinic.appointment.model.entity.AuditLog">
+        SELECT id, entity_type, entity_id, action, operator, detail, created_at
+        FROM audit_log
+        ORDER BY created_at DESC
+        LIMIT #{limit}
+    </select>
+
+</mapper>

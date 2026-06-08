@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.clinic.appointment.mapper.WaitlistMapper">
+
+    <insert id="insert" parameterType="com.clinic.appointment.model.entity.Waitlist"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO waitlist (patient_id, patient_name, schedule_id, doctor_id, department_id,
+                              schedule_date, period, queue_position, status)
+        VALUES (#{patientId}, #{patientName}, #{scheduleId}, #{doctorId}, #{departmentId},
+                #{scheduleDate}, #{period}, #{queuePosition}, #{status})
+    </insert>
+
+    <update id="update" parameterType="com.clinic.appointment.model.entity.Waitlist">
+        UPDATE waitlist
+        SET patient_id = #{patientId},
+            patient_name = #{patientName},
+            schedule_id = #{scheduleId},
+            doctor_id = #{doctorId},
+            department_id = #{departmentId},
+            schedule_date = #{scheduleDate},
+            period = #{period},
+            queue_position = #{queuePosition},
+            status = #{status},
+            offered_at = #{offeredAt},
+            expired_at = #{expiredAt},
+            updated_at = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectById" resultType="com.clinic.appointment.model.entity.Waitlist">
+        SELECT id, patient_id, patient_name, schedule_id, doctor_id, department_id,
+               schedule_date, period, queue_position, status, offered_at, expired_at,
+               created_at, updated_at
+        FROM waitlist
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectByScheduleIdAndStatus" resultType="com.clinic.appointment.model.entity.Waitlist">
+        SELECT id, patient_id, patient_name, schedule_id, doctor_id, department_id,
+               schedule_date, period, queue_position, status, offered_at, expired_at,
+               created_at, updated_at
+        FROM waitlist
+        WHERE schedule_id = #{scheduleId} AND status = #{status}
+    </select>
+
+    <select id="selectFirstWaiting" resultType="com.clinic.appointment.model.entity.Waitlist">
+        SELECT id, patient_id, patient_name, schedule_id, doctor_id, department_id,
+               schedule_date, period, queue_position, status, offered_at, expired_at,
+               created_at, updated_at
+        FROM waitlist
+        WHERE schedule_id = #{scheduleId} AND status = 'WAITING'
+        ORDER BY queue_position ASC
+        LIMIT 1
+    </select>
+
+    <select id="selectByPatientId" resultType="com.clinic.appointment.model.entity.Waitlist">
+        SELECT id, patient_id, patient_name, schedule_id, doctor_id, department_id,
+               schedule_date, period, queue_position, status, offered_at, expired_at,
+               created_at, updated_at
+        FROM waitlist
+        WHERE patient_id = #{patientId}
+    </select>
+
+    <update id="updateStatus">
+        UPDATE waitlist
+        SET status = #{status},
+            updated_at = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <select id="countByScheduleId" resultType="int">
+        SELECT COUNT(*)
+        FROM waitlist
+        WHERE schedule_id = #{scheduleId}
+    </select>
+
+    <select id="selectMaxPosition" resultType="java.lang.Integer">
+        SELECT MAX(queue_position)
+        FROM waitlist
+        WHERE schedule_id = #{scheduleId}
+    </select>
+
+</mapper>

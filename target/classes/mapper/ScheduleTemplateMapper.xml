@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.clinic.appointment.mapper.ScheduleTemplateMapper">
+
+    <insert id="insert" parameterType="com.clinic.appointment.model.entity.ScheduleTemplate"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO schedule_template (doctor_id, day_of_week, period, start_time, end_time,
+                                       max_slots, enabled)
+        VALUES (#{doctorId}, #{dayOfWeek}, #{period}, #{startTime}, #{endTime},
+                #{maxSlots}, #{enabled})
+    </insert>
+
+    <update id="update" parameterType="com.clinic.appointment.model.entity.ScheduleTemplate">
+        UPDATE schedule_template
+        SET doctor_id = #{doctorId},
+            day_of_week = #{dayOfWeek},
+            period = #{period},
+            start_time = #{startTime},
+            end_time = #{endTime},
+            max_slots = #{maxSlots},
+            enabled = #{enabled},
+            updated_at = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectById" resultType="com.clinic.appointment.model.entity.ScheduleTemplate">
+        SELECT id, doctor_id, day_of_week, period, start_time, end_time,
+               max_slots, enabled, created_at, updated_at
+        FROM schedule_template
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectByDoctorId" resultType="com.clinic.appointment.model.entity.ScheduleTemplate">
+        SELECT id, doctor_id, day_of_week, period, start_time, end_time,
+               max_slots, enabled, created_at, updated_at
+        FROM schedule_template
+        WHERE doctor_id = #{doctorId}
+    </select>
+
+    <select id="selectByDayOfWeek" resultType="com.clinic.appointment.model.entity.ScheduleTemplate">
+        SELECT id, doctor_id, day_of_week, period, start_time, end_time,
+               max_slots, enabled, created_at, updated_at
+        FROM schedule_template
+        WHERE day_of_week = #{dayOfWeek}
+    </select>
+
+    <select id="selectEnabledByDayOfWeek" resultType="com.clinic.appointment.model.entity.ScheduleTemplate">
+        SELECT id, doctor_id, day_of_week, period, start_time, end_time,
+               max_slots, enabled, created_at, updated_at
+        FROM schedule_template
+        WHERE day_of_week = #{dayOfWeek} AND enabled = true
+    </select>
+
+</mapper>

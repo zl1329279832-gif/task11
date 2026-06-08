@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.clinic.appointment.mapper.AppointmentMapper">
+
+    <insert id="insert" parameterType="com.clinic.appointment.model.entity.Appointment"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO appointment (patient_id, patient_name, slot_id, schedule_id, doctor_id,
+                                 department_id, schedule_date, period, seq_num, status, source,
+                                 original_appointment_id, cancel_reason, checked_in_at, cancelled_at)
+        VALUES (#{patientId}, #{patientName}, #{slotId}, #{scheduleId}, #{doctorId},
+                #{departmentId}, #{scheduleDate}, #{period}, #{seqNum}, #{status}, #{source},
+                #{originalAppointmentId}, #{cancelReason}, #{checkedInAt}, #{cancelledAt})
+    </insert>
+
+    <update id="update" parameterType="com.clinic.appointment.model.entity.Appointment">
+        UPDATE appointment
+        SET patient_id = #{patientId},
+            patient_name = #{patientName},
+            slot_id = #{slotId},
+            schedule_id = #{scheduleId},
+            doctor_id = #{doctorId},
+            department_id = #{departmentId},
+            schedule_date = #{scheduleDate},
+            period = #{period},
+            seq_num = #{seqNum},
+            status = #{status},
+            source = #{source},
+            original_appointment_id = #{originalAppointmentId},
+            cancel_reason = #{cancelReason},
+            checked_in_at = #{checkedInAt},
+            cancelled_at = #{cancelledAt},
+            updated_at = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectById" resultType="com.clinic.appointment.model.entity.Appointment">
+        SELECT id, patient_id, patient_name, slot_id, schedule_id, doctor_id, department_id,
+               schedule_date, period, seq_num, status, source, original_appointment_id,
+               cancel_reason, checked_in_at, cancelled_at, created_at, updated_at
+        FROM appointment
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectByPatientId" resultType="com.clinic.appointment.model.entity.Appointment">
+        SELECT id, patient_id, patient_name, slot_id, schedule_id, doctor_id, department_id,
+               schedule_date, period, seq_num, status, source, original_appointment_id,
+               cancel_reason, checked_in_at, cancelled_at, created_at, updated_at
+        FROM appointment
+        WHERE patient_id = #{patientId}
+    </select>
+
+    <select id="selectBySlotId" resultType="com.clinic.appointment.model.entity.Appointment">
+        SELECT id, patient_id, patient_name, slot_id, schedule_id, doctor_id, department_id,
+               schedule_date, period, seq_num, status, source, original_appointment_id,
+               cancel_reason, checked_in_at, cancelled_at, created_at, updated_at
+        FROM appointment
+        WHERE slot_id = #{slotId}
+    </select>
+
+    <select id="selectByScheduleId" resultType="com.clinic.appointment.model.entity.Appointment">
+        SELECT id, patient_id, patient_name, slot_id, schedule_id, doctor_id, department_id,
+               schedule_date, period, seq_num, status, source, original_appointment_id,
+               cancel_reason, checked_in_at, cancelled_at, created_at, updated_at
+        FROM appointment
+        WHERE schedule_id = #{scheduleId}
+    </select>
+
+    <select id="selectActiveByScheduleId" resultType="com.clinic.appointment.model.entity.Appointment">
+        SELECT id, patient_id, patient_name, slot_id, schedule_id, doctor_id, department_id,
+               schedule_date, period, seq_num, status, source, original_appointment_id,
+               cancel_reason, checked_in_at, cancelled_at, created_at, updated_at
+        FROM appointment
+        WHERE schedule_id = #{scheduleId} AND status IN ('BOOKED', 'CHECKED_IN')
+    </select>
+
+    <update id="updateStatus">
+        UPDATE appointment
+        SET status = #{status},
+            updated_at = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectByDoctorAndDate" resultType="com.clinic.appointment.model.entity.Appointment">
+        SELECT id, patient_id, patient_name, slot_id, schedule_id, doctor_id, department_id,
+               schedule_date, period, seq_num, status, source, original_appointment_id,
+               cancel_reason, checked_in_at, cancelled_at, created_at, updated_at
+        FROM appointment
+        WHERE doctor_id = #{doctorId} AND schedule_date = #{scheduleDate}
+    </select>
+
+    <update id="batchUpdateStatus">
+        UPDATE appointment
+        SET status = #{status},
+            cancel_reason = #{reason},
+            cancelled_at = NOW(),
+            updated_at = NOW()
+        WHERE id IN
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+</mapper>
