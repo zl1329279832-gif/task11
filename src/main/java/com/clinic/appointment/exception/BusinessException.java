@@ -47,4 +47,28 @@ public class BusinessException extends RuntimeException {
     public static BusinessException waitlistFull() {
         return new BusinessException("WAITLIST_FULL", "候补队列已满");
     }
+
+    public static BusinessException roomUnavailable() {
+        return new BusinessException("ROOM_UNAVAILABLE", "所需诊室不可用");
+    }
+
+    public static BusinessException equipmentUnavailable() {
+        return new BusinessException("EQUIPMENT_UNAVAILABLE", "所需设备不可用");
+    }
+
+    public static BusinessException nursingUnavailable() {
+        return new BusinessException("NURSING_UNAVAILABLE", "护理资源不可用");
+    }
+
+    public static BusinessException resourceCasFailed(String resourceType) {
+        return new BusinessException("RESOURCE_CAS_FAILED", resourceType + "资源预约冲突，请重试");
+    }
+
+    public static BusinessException patientExamLimitExceeded() {
+        return new BusinessException("PATIENT_EXAM_LIMIT", "已达到该检查类型的预约上限");
+    }
+
+    public static BusinessException examTypeNotFound() {
+        return new BusinessException("EXAM_TYPE_NOT_FOUND", "检查类型不存在");
+    }
 }

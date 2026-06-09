@@ -3,18 +3,24 @@ package com.clinic.appointment.service.impl;
 import com.clinic.appointment.domain.dto.BookRequest;
 import com.clinic.appointment.domain.dto.CancelRequest;
 import com.clinic.appointment.domain.dto.RescheduleRequest;
+import com.clinic.appointment.domain.dto.ResourceAllocation;
 import com.clinic.appointment.domain.entity.Appointment;
+import com.clinic.appointment.domain.entity.AppointmentResource;
 import com.clinic.appointment.domain.entity.DoctorSchedule;
+import com.clinic.appointment.domain.entity.ExamType;
 import com.clinic.appointment.domain.entity.ScheduleSlot;
 import com.clinic.appointment.domain.enums.AppointmentStatus;
 import com.clinic.appointment.domain.enums.SlotStatus;
 import com.clinic.appointment.exception.BusinessException;
 import com.clinic.appointment.mapper.AppointmentMapper;
+import com.clinic.appointment.mapper.AppointmentResourceMapper;
 import com.clinic.appointment.mapper.DoctorScheduleMapper;
+import com.clinic.appointment.mapper.ExamTypeMapper;
 import com.clinic.appointment.mapper.ScheduleSlotMapper;
 import com.clinic.appointment.service.AppointmentService;
 import com.clinic.appointment.service.AuditService;
 import com.clinic.appointment.service.RedisLockService;
+import com.clinic.appointment.service.ResourceScheduleService;
 import com.clinic.appointment.service.WaitlistService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,8 +34,11 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
+import java.util.function.Supplier;
 
 @Slf4j
 @Service
@@ -41,10 +50,16 @@ public class AppointmentServiceImpl implements AppointmentService {
     private final DoctorScheduleMapper scheduleMapper;
     private final RedisLockService lockService;
     private final AuditService auditService;
+    private final ExamTypeMapper examTypeMapper;
+    private final AppointmentResourceMapper appointmentResourceMapper;
 
     @Autowired
     @Lazy
     private WaitlistService waitlistService;
+
+    @Autowired
+    @Lazy
+    private ResourceScheduleService resourceScheduleService;
 
     private static final DateTimeFormatter NO_FMT = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
 
@@ -57,16 +72,37 @@ public class AppointmentServiceImpl implements AppointmentService {
             throw BusinessException.slotNotAvailable();
         }
 
-        // 2. 分布式锁保护（按号源粒度）
-        String lockKey = "lock:slot:" + slot.getId();
-        return lockService.executeWithLock(lockKey, () -> {
-            // 3. 锁内重新检查号源状态
+        // 2. 判断是否联合预约
+        boolean isJoint = request.getExamTypeCode() != null;
+        ExamType examType = null;
+        ResourceAllocation allocation = null;
+
+        if (isJoint) {
+            examType = examTypeMapper.findByCode(request.getExamTypeCode());
+            if (examType == null) {
+                throw BusinessException.examTypeNotFound();
+            }
+            // 校验患者每日检查次数限制
+            resourceScheduleService.validatePatientLimits(
+                    request.getPatientId(), request.getExamTypeCode(), slot.getSlotDate());
+            // 解析所需资源（只读，锁外）
+            allocation = resourceScheduleService.resolveResources(
+                    examType, slot.getSlotDate(), slot.getSlotTime(), request);
+        }
+
+        // 3. 构建有序锁键列表（防死锁）
+        List<String> lockKeys = buildOrderedLockKeys(slot.getId(), allocation);
+
+        // 4. 递归加锁后执行预约
+        final ResourceAllocation finalAllocation = allocation;
+        return executeWithOrderedLocks(lockKeys, 0, () -> {
+            // 5. 锁内重新检查号源状态
             ScheduleSlot freshSlot = slotMapper.selectById(request.getSlotId());
             if (freshSlot == null || !SlotStatus.AVAILABLE.name().equals(freshSlot.getStatus())) {
                 throw BusinessException.slotNotAvailable();
             }
 
-            // 4. 创建预约记录
+            // 6. 创建预约记录
             Appointment appointment = new Appointment();
             appointment.setAppointmentNo(generateNo());
             appointment.setPatientId(request.getPatientId());
@@ -78,30 +114,40 @@ public class AppointmentServiceImpl implements AppointmentService {
             appointment.setSlotTime(freshSlot.getSlotTime());
             appointment.setStatus(AppointmentStatus.CONFIRMED.name());
             appointment.setSource("ONLINE");
+            appointment.setBookingType(isJoint ? "JOINT" : "SINGLE");
+            appointment.setExamTypeCode(isJoint ? request.getExamTypeCode() : null);
             appointmentMapper.insert(appointment);
 
-            // 5. CAS占用号源（乐观锁）
+            // 7. CAS占用号源（乐观锁）
             int updated = slotMapper.casBook(freshSlot.getId(), appointment.getId(), freshSlot.getVersion());
             if (updated == 0) {
                 throw BusinessException.slotNotAvailable();
             }
 
-            // 6. 更新排班已预约数
+            // 8. 联合预约：CAS预订所有资源（任一失败抛异常→事务回滚）
+            if (isJoint && finalAllocation != null && !finalAllocation.isEmpty()) {
+                resourceScheduleService.bookResources(appointment.getId(), finalAllocation);
+            }
+
+            // 9. 更新排班已预约数
             DoctorSchedule schedule = scheduleMapper.selectById(freshSlot.getScheduleId());
             if (schedule != null) {
                 schedule.setBookedSlots(schedule.getBookedSlots() + 1);
                 scheduleMapper.updateById(schedule);
             }
 
-            // 7. 审计日志
+            // 10. 审计日志
             auditService.log("BOOK", "APPOINTMENT", appointment.getId(),
-                    String.format("{\"patientId\":%d,\"slotId\":%d,\"date\":\"%s\",\"time\":\"%s\"}",
+                    String.format("{\"patientId\":%d,\"slotId\":%d,\"date\":\"%s\",\"time\":\"%s\",\"bookingType\":\"%s\",\"examType\":\"%s\"}",
                             request.getPatientId(), freshSlot.getId(),
-                            freshSlot.getSlotDate(), freshSlot.getSlotTime()));
+                            freshSlot.getSlotDate(), freshSlot.getSlotTime(),
+                            appointment.getBookingType(),
+                            appointment.getExamTypeCode()));
 
-            log.info("预约成功: no={}, patient={}, doctor={}, date={}, time={}",
+            log.info("预约成功: no={}, patient={}, doctor={}, date={}, time={}, type={}",
                     appointment.getAppointmentNo(), request.getPatientId(),
-                    freshSlot.getDoctorId(), freshSlot.getSlotDate(), freshSlot.getSlotTime());
+                    freshSlot.getDoctorId(), freshSlot.getSlotDate(), freshSlot.getSlotTime(),
+                    appointment.getBookingType());
 
             return appointment;
         });
@@ -122,27 +168,22 @@ public class AppointmentServiceImpl implements AppointmentService {
             throw BusinessException.invalidStatusTransition(status, "CANCELLED");
         }
 
-        // 分布式锁保护：使用slot粒度锁，与book()保持一致，防止同一号源被并发操作
-        String lockKey = "lock:slot:" + appointment.getSlotId();
-        return lockService.executeWithLock(lockKey, () -> {
-            // 锁内重新校验预约状态（防止并发取消）
+        // 构建锁键列表：slot锁 + 联合预约的资源锁
+        List<String> lockKeys = buildCancelLockKeys(appointment);
+
+        return executeWithOrderedLocks(lockKeys, 0, () -> {
+            // 原子CAS更新预约状态（防止并发取消）
+            String reason = request.getReason() != null ? request.getReason() : "";
+            int cancelUpdated = appointmentMapper.casCancelById(request.getAppointmentId(), reason);
+            if (cancelUpdated == 0) {
+                throw BusinessException.invalidStatusTransition("CANCELLED", "CANCELLED");
+            }
+
+            // 重新读取已取消的预约
             Appointment freshAppt = appointmentMapper.selectById(request.getAppointmentId());
-            if (freshAppt == null) {
-                throw BusinessException.appointmentNotFound();
-            }
-            String freshStatus = freshAppt.getStatus();
-            if (!AppointmentStatus.PENDING.name().equals(freshStatus) &&
-                !AppointmentStatus.CONFIRMED.name().equals(freshStatus)) {
-                throw BusinessException.invalidStatusTransition(freshStatus, "CANCELLED");
-            }
 
             // 重新读取号源（锁内）
             ScheduleSlot slot = slotMapper.selectById(freshAppt.getSlotId());
-
-            // 更新预约状态
-            freshAppt.setStatus(AppointmentStatus.CANCELLED.name());
-            freshAppt.setCancelReason(request.getReason() != null ? request.getReason() : "");
-            appointmentMapper.updateById(freshAppt);
 
             // 释放号源并检查返回值
             if (slot != null && SlotStatus.BOOKED.name().equals(slot.getStatus())) {
@@ -160,15 +201,17 @@ public class AppointmentServiceImpl implements AppointmentService {
                 }
             }
 
+            // 联合预约：释放所有资源
+            if ("JOINT".equals(freshAppt.getBookingType())) {
+                resourceScheduleService.releaseResources(freshAppt.getId());
+            }
+
             auditService.log("CANCEL", "APPOINTMENT", freshAppt.getId(),
                     String.format("{\"reason\":\"%s\"}", request.getReason()));
 
             log.info("取消预约: no={}, reason={}", freshAppt.getAppointmentNo(), request.getReason());
 
-            // 事务提交后再触发候补补位，避免：
-            // 1. 补位事务嵌套导致号源状态不可见
-            // 2. 补位抢锁与当前cancel锁冲突
-            // 3. 补位失败回滚整个cancel事务
+            // 事务提交后再触发候补补位
             final Long doctorId = freshAppt.getDoctorId();
             final LocalDate slotDate = freshAppt.getSlotDate();
             final java.time.LocalTime slotTime = freshAppt.getSlotTime();
@@ -209,80 +252,108 @@ public class AppointmentServiceImpl implements AppointmentService {
             throw BusinessException.slotNotAvailable();
         }
 
-        // 锁保护：同时锁旧号源和新号源（按ID排序避免死锁）
-        Long oldSlotId = original.getSlotId();
-        Long newSlotId = newSlot.getId();
-        String lockKey1 = "lock:slot:" + Math.min(oldSlotId, newSlotId);
-        String lockKey2 = "lock:slot:" + Math.max(oldSlotId, newSlotId);
+        // 判断是否联合预约改签
+        boolean isJoint = "JOINT".equals(original.getBookingType());
+        ResourceAllocation newAllocation = null;
 
-        return lockService.executeWithLock(lockKey1, () ->
-            lockService.executeWithLock(lockKey2, () -> {
-                // 重新校验新号源
-                ScheduleSlot freshNew = slotMapper.selectById(newSlotId);
-                if (freshNew == null || !SlotStatus.AVAILABLE.name().equals(freshNew.getStatus())) {
-                    throw BusinessException.slotNotAvailable();
-                }
+        if (isJoint) {
+            ExamType examType = examTypeMapper.findByCode(original.getExamTypeCode());
+            if (examType == null) {
+                throw BusinessException.examTypeNotFound();
+            }
+            // 构建改签用的BookRequest以传递资源指定
+            BookRequest resReq = new BookRequest();
+            resReq.setRoomResourceSlotId(request.getNewRoomResourceSlotId());
+            resReq.setEquipmentResourceSlotId(request.getNewEquipmentResourceSlotId());
+            resReq.setNursingResourceSlotId(request.getNewNursingResourceSlotId());
+            newAllocation = resourceScheduleService.resolveResources(
+                    examType, newSlot.getSlotDate(), newSlot.getSlotTime(), resReq);
+        }
 
-                // 1. 释放旧号源
-                ScheduleSlot oldSlot = slotMapper.selectById(oldSlotId);
-                if (oldSlot != null) {
-                    slotMapper.casRelease(oldSlotId, oldSlot.getVersion());
-                }
+        // 构建锁键列表：旧slot + 新slot + 旧资源 + 新资源，排序防死锁
+        List<String> lockKeys = buildRescheduleLockKeys(
+                original.getSlotId(), newSlot.getId(), original, newAllocation);
 
-                // 2. 标记旧预约为已改签
-                original.setStatus(AppointmentStatus.RESCHEDULED.name());
-                original.setCancelReason(request.getReason() != null ? request.getReason() : "改签");
-                appointmentMapper.updateById(original);
+        final ResourceAllocation finalNewAllocation = newAllocation;
+        return executeWithOrderedLocks(lockKeys, 0, () -> {
+            // 重新校验新号源
+            ScheduleSlot freshNew = slotMapper.selectById(request.getNewSlotId());
+            if (freshNew == null || !SlotStatus.AVAILABLE.name().equals(freshNew.getStatus())) {
+                throw BusinessException.slotNotAvailable();
+            }
 
-                // 3. 创建新预约
-                Appointment newAppointment = new Appointment();
-                newAppointment.setAppointmentNo(generateNo());
-                newAppointment.setPatientId(original.getPatientId());
-                newAppointment.setPatientName(original.getPatientName());
-                newAppointment.setDoctorId(freshNew.getDoctorId());
-                newAppointment.setDepartmentId(freshNew.getDepartmentId());
-                newAppointment.setSlotId(freshNew.getId());
-                newAppointment.setSlotDate(freshNew.getSlotDate());
-                newAppointment.setSlotTime(freshNew.getSlotTime());
-                newAppointment.setStatus(AppointmentStatus.CONFIRMED.name());
-                newAppointment.setSource(original.getSource());
-                newAppointment.setOriginalId(original.getId());
-                appointmentMapper.insert(newAppointment);
+            // 1. 释放旧资源（联合预约）
+            if (isJoint) {
+                resourceScheduleService.releaseResources(original.getId());
+            }
 
-                // 4. CAS占用新号源
-                int updated = slotMapper.casBook(freshNew.getId(), newAppointment.getId(), freshNew.getVersion());
-                if (updated == 0) {
-                    throw BusinessException.slotNotAvailable();
-                }
+            // 2. 释放旧号源
+            Long oldSlotId = original.getSlotId();
+            ScheduleSlot oldSlot = slotMapper.selectById(oldSlotId);
+            if (oldSlot != null) {
+                slotMapper.casRelease(oldSlotId, oldSlot.getVersion());
+            }
 
-                auditService.log("RESCHEDULE", "APPOINTMENT", newAppointment.getId(),
-                        String.format("{\"fromId\":%d,\"fromSlot\":%d,\"toSlot\":%d}",
-                                original.getId(), oldSlotId, newSlotId));
+            // 3. 标记旧预约为已改签
+            original.setStatus(AppointmentStatus.RESCHEDULED.name());
+            original.setCancelReason(request.getReason() != null ? request.getReason() : "改签");
+            appointmentMapper.updateById(original);
 
-                log.info("改签成功: old={}, new={}, patient={}",
-                        original.getAppointmentNo(), newAppointment.getAppointmentNo(),
-                        original.getPatientId());
+            // 4. 创建新预约
+            Appointment newAppointment = new Appointment();
+            newAppointment.setAppointmentNo(generateNo());
+            newAppointment.setPatientId(original.getPatientId());
+            newAppointment.setPatientName(original.getPatientName());
+            newAppointment.setDoctorId(freshNew.getDoctorId());
+            newAppointment.setDepartmentId(freshNew.getDepartmentId());
+            newAppointment.setSlotId(freshNew.getId());
+            newAppointment.setSlotDate(freshNew.getSlotDate());
+            newAppointment.setSlotTime(freshNew.getSlotTime());
+            newAppointment.setStatus(AppointmentStatus.CONFIRMED.name());
+            newAppointment.setSource(original.getSource());
+            newAppointment.setOriginalId(original.getId());
+            newAppointment.setBookingType(original.getBookingType());
+            newAppointment.setExamTypeCode(original.getExamTypeCode());
+            appointmentMapper.insert(newAppointment);
 
-                // 事务提交后触发旧号源的候补补位
-                final Long oldDoctorId = original.getDoctorId();
-                final LocalDate oldDate = original.getSlotDate();
-                final java.time.LocalTime oldTime = original.getSlotTime();
-                if (TransactionSynchronizationManager.isActualTransactionActive()) {
-                    TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
-                        @Override
-                        public void afterCommit() {
-                            try {
-                                waitlistService.triggerBackfill(oldDoctorId, oldDate, oldTime);
-                            } catch (Exception e) {
-                                log.error("改签后候补补位触发失败: {}", e.getMessage());
-                            }
+            // 5. CAS占用新号源
+            int updated = slotMapper.casBook(freshNew.getId(), newAppointment.getId(), freshNew.getVersion());
+            if (updated == 0) {
+                throw BusinessException.slotNotAvailable();
+            }
+
+            // 6. 联合预约：CAS预订新资源
+            if (isJoint && finalNewAllocation != null && !finalNewAllocation.isEmpty()) {
+                resourceScheduleService.bookResources(newAppointment.getId(), finalNewAllocation);
+            }
+
+            auditService.log("RESCHEDULE", "APPOINTMENT", newAppointment.getId(),
+                    String.format("{\"fromId\":%d,\"fromSlot\":%d,\"toSlot\":%d}",
+                            original.getId(), oldSlotId, request.getNewSlotId()));
+
+            log.info("改签成功: old={}, new={}, patient={}, type={}",
+                    original.getAppointmentNo(), newAppointment.getAppointmentNo(),
+                    original.getPatientId(), original.getBookingType());
+
+            // 事务提交后触发旧号源的候补补位
+            final Long oldDoctorId = original.getDoctorId();
+            final LocalDate oldDate = original.getSlotDate();
+            final java.time.LocalTime oldTime = original.getSlotTime();
+            if (TransactionSynchronizationManager.isActualTransactionActive()) {
+                TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
+                    @Override
+                    public void afterCommit() {
+                        try {
+                            waitlistService.triggerBackfill(oldDoctorId, oldDate, oldTime);
+                        } catch (Exception e) {
+                            log.error("改签后候补补位触发失败: {}", e.getMessage());
                         }
-                    });
-                }
+                    }
+                });
+            }
 
-                return newAppointment;
-            })
-        );
+            return newAppointment;
+        });
     }
 
     @Override
@@ -373,6 +444,11 @@ public class AppointmentServiceImpl implements AppointmentService {
             if (slot != null) {
                 slotMapper.casRelease(slot.getId(), slot.getVersion());
             }
+
+            // 联合预约：释放资源
+            if ("JOINT".equals(appt.getBookingType())) {
+                resourceScheduleService.releaseResources(appt.getId());
+            }
         }
 
         auditService.log("BATCH_CANCEL", "APPOINTMENT", null,
@@ -382,6 +458,95 @@ public class AppointmentServiceImpl implements AppointmentService {
         log.info("批量取消预约: doctor={}, range={}~{}, count={}", doctorId, startDate, endDate, toCancel.size());
         return toCancel;
     }
+
+    // ── 多资源锁辅助方法 ──────────────────────────────────────
+
+    /**
+     * 构建有序锁键列表（按前缀+数字ID排序，防止死锁）
+     */
+    private List<String> buildOrderedLockKeys(Long slotId, ResourceAllocation allocation) {
+        List<LockKeyEntry> entries = new ArrayList<>();
+        entries.add(new LockKeyEntry("lock:slot", slotId));
+
+        if (allocation != null) {
+            for (Long resSlotId : allocation.getAllResourceSlotIds()) {
+                entries.add(new LockKeyEntry("lock:resource", resSlotId));
+            }
+        }
+
+        entries.sort(Comparator.comparing(LockKeyEntry::prefix).thenComparing(LockKeyEntry::id));
+
+        return entries.stream()
+                .map(e -> e.prefix() + ":" + e.id())
+                .toList();
+    }
+
+    /**
+     * 构建取消操作的锁键列表：slot锁 + 已关联的资源锁
+     */
+    private List<String> buildCancelLockKeys(Appointment appointment) {
+        List<LockKeyEntry> entries = new ArrayList<>();
+        entries.add(new LockKeyEntry("lock:slot", appointment.getSlotId()));
+
+        if ("JOINT".equals(appointment.getBookingType())) {
+            List<AppointmentResource> resources =
+                    appointmentResourceMapper.findByAppointment(appointment.getId());
+            for (AppointmentResource ar : resources) {
+                entries.add(new LockKeyEntry("lock:resource", ar.getResourceSlotId()));
+            }
+        }
+
+        entries.sort(Comparator.comparing(LockKeyEntry::prefix).thenComparing(LockKeyEntry::id));
+        return entries.stream().map(e -> e.prefix() + ":" + e.id()).toList();
+    }
+
+    /**
+     * 构建改签操作的锁键列表：旧slot + 新slot + 旧资源 + 新资源（去重排序）
+     */
+    private List<String> buildRescheduleLockKeys(Long oldSlotId, Long newSlotId,
+                                                  Appointment original,
+                                                  ResourceAllocation newAllocation) {
+        List<LockKeyEntry> entries = new ArrayList<>();
+        entries.add(new LockKeyEntry("lock:slot", oldSlotId));
+        entries.add(new LockKeyEntry("lock:slot", newSlotId));
+
+        // 旧资源锁
+        if ("JOINT".equals(original.getBookingType())) {
+            List<AppointmentResource> oldResources =
+                    appointmentResourceMapper.findByAppointment(original.getId());
+            for (AppointmentResource ar : oldResources) {
+                entries.add(new LockKeyEntry("lock:resource", ar.getResourceSlotId()));
+            }
+        }
+
+        // 新资源锁
+        if (newAllocation != null) {
+            for (Long resSlotId : newAllocation.getAllResourceSlotIds()) {
+                entries.add(new LockKeyEntry("lock:resource", resSlotId));
+            }
+        }
+
+        // 去重 + 排序
+        return entries.stream()
+                .distinct()
+                .sorted(Comparator.comparing(LockKeyEntry::prefix).thenComparing(LockKeyEntry::id))
+                .map(e -> e.prefix() + ":" + e.id())
+                .toList();
+    }
+
+    /**
+     * 递归按顺序加锁，全部加锁后执行操作
+     * 与DoctorSuspensionServiceImpl的递归锁策略一致
+     */
+    private <T> T executeWithOrderedLocks(List<String> lockKeys, int index, Supplier<T> action) {
+        if (index >= lockKeys.size()) {
+            return action.get();
+        }
+        return lockService.executeWithLock(lockKeys.get(index),
+                () -> executeWithOrderedLocks(lockKeys, index + 1, action));
+    }
+
+    private record LockKeyEntry(String prefix, Long id) {}
 
     private String generateNo() {
         return "APT" + LocalDateTime.now().format(NO_FMT) +

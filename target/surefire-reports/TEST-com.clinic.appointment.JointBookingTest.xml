@@ -1,0 +1,1618 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.clinic.appointment.JointBookingTest" time="2.012" tests="4" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="17"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="GBK"/>
+    <property name="java.class.path" value="C:\Users\13292\Desktop\claudel1\reposNew\task11\target\test-classes;C:\Users\13292\Desktop\claudel1\reposNew\task11\target\classes;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter-web\3.2.5\spring-boot-starter-web-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter\3.2.5\spring-boot-starter-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot\3.2.5\spring-boot-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter-logging\3.2.5\spring-boot-starter-logging-3.2.5.jar;C:\Users\13292\.m2\repository\ch\qos\logback\logback-classic\1.4.14\logback-classic-1.4.14.jar;C:\Users\13292\.m2\repository\ch\qos\logback\logback-core\1.4.14\logback-core-1.4.14.jar;C:\Users\13292\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.21.1\log4j-to-slf4j-2.21.1.jar;C:\Users\13292\.m2\repository\org\apache\logging\log4j\log4j-api\2.21.1\log4j-api-2.21.1.jar;C:\Users\13292\.m2\repository\org\slf4j\jul-to-slf4j\2.0.13\jul-to-slf4j-2.0.13.jar;C:\Users\13292\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar;C:\Users\13292\.m2\repository\org\yaml\snakeyaml\2.2\snakeyaml-2.2.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter-json\3.2.5\spring-boot-starter-json-3.2.5.jar;C:\Users\13292\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.15.4\jackson-datatype-jdk8-2.15.4.jar;C:\Users\13292\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.15.4\jackson-module-parameter-names-2.15.4.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\3.2.5\spring-boot-starter-tomcat-3.2.5.jar;C:\Users\13292\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\10.1.20\tomcat-embed-core-10.1.20.jar;C:\Users\13292\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\10.1.20\tomcat-embed-websocket-10.1.20.jar;C:\Users\13292\.m2\repository\org\springframework\spring-web\6.1.6\spring-web-6.1.6.jar;C:\Users\13292\.m2\repository\org\springframework\spring-beans\6.1.6\spring-beans-6.1.6.jar;C:\Users\13292\.m2\repository\io\micrometer\micrometer-observation\1.12.5\micrometer-observation-1.12.5.jar;C:\Users\13292\.m2\repository\io\micrometer\micrometer-commons\1.12.5\micrometer-commons-1.12.5.jar;C:\Users\13292\.m2\repository\org\springframework\spring-webmvc\6.1.6\spring-webmvc-6.1.6.jar;C:\Users\13292\.m2\repository\org\springframework\spring-context\6.1.6\spring-context-6.1.6.jar;C:\Users\13292\.m2\repository\org\springframework\spring-expression\6.1.6\spring-expression-6.1.6.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter-data-redis\3.2.5\spring-boot-starter-data-redis-3.2.5.jar;C:\Users\13292\.m2\repository\io\lettuce\lettuce-core\6.3.2.RELEASE\lettuce-core-6.3.2.RELEASE.jar;C:\Users\13292\.m2\repository\io\netty\netty-common\4.1.109.Final\netty-common-4.1.109.Final.jar;C:\Users\13292\.m2\repository\io\netty\netty-handler\4.1.109.Final\netty-handler-4.1.109.Final.jar;C:\Users\13292\.m2\repository\io\netty\netty-transport-native-unix-common\4.1.109.Final\netty-transport-native-unix-common-4.1.109.Final.jar;C:\Users\13292\.m2\repository\io\netty\netty-transport\4.1.109.Final\netty-transport-4.1.109.Final.jar;C:\Users\13292\.m2\repository\io\projectreactor\reactor-core\3.6.5\reactor-core-3.6.5.jar;C:\Users\13292\.m2\repository\org\springframework\data\spring-data-redis\3.2.5\spring-data-redis-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\data\spring-data-keyvalue\3.2.5\spring-data-keyvalue-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\data\spring-data-commons\3.2.5\spring-data-commons-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\spring-tx\6.1.6\spring-tx-6.1.6.jar;C:\Users\13292\.m2\repository\org\springframework\spring-oxm\6.1.6\spring-oxm-6.1.6.jar;C:\Users\13292\.m2\repository\org\springframework\spring-context-support\6.1.6\spring-context-support-6.1.6.jar;C:\Users\13292\.m2\repository\org\slf4j\slf4j-api\2.0.13\slf4j-api-2.0.13.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter-validation\3.2.5\spring-boot-starter-validation-3.2.5.jar;C:\Users\13292\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\10.1.20\tomcat-embed-el-10.1.20.jar;C:\Users\13292\.m2\repository\org\hibernate\validator\hibernate-validator\8.0.1.Final\hibernate-validator-8.0.1.Final.jar;C:\Users\13292\.m2\repository\jakarta\validation\jakarta.validation-api\3.0.2\jakarta.validation-api-3.0.2.jar;C:\Users\13292\.m2\repository\org\jboss\logging\jboss-logging\3.5.3.Final\jboss-logging-3.5.3.Final.jar;C:\Users\13292\.m2\repository\com\fasterxml\classmate\1.6.0\classmate-1.6.0.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter-aop\3.2.5\spring-boot-starter-aop-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\spring-aop\6.1.6\spring-aop-6.1.6.jar;C:\Users\13292\.m2\repository\org\aspectj\aspectjweaver\1.9.22\aspectjweaver-1.9.22.jar;C:\Users\13292\.m2\repository\com\baomidou\mybatis-plus-spring-boot3-starter\3.5.6\mybatis-plus-spring-boot3-starter-3.5.6.jar;C:\Users\13292\.m2\repository\com\baomidou\mybatis-plus\3.5.6\mybatis-plus-3.5.6.jar;C:\Users\13292\.m2\repository\com\baomidou\mybatis-plus-core\3.5.6\mybatis-plus-core-3.5.6.jar;C:\Users\13292\.m2\repository\com\baomidou\mybatis-plus-annotation\3.5.6\mybatis-plus-annotation-3.5.6.jar;C:\Users\13292\.m2\repository\com\baomidou\mybatis-plus-extension\3.5.6\mybatis-plus-extension-3.5.6.jar;C:\Users\13292\.m2\repository\org\mybatis\mybatis\3.5.16\mybatis-3.5.16.jar;C:\Users\13292\.m2\repository\com\github\jsqlparser\jsqlparser\4.9\jsqlparser-4.9.jar;C:\Users\13292\.m2\repository\org\mybatis\mybatis-spring\3.0.3\mybatis-spring-3.0.3.jar;C:\Users\13292\.m2\repository\com\baomidou\mybatis-plus-spring-boot-autoconfigure\3.5.6\mybatis-plus-spring-boot-autoconfigure-3.5.6.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\3.2.5\spring-boot-autoconfigure-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter-jdbc\3.2.5\spring-boot-starter-jdbc-3.2.5.jar;C:\Users\13292\.m2\repository\com\zaxxer\HikariCP\5.0.1\HikariCP-5.0.1.jar;C:\Users\13292\.m2\repository\org\springframework\spring-jdbc\6.1.6\spring-jdbc-6.1.6.jar;C:\Users\13292\.m2\repository\com\mysql\mysql-connector-j\8.3.0\mysql-connector-j-8.3.0.jar;C:\Users\13292\.m2\repository\com\h2database\h2\2.2.224\h2-2.2.224.jar;C:\Users\13292\.m2\repository\org\redisson\redisson-spring-boot-starter\3.27.2\redisson-spring-boot-starter-3.27.2.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter-actuator\3.2.5\spring-boot-starter-actuator-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-actuator-autoconfigure\3.2.5\spring-boot-actuator-autoconfigure-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-actuator\3.2.5\spring-boot-actuator-3.2.5.jar;C:\Users\13292\.m2\repository\io\micrometer\micrometer-jakarta9\1.12.5\micrometer-jakarta9-1.12.5.jar;C:\Users\13292\.m2\repository\io\micrometer\micrometer-core\1.12.5\micrometer-core-1.12.5.jar;C:\Users\13292\.m2\repository\org\hdrhistogram\HdrHistogram\2.1.12\HdrHistogram-2.1.12.jar;C:\Users\13292\.m2\repository\org\latencyutils\LatencyUtils\2.0.3\LatencyUtils-2.0.3.jar;C:\Users\13292\.m2\repository\org\redisson\redisson\3.27.2\redisson-3.27.2.jar;C:\Users\13292\.m2\repository\io\netty\netty-codec\4.1.109.Final\netty-codec-4.1.109.Final.jar;C:\Users\13292\.m2\repository\io\netty\netty-buffer\4.1.109.Final\netty-buffer-4.1.109.Final.jar;C:\Users\13292\.m2\repository\io\netty\netty-resolver\4.1.109.Final\netty-resolver-4.1.109.Final.jar;C:\Users\13292\.m2\repository\io\netty\netty-resolver-dns\4.1.109.Final\netty-resolver-dns-4.1.109.Final.jar;C:\Users\13292\.m2\repository\io\netty\netty-codec-dns\4.1.109.Final\netty-codec-dns-4.1.109.Final.jar;C:\Users\13292\.m2\repository\javax\cache\cache-api\1.1.1\cache-api-1.1.1.jar;C:\Users\13292\.m2\repository\org\reactivestreams\reactive-streams\1.0.4\reactive-streams-1.0.4.jar;C:\Users\13292\.m2\repository\io\reactivex\rxjava3\rxjava\3.1.8\rxjava-3.1.8.jar;C:\Users\13292\.m2\repository\org\jboss\marshalling\jboss-marshalling\2.0.11.Final\jboss-marshalling-2.0.11.Final.jar;C:\Users\13292\.m2\repository\org\jboss\marshalling\jboss-marshalling-river\2.0.11.Final\jboss-marshalling-river-2.0.11.Final.jar;C:\Users\13292\.m2\repository\com\esotericsoftware\kryo\5.6.0\kryo-5.6.0.jar;C:\Users\13292\.m2\repository\com\esotericsoftware\reflectasm\1.11.9\reflectasm-1.11.9.jar;C:\Users\13292\.m2\repository\com\esotericsoftware\minlog\1.3.1\minlog-1.3.1.jar;C:\Users\13292\.m2\repository\com\fasterxml\jackson\dataformat\jackson-dataformat-yaml\2.15.4\jackson-dataformat-yaml-2.15.4.jar;C:\Users\13292\.m2\repository\net\bytebuddy\byte-buddy\1.14.13\byte-buddy-1.14.13.jar;C:\Users\13292\.m2\repository\org\jodd\jodd-bean\5.1.6\jodd-bean-5.1.6.jar;C:\Users\13292\.m2\repository\org\jodd\jodd-core\5.1.6\jodd-core-5.1.6.jar;C:\Users\13292\.m2\repository\org\redisson\redisson-spring-data-32\3.27.2\redisson-spring-data-32-3.27.2.jar;C:\Users\13292\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.15.4\jackson-datatype-jsr310-2.15.4.jar;C:\Users\13292\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.15.4\jackson-annotations-2.15.4.jar;C:\Users\13292\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.15.4\jackson-core-2.15.4.jar;C:\Users\13292\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.15.4\jackson-databind-2.15.4.jar;C:\Users\13292\.m2\repository\org\projectlombok\lombok\1.18.32\lombok-1.18.32.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter-test\3.2.5\spring-boot-starter-test-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-test\3.2.5\spring-boot-test-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\3.2.5\spring-boot-test-autoconfigure-3.2.5.jar;C:\Users\13292\.m2\repository\com\jayway\jsonpath\json-path\2.9.0\json-path-2.9.0.jar;C:\Users\13292\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\4.0.2\jakarta.xml.bind-api-4.0.2.jar;C:\Users\13292\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.3\jakarta.activation-api-2.1.3.jar;C:\Users\13292\.m2\repository\net\minidev\json-smart\2.5.1\json-smart-2.5.1.jar;C:\Users\13292\.m2\repository\net\minidev\accessors-smart\2.5.1\accessors-smart-2.5.1.jar;C:\Users\13292\.m2\repository\org\ow2\asm\asm\9.6\asm-9.6.jar;C:\Users\13292\.m2\repository\org\assertj\assertj-core\3.24.2\assertj-core-3.24.2.jar;C:\Users\13292\.m2\repository\org\awaitility\awaitility\4.2.1\awaitility-4.2.1.jar;C:\Users\13292\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Users\13292\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.2\junit-jupiter-5.10.2.jar;C:\Users\13292\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\13292\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\13292\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\13292\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\13292\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\13292\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\13292\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;C:\Users\13292\.m2\repository\org\mockito\mockito-core\5.7.0\mockito-core-5.7.0.jar;C:\Users\13292\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.13\byte-buddy-agent-1.14.13.jar;C:\Users\13292\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\13292\.m2\repository\org\mockito\mockito-junit-jupiter\5.7.0\mockito-junit-jupiter-5.7.0.jar;C:\Users\13292\.m2\repository\org\skyscreamer\jsonassert\1.5.1\jsonassert-1.5.1.jar;C:\Users\13292\.m2\repository\com\vaadin\external\google\android-json\0.0.20131108.vaadin1\android-json-0.0.20131108.vaadin1.jar;C:\Users\13292\.m2\repository\org\springframework\spring-core\6.1.6\spring-core-6.1.6.jar;C:\Users\13292\.m2\repository\org\springframework\spring-jcl\6.1.6\spring-jcl-6.1.6.jar;C:\Users\13292\.m2\repository\org\springframework\spring-test\6.1.6\spring-test-6.1.6.jar;C:\Users\13292\.m2\repository\org\xmlunit\xmlunit-core\2.9.1\xmlunit-core-2.9.1.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-testcontainers\3.2.5\spring-boot-testcontainers-3.2.5.jar;C:\Users\13292\.m2\repository\org\testcontainers\testcontainers\1.19.7\testcontainers-1.19.7.jar;C:\Users\13292\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\13292\.m2\repository\org\hamcrest\hamcrest-core\2.2\hamcrest-core-2.2.jar;C:\Users\13292\.m2\repository\org\apache\commons\commons-compress\1.24.0\commons-compress-1.24.0.jar;C:\Users\13292\.m2\repository\org\rnorth\duct-tape\duct-tape\1.0.8\duct-tape-1.0.8.jar;C:\Users\13292\.m2\repository\org\jetbrains\annotations\17.0.0\annotations-17.0.0.jar;C:\Users\13292\.m2\repository\com\github\docker-java\docker-java-api\3.3.6\docker-java-api-3.3.6.jar;C:\Users\13292\.m2\repository\com\github\docker-java\docker-java-transport-zerodep\3.3.6\docker-java-transport-zerodep-3.3.6.jar;C:\Users\13292\.m2\repository\com\github\docker-java\docker-java-transport\3.3.6\docker-java-transport-3.3.6.jar;C:\Users\13292\.m2\repository\net\java\dev\jna\jna\5.13.0\jna-5.13.0.jar;C:\Users\13292\.m2\repository\org\testcontainers\mysql\1.19.7\mysql-1.19.7.jar;C:\Users\13292\.m2\repository\org\testcontainers\jdbc\1.19.7\jdbc-1.19.7.jar;C:\Users\13292\.m2\repository\org\testcontainers\database-commons\1.19.7\database-commons-1.19.7.jar;C:\Users\13292\.m2\repository\org\testcontainers\junit-jupiter\1.19.7\junit-jupiter-1.19.7.jar;"/>
+    <property name="java.vm.vendor" value="Microsoft"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://www.microsoft.com"/>
+    <property name="user.timezone" value="GMT+08:00"/>
+    <property name="org.jboss.logging.provider" value="slf4j"/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="java.vm.specification.version" value="17"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="CN"/>
+    <property name="sun.boot.library.path" value="C:\Users\13292\.jdks\ms-17.0.19\bin"/>
+    <property name="sun.java.command" value="C:\Users\13292\AppData\Local\Temp\surefire11507695970554003810\surefirebooter-20260609170422793_3.jar C:\Users\13292\AppData\Local\Temp\surefire11507695970554003810 2026-06-09T17-04-22_617-jvmRun1 surefire-20260609170422793_1tmp surefire_0-20260609170422793_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\13292\Desktop\claudel1\reposNew\task11\target\test-classes;C:\Users\13292\Desktop\claudel1\reposNew\task11\target\classes;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter-web\3.2.5\spring-boot-starter-web-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter\3.2.5\spring-boot-starter-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot\3.2.5\spring-boot-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter-logging\3.2.5\spring-boot-starter-logging-3.2.5.jar;C:\Users\13292\.m2\repository\ch\qos\logback\logback-classic\1.4.14\logback-classic-1.4.14.jar;C:\Users\13292\.m2\repository\ch\qos\logback\logback-core\1.4.14\logback-core-1.4.14.jar;C:\Users\13292\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.21.1\log4j-to-slf4j-2.21.1.jar;C:\Users\13292\.m2\repository\org\apache\logging\log4j\log4j-api\2.21.1\log4j-api-2.21.1.jar;C:\Users\13292\.m2\repository\org\slf4j\jul-to-slf4j\2.0.13\jul-to-slf4j-2.0.13.jar;C:\Users\13292\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar;C:\Users\13292\.m2\repository\org\yaml\snakeyaml\2.2\snakeyaml-2.2.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter-json\3.2.5\spring-boot-starter-json-3.2.5.jar;C:\Users\13292\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.15.4\jackson-datatype-jdk8-2.15.4.jar;C:\Users\13292\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.15.4\jackson-module-parameter-names-2.15.4.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\3.2.5\spring-boot-starter-tomcat-3.2.5.jar;C:\Users\13292\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\10.1.20\tomcat-embed-core-10.1.20.jar;C:\Users\13292\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\10.1.20\tomcat-embed-websocket-10.1.20.jar;C:\Users\13292\.m2\repository\org\springframework\spring-web\6.1.6\spring-web-6.1.6.jar;C:\Users\13292\.m2\repository\org\springframework\spring-beans\6.1.6\spring-beans-6.1.6.jar;C:\Users\13292\.m2\repository\io\micrometer\micrometer-observation\1.12.5\micrometer-observation-1.12.5.jar;C:\Users\13292\.m2\repository\io\micrometer\micrometer-commons\1.12.5\micrometer-commons-1.12.5.jar;C:\Users\13292\.m2\repository\org\springframework\spring-webmvc\6.1.6\spring-webmvc-6.1.6.jar;C:\Users\13292\.m2\repository\org\springframework\spring-context\6.1.6\spring-context-6.1.6.jar;C:\Users\13292\.m2\repository\org\springframework\spring-expression\6.1.6\spring-expression-6.1.6.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter-data-redis\3.2.5\spring-boot-starter-data-redis-3.2.5.jar;C:\Users\13292\.m2\repository\io\lettuce\lettuce-core\6.3.2.RELEASE\lettuce-core-6.3.2.RELEASE.jar;C:\Users\13292\.m2\repository\io\netty\netty-common\4.1.109.Final\netty-common-4.1.109.Final.jar;C:\Users\13292\.m2\repository\io\netty\netty-handler\4.1.109.Final\netty-handler-4.1.109.Final.jar;C:\Users\13292\.m2\repository\io\netty\netty-transport-native-unix-common\4.1.109.Final\netty-transport-native-unix-common-4.1.109.Final.jar;C:\Users\13292\.m2\repository\io\netty\netty-transport\4.1.109.Final\netty-transport-4.1.109.Final.jar;C:\Users\13292\.m2\repository\io\projectreactor\reactor-core\3.6.5\reactor-core-3.6.5.jar;C:\Users\13292\.m2\repository\org\springframework\data\spring-data-redis\3.2.5\spring-data-redis-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\data\spring-data-keyvalue\3.2.5\spring-data-keyvalue-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\data\spring-data-commons\3.2.5\spring-data-commons-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\spring-tx\6.1.6\spring-tx-6.1.6.jar;C:\Users\13292\.m2\repository\org\springframework\spring-oxm\6.1.6\spring-oxm-6.1.6.jar;C:\Users\13292\.m2\repository\org\springframework\spring-context-support\6.1.6\spring-context-support-6.1.6.jar;C:\Users\13292\.m2\repository\org\slf4j\slf4j-api\2.0.13\slf4j-api-2.0.13.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter-validation\3.2.5\spring-boot-starter-validation-3.2.5.jar;C:\Users\13292\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\10.1.20\tomcat-embed-el-10.1.20.jar;C:\Users\13292\.m2\repository\org\hibernate\validator\hibernate-validator\8.0.1.Final\hibernate-validator-8.0.1.Final.jar;C:\Users\13292\.m2\repository\jakarta\validation\jakarta.validation-api\3.0.2\jakarta.validation-api-3.0.2.jar;C:\Users\13292\.m2\repository\org\jboss\logging\jboss-logging\3.5.3.Final\jboss-logging-3.5.3.Final.jar;C:\Users\13292\.m2\repository\com\fasterxml\classmate\1.6.0\classmate-1.6.0.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter-aop\3.2.5\spring-boot-starter-aop-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\spring-aop\6.1.6\spring-aop-6.1.6.jar;C:\Users\13292\.m2\repository\org\aspectj\aspectjweaver\1.9.22\aspectjweaver-1.9.22.jar;C:\Users\13292\.m2\repository\com\baomidou\mybatis-plus-spring-boot3-starter\3.5.6\mybatis-plus-spring-boot3-starter-3.5.6.jar;C:\Users\13292\.m2\repository\com\baomidou\mybatis-plus\3.5.6\mybatis-plus-3.5.6.jar;C:\Users\13292\.m2\repository\com\baomidou\mybatis-plus-core\3.5.6\mybatis-plus-core-3.5.6.jar;C:\Users\13292\.m2\repository\com\baomidou\mybatis-plus-annotation\3.5.6\mybatis-plus-annotation-3.5.6.jar;C:\Users\13292\.m2\repository\com\baomidou\mybatis-plus-extension\3.5.6\mybatis-plus-extension-3.5.6.jar;C:\Users\13292\.m2\repository\org\mybatis\mybatis\3.5.16\mybatis-3.5.16.jar;C:\Users\13292\.m2\repository\com\github\jsqlparser\jsqlparser\4.9\jsqlparser-4.9.jar;C:\Users\13292\.m2\repository\org\mybatis\mybatis-spring\3.0.3\mybatis-spring-3.0.3.jar;C:\Users\13292\.m2\repository\com\baomidou\mybatis-plus-spring-boot-autoconfigure\3.5.6\mybatis-plus-spring-boot-autoconfigure-3.5.6.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\3.2.5\spring-boot-autoconfigure-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter-jdbc\3.2.5\spring-boot-starter-jdbc-3.2.5.jar;C:\Users\13292\.m2\repository\com\zaxxer\HikariCP\5.0.1\HikariCP-5.0.1.jar;C:\Users\13292\.m2\repository\org\springframework\spring-jdbc\6.1.6\spring-jdbc-6.1.6.jar;C:\Users\13292\.m2\repository\com\mysql\mysql-connector-j\8.3.0\mysql-connector-j-8.3.0.jar;C:\Users\13292\.m2\repository\com\h2database\h2\2.2.224\h2-2.2.224.jar;C:\Users\13292\.m2\repository\org\redisson\redisson-spring-boot-starter\3.27.2\redisson-spring-boot-starter-3.27.2.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter-actuator\3.2.5\spring-boot-starter-actuator-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-actuator-autoconfigure\3.2.5\spring-boot-actuator-autoconfigure-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-actuator\3.2.5\spring-boot-actuator-3.2.5.jar;C:\Users\13292\.m2\repository\io\micrometer\micrometer-jakarta9\1.12.5\micrometer-jakarta9-1.12.5.jar;C:\Users\13292\.m2\repository\io\micrometer\micrometer-core\1.12.5\micrometer-core-1.12.5.jar;C:\Users\13292\.m2\repository\org\hdrhistogram\HdrHistogram\2.1.12\HdrHistogram-2.1.12.jar;C:\Users\13292\.m2\repository\org\latencyutils\LatencyUtils\2.0.3\LatencyUtils-2.0.3.jar;C:\Users\13292\.m2\repository\org\redisson\redisson\3.27.2\redisson-3.27.2.jar;C:\Users\13292\.m2\repository\io\netty\netty-codec\4.1.109.Final\netty-codec-4.1.109.Final.jar;C:\Users\13292\.m2\repository\io\netty\netty-buffer\4.1.109.Final\netty-buffer-4.1.109.Final.jar;C:\Users\13292\.m2\repository\io\netty\netty-resolver\4.1.109.Final\netty-resolver-4.1.109.Final.jar;C:\Users\13292\.m2\repository\io\netty\netty-resolver-dns\4.1.109.Final\netty-resolver-dns-4.1.109.Final.jar;C:\Users\13292\.m2\repository\io\netty\netty-codec-dns\4.1.109.Final\netty-codec-dns-4.1.109.Final.jar;C:\Users\13292\.m2\repository\javax\cache\cache-api\1.1.1\cache-api-1.1.1.jar;C:\Users\13292\.m2\repository\org\reactivestreams\reactive-streams\1.0.4\reactive-streams-1.0.4.jar;C:\Users\13292\.m2\repository\io\reactivex\rxjava3\rxjava\3.1.8\rxjava-3.1.8.jar;C:\Users\13292\.m2\repository\org\jboss\marshalling\jboss-marshalling\2.0.11.Final\jboss-marshalling-2.0.11.Final.jar;C:\Users\13292\.m2\repository\org\jboss\marshalling\jboss-marshalling-river\2.0.11.Final\jboss-marshalling-river-2.0.11.Final.jar;C:\Users\13292\.m2\repository\com\esotericsoftware\kryo\5.6.0\kryo-5.6.0.jar;C:\Users\13292\.m2\repository\com\esotericsoftware\reflectasm\1.11.9\reflectasm-1.11.9.jar;C:\Users\13292\.m2\repository\com\esotericsoftware\minlog\1.3.1\minlog-1.3.1.jar;C:\Users\13292\.m2\repository\com\fasterxml\jackson\dataformat\jackson-dataformat-yaml\2.15.4\jackson-dataformat-yaml-2.15.4.jar;C:\Users\13292\.m2\repository\net\bytebuddy\byte-buddy\1.14.13\byte-buddy-1.14.13.jar;C:\Users\13292\.m2\repository\org\jodd\jodd-bean\5.1.6\jodd-bean-5.1.6.jar;C:\Users\13292\.m2\repository\org\jodd\jodd-core\5.1.6\jodd-core-5.1.6.jar;C:\Users\13292\.m2\repository\org\redisson\redisson-spring-data-32\3.27.2\redisson-spring-data-32-3.27.2.jar;C:\Users\13292\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.15.4\jackson-datatype-jsr310-2.15.4.jar;C:\Users\13292\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.15.4\jackson-annotations-2.15.4.jar;C:\Users\13292\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.15.4\jackson-core-2.15.4.jar;C:\Users\13292\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.15.4\jackson-databind-2.15.4.jar;C:\Users\13292\.m2\repository\org\projectlombok\lombok\1.18.32\lombok-1.18.32.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-starter-test\3.2.5\spring-boot-starter-test-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-test\3.2.5\spring-boot-test-3.2.5.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\3.2.5\spring-boot-test-autoconfigure-3.2.5.jar;C:\Users\13292\.m2\repository\com\jayway\jsonpath\json-path\2.9.0\json-path-2.9.0.jar;C:\Users\13292\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\4.0.2\jakarta.xml.bind-api-4.0.2.jar;C:\Users\13292\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.3\jakarta.activation-api-2.1.3.jar;C:\Users\13292\.m2\repository\net\minidev\json-smart\2.5.1\json-smart-2.5.1.jar;C:\Users\13292\.m2\repository\net\minidev\accessors-smart\2.5.1\accessors-smart-2.5.1.jar;C:\Users\13292\.m2\repository\org\ow2\asm\asm\9.6\asm-9.6.jar;C:\Users\13292\.m2\repository\org\assertj\assertj-core\3.24.2\assertj-core-3.24.2.jar;C:\Users\13292\.m2\repository\org\awaitility\awaitility\4.2.1\awaitility-4.2.1.jar;C:\Users\13292\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Users\13292\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.2\junit-jupiter-5.10.2.jar;C:\Users\13292\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\13292\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\13292\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\13292\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\13292\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\13292\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\13292\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;C:\Users\13292\.m2\repository\org\mockito\mockito-core\5.7.0\mockito-core-5.7.0.jar;C:\Users\13292\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.13\byte-buddy-agent-1.14.13.jar;C:\Users\13292\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\13292\.m2\repository\org\mockito\mockito-junit-jupiter\5.7.0\mockito-junit-jupiter-5.7.0.jar;C:\Users\13292\.m2\repository\org\skyscreamer\jsonassert\1.5.1\jsonassert-1.5.1.jar;C:\Users\13292\.m2\repository\com\vaadin\external\google\android-json\0.0.20131108.vaadin1\android-json-0.0.20131108.vaadin1.jar;C:\Users\13292\.m2\repository\org\springframework\spring-core\6.1.6\spring-core-6.1.6.jar;C:\Users\13292\.m2\repository\org\springframework\spring-jcl\6.1.6\spring-jcl-6.1.6.jar;C:\Users\13292\.m2\repository\org\springframework\spring-test\6.1.6\spring-test-6.1.6.jar;C:\Users\13292\.m2\repository\org\xmlunit\xmlunit-core\2.9.1\xmlunit-core-2.9.1.jar;C:\Users\13292\.m2\repository\org\springframework\boot\spring-boot-testcontainers\3.2.5\spring-boot-testcontainers-3.2.5.jar;C:\Users\13292\.m2\repository\org\testcontainers\testcontainers\1.19.7\testcontainers-1.19.7.jar;C:\Users\13292\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\13292\.m2\repository\org\hamcrest\hamcrest-core\2.2\hamcrest-core-2.2.jar;C:\Users\13292\.m2\repository\org\apache\commons\commons-compress\1.24.0\commons-compress-1.24.0.jar;C:\Users\13292\.m2\repository\org\rnorth\duct-tape\duct-tape\1.0.8\duct-tape-1.0.8.jar;C:\Users\13292\.m2\repository\org\jetbrains\annotations\17.0.0\annotations-17.0.0.jar;C:\Users\13292\.m2\repository\com\github\docker-java\docker-java-api\3.3.6\docker-java-api-3.3.6.jar;C:\Users\13292\.m2\repository\com\github\docker-java\docker-java-transport-zerodep\3.3.6\docker-java-transport-zerodep-3.3.6.jar;C:\Users\13292\.m2\repository\com\github\docker-java\docker-java-transport\3.3.6\docker-java-transport-3.3.6.jar;C:\Users\13292\.m2\repository\net\java\dev\jna\jna\5.13.0\jna-5.13.0.jar;C:\Users\13292\.m2\repository\org\testcontainers\mysql\1.19.7\mysql-1.19.7.jar;C:\Users\13292\.m2\repository\org\testcontainers\jdbc\1.19.7\jdbc-1.19.7.jar;C:\Users\13292\.m2\repository\org\testcontainers\database-commons\1.19.7\database-commons-1.19.7.jar;C:\Users\13292\.m2\repository\org\testcontainers\junit-jupiter\1.19.7\junit-jupiter-1.19.7.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\13292"/>
+    <property name="user.language" value="zh"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2026-04-21"/>
+    <property name="java.home" value="C:\Users\13292\.jdks\ms-17.0.19"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\13292\Desktop\claudel1\reposNew\task11"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="FILE_LOG_CHARSET" value="GBK"/>
+    <property name="java.awt.headless" value="true"/>
+    <property name="surefire.real.class.path" value="C:\Users\13292\AppData\Local\Temp\surefire11507695970554003810\surefirebooter-20260609170422793_3.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="17.0.19+10-LTS"/>
+    <property name="user.name" value="13292"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="GBK"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="Microsoft-13877129"/>
+    <property name="localRepository" value="C:\Users\13292\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://github.com/microsoft/openjdk/issues"/>
+    <property name="java.io.tmpdir" value="C:\Users\13292\AppData\Local\Temp\"/>
+    <property name="com.zaxxer.hikari.pool_number" value="4"/>
+    <property name="java.version" value="17.0.19"/>
+    <property name="user.dir" value="C:\Users\13292\Desktop\claudel1\reposNew\task11"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="PID" value="30284"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="CONSOLE_LOG_CHARSET" value="GBK"/>
+    <property name="native.encoding" value="GBK"/>
+    <property name="java.library.path" value="C:\Users\13292\.jdks\ms-17.0.19\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\13292\bin;C:\Users\13292\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\13292\bin;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0;C:\windows\System32\OpenSSH;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files\dotnet;C:\Users\13292\AppData\Local\nvm;C:\nvm4w\nodejs;C:\serverPath\apache-maven-3.9.16\bin;C:\Program Files\Git\cmd;C:\Program Files\cursor\resources\app\bin;C:\Users\13292\.jdks\ms-17.0.19\bin;C:\Program Files\Go\bin;C:\Program Files\GitHub CLI;C:\Users\13292\AppData\Local\Programs\Python\Python312\Scripts;C:\Users\13292\AppData\Local\Programs\Python\Python312;C:\Users\13292\AppData\Local\Microsoft\WindowsApps;C:\Program Files\JetBrains\IntelliJ IDEA 2026.1.2\bin;C:\Users\13292\go\bin;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.vendor" value="Microsoft"/>
+    <property name="java.vm.version" value="17.0.19+10-LTS"/>
+    <property name="java.specification.maintenance.version" value="1"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="61.0"/>
+  </properties>
+  <testcase name="jointBookingSuccess" classname="com.clinic.appointment.JointBookingTest" time="0.043">
+    <system-out><![CDATA[2026-06-09T17:04:47.538+08:00  INFO 30284 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.clinic.appointment.JointBookingTest]: JointBookingTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-06-09T17:04:47.555+08:00  INFO 30284 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.clinic.appointment.ClinicApplication for test class com.clinic.appointment.JointBookingTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.5)
+
+2026-06-09T17:04:47.597+08:00  INFO 30284 --- [           main] c.clinic.appointment.JointBookingTest    : Starting JointBookingTest using Java 17.0.19 with PID 30284 (started by 13292 in C:\Users\13292\Desktop\claudel1\reposNew\task11)
+2026-06-09T17:04:47.597+08:00 DEBUG 30284 --- [           main] c.clinic.appointment.JointBookingTest    : Running with Spring Boot v3.2.5, Spring v6.1.6
+2026-06-09T17:04:47.597+08:00  INFO 30284 --- [           main] c.clinic.appointment.JointBookingTest    : The following 1 profile is active: "test"
+Logging initialized using 'class org.apache.ibatis.logging.stdout.StdOutImpl' adapter.
+ _ _   |_  _ _|_. ___ _ |    _ 
+| | |\/|_)(_| | |_\  |_)||_|_\ 
+     /               |         
+                        3.5.6 
+2026-06-09T17:04:48.241+08:00  INFO 30284 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Starting...
+2026-06-09T17:04:48.242+08:00  INFO 30284 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-4 - Added connection conn27: url=jdbc:h2:mem:clinic_test user=SA
+2026-06-09T17:04:48.243+08:00  INFO 30284 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Start completed.
+2026-06-09T17:04:49.276+08:00  INFO 30284 --- [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2026-06-09T17:04:49.343+08:00  INFO 30284 --- [           main] c.clinic.appointment.JointBookingTest    : Started JointBookingTest in 1.784 seconds (process running for 26.399)
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@57a22410] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@773031432 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: DELETE FROM appointment_resource
+==> Parameters: 
+<==    Updates: 0
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@57a22410]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@37d12ccb] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@2044902525 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: DELETE FROM appointment
+==> Parameters: 
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@37d12ccb]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3fa695f5] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@221734863 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: DELETE FROM schedule_slot
+==> Parameters: 
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3fa695f5]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@333ea5d6] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1599334040 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: DELETE FROM doctor_schedule
+==> Parameters: 
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@333ea5d6]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@54d1c9ba] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1651430896 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: DELETE FROM doctor
+==> Parameters: 
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@54d1c9ba]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2438cc7e] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1679792455 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: DELETE FROM department
+==> Parameters: 
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2438cc7e]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3e590067] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@705467145 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: DELETE FROM resource_slot
+==> Parameters: 
+<==    Updates: 3
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3e590067]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4835e10a] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1358466282 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: DELETE FROM resource
+==> Parameters: 
+<==    Updates: 3
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4835e10a]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2654f4aa] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1745797042 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: DELETE FROM exam_type
+==> Parameters: 
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2654f4aa]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@f542e08] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1234325446 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO department ( name, code, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ? )
+==> Parameters: 影像科(String), YINGXIANG_59735096426200(String), 1(Integer), 2026-06-09T17:04:49.361425900(LocalDateTime), 2026-06-09T17:04:49.362423700(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@f542e08]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@56297b5f] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@228520483 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO doctor ( name, employee_no, department_id, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ? )
+==> Parameters: 张医生(String), DJ_59735098351400(String), 16(Long), 1(Integer), 2026-06-09T17:04:49.363421100(LocalDateTime), 2026-06-09T17:04:49.363421100(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@56297b5f]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7f14bdd1] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@401793053 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO doctor_schedule ( doctor_id, department_id, schedule_date, time_period, total_slots, booked_slots, extra_slots, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 17(Long), 16(Long), 2026-06-12(LocalDate), MORNING(String), 5(Integer), 0(Integer), 0(Integer), NORMAL(String), 2026-06-09T17:04:49.365416(LocalDateTime), 2026-06-09T17:04:49.365416(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7f14bdd1]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@a9c923f] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1894344357 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO schedule_slot ( schedule_id, doctor_id, department_id, slot_date, slot_time, slot_no, status, is_extra, version, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 17(Long), 17(Long), 16(Long), 2026-06-12(LocalDate), 09:00(LocalTime), 1(Integer), AVAILABLE(String), 0(Integer), 0(Integer), 2026-06-09T17:04:49.365416(LocalDateTime), 2026-06-09T17:04:49.365416(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@a9c923f]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2ac9b75c] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@716916752 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO resource ( name, code, type, department_id, capacity, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: CT诊室1(String), ROOM_CT1_59735101395700(String), ROOM(String), 16(Long), 1(Integer), 1(Integer), 2026-06-09T17:04:49.366413100(LocalDateTime), 2026-06-09T17:04:49.366413100(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2ac9b75c]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@44d83a12] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@2143268962 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO resource ( name, code, type, department_id, capacity, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: CT设备1(String), EQUIP_CT1_59735101957100(String), EQUIPMENT(String), 16(Long), 1(Integer), 1(Integer), 2026-06-09T17:04:49.367410800(LocalDateTime), 2026-06-09T17:04:49.367410800(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@44d83a12]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@18ab9b9e] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1746971475 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO resource ( name, code, type, department_id, capacity, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 护理组1(String), NURSE_1_59735102464800(String), NURSING(String), 16(Long), 1(Integer), 1(Integer), 2026-06-09T17:04:49.367410800(LocalDateTime), 2026-06-09T17:04:49.367410800(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@18ab9b9e]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6d2d04ef] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1871943048 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO resource_slot ( resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 10(Long), ROOM(String), 2026-06-12(LocalDate), 08:00(LocalTime), 12:00(LocalTime), 1(Integer), 0(Integer), AVAILABLE(String), 0(Integer), 2026-06-09T17:04:49.368407300(LocalDateTime), 2026-06-09T17:04:49.368407300(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6d2d04ef]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2ba0948f] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1186449563 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO resource_slot ( resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 11(Long), EQUIPMENT(String), 2026-06-12(LocalDate), 08:00(LocalTime), 12:00(LocalTime), 1(Integer), 0(Integer), AVAILABLE(String), 0(Integer), 2026-06-09T17:04:49.368407300(LocalDateTime), 2026-06-09T17:04:49.368407300(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2ba0948f]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@43b8a6de] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@821318900 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO resource_slot ( resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 12(Long), NURSING(String), 2026-06-12(LocalDate), 08:00(LocalTime), 12:00(LocalTime), 1(Integer), 0(Integer), AVAILABLE(String), 0(Integer), 2026-06-09T17:04:49.368407300(LocalDateTime), 2026-06-09T17:04:49.368407300(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@43b8a6de]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1f5faa89] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1741966057 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO exam_type ( name, code, need_room, need_equipment, need_nursing, patient_daily_limit, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: CT扫描(String), CT_SCAN(String), 1(Integer), 1(Integer), 1(Integer), 2(Integer), 1(Integer), 2026-06-09T17:04:49.369404700(LocalDateTime), 2026-06-09T17:04:49.369404700(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1f5faa89]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526]
+JDBC Connection [HikariProxyConnection@2095300812 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will be managed by Spring
+==>  Preparing: SELECT id,schedule_id,doctor_id,department_id,slot_date,slot_time,slot_no,status,appointment_id,is_extra,version,create_time,update_time FROM schedule_slot WHERE id=?
+==> Parameters: 69(Long)
+<==    Columns: id, schedule_id, doctor_id, department_id, slot_date, slot_time, slot_no, status, appointment_id, is_extra, version, create_time, update_time
+<==        Row: 69, 17, 17, 16, 2026-06-12, 09:00:00, 1, AVAILABLE, null, 0, 0, 2026-06-09 17:04:49.365416, 2026-06-09 17:04:49.365416
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526] from current transaction
+==>  Preparing: SELECT * FROM exam_type WHERE code = ? AND status = 1
+==> Parameters: CT_SCAN(String)
+<==    Columns: id, name, code, need_room, need_equipment, need_nursing, equipment_code, room_code, patient_daily_limit, status, create_time, update_time
+<==        Row: 4, CT扫描, CT_SCAN, 1, 1, 1, null, null, 2, 1, 2026-06-09 17:04:49.369405, 2026-06-09 17:04:49.369405
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526] from current transaction
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526] from current transaction
+==>  Preparing: SELECT COUNT(*) FROM appointment WHERE patient_id = ? AND slot_date = ? AND exam_type_code = ? AND status IN ('PENDING','CONFIRMED')
+==> Parameters: 1001(Long), 2026-06-12(LocalDate), CT_SCAN(String)
+<==    Columns: COUNT(*)
+<==        Row: 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526] from current transaction
+==>  Preparing: SELECT rs.* FROM resource_slot rs JOIN resource r ON rs.resource_id = r.id WHERE r.type = ? AND r.status = 1 AND rs.slot_date = ? AND rs.start_time <= ? AND rs.end_time > ? AND rs.status = 'AVAILABLE' AND rs.booked_count < rs.capacity ORDER BY rs.booked_count ASC, rs.start_time
+==> Parameters: ROOM(String), 2026-06-12(LocalDate), 09:00(LocalTime), 09:00(LocalTime)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 10, 10, ROOM, 2026-06-12, 08:00:00, 12:00:00, 1, 0, AVAILABLE, 0, 2026-06-09 17:04:49.368407, 2026-06-09 17:04:49.368407
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526] from current transaction
+==>  Preparing: SELECT rs.* FROM resource_slot rs JOIN resource r ON rs.resource_id = r.id WHERE r.type = ? AND r.status = 1 AND rs.slot_date = ? AND rs.start_time <= ? AND rs.end_time > ? AND rs.status = 'AVAILABLE' AND rs.booked_count < rs.capacity ORDER BY rs.booked_count ASC, rs.start_time
+==> Parameters: EQUIPMENT(String), 2026-06-12(LocalDate), 09:00(LocalTime), 09:00(LocalTime)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 11, 11, EQUIPMENT, 2026-06-12, 08:00:00, 12:00:00, 1, 0, AVAILABLE, 0, 2026-06-09 17:04:49.368407, 2026-06-09 17:04:49.368407
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526] from current transaction
+==>  Preparing: SELECT rs.* FROM resource_slot rs JOIN resource r ON rs.resource_id = r.id WHERE r.type = ? AND r.status = 1 AND rs.slot_date = ? AND rs.start_time <= ? AND rs.end_time > ? AND rs.status = 'AVAILABLE' AND rs.booked_count < rs.capacity ORDER BY rs.booked_count ASC, rs.start_time
+==> Parameters: NURSING(String), 2026-06-12(LocalDate), 09:00(LocalTime), 09:00(LocalTime)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 12, 12, NURSING, 2026-06-12, 08:00:00, 12:00:00, 1, 0, AVAILABLE, 0, 2026-06-09 17:04:49.368407, 2026-06-09 17:04:49.368407
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526] from current transaction
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526] from current transaction
+==>  Preparing: INSERT INTO appointment ( appointment_no, patient_id, patient_name, doctor_id, department_id, slot_id, slot_date, slot_time, status, source, booking_type, exam_type_code, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: APT2026060917044951EA60(String), 1001(Long), 测试患者(String), 17(Long), 16(Long), 69(Long), 2026-06-12(LocalDate), 09:00(LocalTime), CONFIRMED(String), ONLINE(String), JOINT(String), CT_SCAN(String), 2026-06-09T17:04:49.377383400(LocalDateTime), 2026-06-09T17:04:49.377383400(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526] from current transaction
+==>  Preparing: UPDATE schedule_slot SET status = 'BOOKED', appointment_id = ?, version = version + 1, update_time = NOW() WHERE id = ? AND status = 'AVAILABLE' AND version = ?
+==> Parameters: 68(Long), 69(Long), 0(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526] from current transaction
+==>  Preparing: SELECT id,resource_id,resource_type,slot_date,start_time,end_time,capacity,booked_count,status,version,create_time,update_time FROM resource_slot WHERE id=?
+==> Parameters: 10(Long)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 10, 10, ROOM, 2026-06-12, 08:00:00, 12:00:00, 1, 0, AVAILABLE, 0, 2026-06-09 17:04:49.368407, 2026-06-09 17:04:49.368407
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526] from current transaction
+==>  Preparing: UPDATE resource_slot SET booked_count = booked_count + 1, status = CASE WHEN booked_count + 1 >= capacity THEN 'FULL' ELSE 'AVAILABLE' END, version = version + 1, update_time = NOW() WHERE id = ? AND booked_count < capacity AND status = 'AVAILABLE' AND version = ?
+==> Parameters: 10(Long), 0(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526] from current transaction
+==>  Preparing: INSERT INTO appointment_resource ( appointment_id, resource_slot_id, resource_id, resource_type, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 68(Long), 10(Long), 10(Long), ROOM(String), BOOKED(String), 2026-06-09T17:04:49.382370800(LocalDateTime), 2026-06-09T17:04:49.382370800(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526]
+2026-06-09T17:04:49.383+08:00  INFO 30284 --- [           main] c.c.a.s.i.ResourceScheduleServiceImpl    : 资源预订成功: appointmentId=68, resourceType=ROOM, resourceSlotId=10
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526] from current transaction
+==>  Preparing: SELECT id,resource_id,resource_type,slot_date,start_time,end_time,capacity,booked_count,status,version,create_time,update_time FROM resource_slot WHERE id=?
+==> Parameters: 11(Long)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 11, 11, EQUIPMENT, 2026-06-12, 08:00:00, 12:00:00, 1, 0, AVAILABLE, 0, 2026-06-09 17:04:49.368407, 2026-06-09 17:04:49.368407
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526] from current transaction
+==>  Preparing: UPDATE resource_slot SET booked_count = booked_count + 1, status = CASE WHEN booked_count + 1 >= capacity THEN 'FULL' ELSE 'AVAILABLE' END, version = version + 1, update_time = NOW() WHERE id = ? AND booked_count < capacity AND status = 'AVAILABLE' AND version = ?
+==> Parameters: 11(Long), 0(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526] from current transaction
+==>  Preparing: INSERT INTO appointment_resource ( appointment_id, resource_slot_id, resource_id, resource_type, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 68(Long), 11(Long), 11(Long), EQUIPMENT(String), BOOKED(String), 2026-06-09T17:04:49.384366800(LocalDateTime), 2026-06-09T17:04:49.384366800(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526]
+2026-06-09T17:04:49.385+08:00  INFO 30284 --- [           main] c.c.a.s.i.ResourceScheduleServiceImpl    : 资源预订成功: appointmentId=68, resourceType=EQUIPMENT, resourceSlotId=11
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526] from current transaction
+==>  Preparing: SELECT id,resource_id,resource_type,slot_date,start_time,end_time,capacity,booked_count,status,version,create_time,update_time FROM resource_slot WHERE id=?
+==> Parameters: 12(Long)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 12, 12, NURSING, 2026-06-12, 08:00:00, 12:00:00, 1, 0, AVAILABLE, 0, 2026-06-09 17:04:49.368407, 2026-06-09 17:04:49.368407
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526] from current transaction
+==>  Preparing: UPDATE resource_slot SET booked_count = booked_count + 1, status = CASE WHEN booked_count + 1 >= capacity THEN 'FULL' ELSE 'AVAILABLE' END, version = version + 1, update_time = NOW() WHERE id = ? AND booked_count < capacity AND status = 'AVAILABLE' AND version = ?
+==> Parameters: 12(Long), 0(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526] from current transaction
+==>  Preparing: INSERT INTO appointment_resource ( appointment_id, resource_slot_id, resource_id, resource_type, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 68(Long), 12(Long), 12(Long), NURSING(String), BOOKED(String), 2026-06-09T17:04:49.387357300(LocalDateTime), 2026-06-09T17:04:49.387357300(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526]
+2026-06-09T17:04:49.388+08:00  INFO 30284 --- [           main] c.c.a.s.i.ResourceScheduleServiceImpl    : 资源预订成功: appointmentId=68, resourceType=NURSING, resourceSlotId=12
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526] from current transaction
+==>  Preparing: SELECT id,doctor_id,department_id,schedule_date,time_period,total_slots,booked_slots,extra_slots,status,create_time,update_time FROM doctor_schedule WHERE id=?
+==> Parameters: 17(Long)
+<==    Columns: id, doctor_id, department_id, schedule_date, time_period, total_slots, booked_slots, extra_slots, status, create_time, update_time
+<==        Row: 17, 17, 16, 2026-06-12, MORNING, 5, 0, 0, NORMAL, 2026-06-09 17:04:49.365416, 2026-06-09 17:04:49.365416
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526] from current transaction
+==>  Preparing: UPDATE doctor_schedule SET doctor_id=?, department_id=?, schedule_date=?, time_period=?, total_slots=?, booked_slots=?, extra_slots=?, status=?, create_time=?, update_time=? WHERE id=?
+==> Parameters: 17(Long), 16(Long), 2026-06-12(LocalDate), MORNING(String), 5(Integer), 1(Integer), 0(Integer), NORMAL(String), 2026-06-09T17:04:49.365416(LocalDateTime), 2026-06-09T17:04:49.365416(LocalDateTime), 17(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4df2bffd] was not registered for synchronization because synchronization is not active
+2026-06-09T17:04:49.391+08:00  INFO 30284 --- [           main] c.c.a.s.impl.AppointmentServiceImpl      : 预约成功: no=APT2026060917044951EA60, patient=1001, doctor=17, date=2026-06-12, time=09:00, type=JOINT
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@519fa526]
+JDBC Connection [HikariProxyConnection@1127565363 wrapping conn28: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO audit_log ( operation, entity_type, entity_id, operator_name, detail, ip, create_time ) VALUES ( ?, ?, ?, ?, ?, ?, ? )
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@17f83573] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@533885295 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: SELECT id,schedule_id,doctor_id,department_id,slot_date,slot_time,slot_no,status,appointment_id,is_extra,version,create_time,update_time FROM schedule_slot WHERE id=?
+==> Parameters: 69(Long)
+<==    Columns: id, schedule_id, doctor_id, department_id, slot_date, slot_time, slot_no, status, appointment_id, is_extra, version, create_time, update_time
+<==        Row: 69, 17, 17, 16, 2026-06-12, 09:00:00, 1, BOOKED, 68, 0, 1, 2026-06-09 17:04:49.365416, 2026-06-09 17:04:49.379379
+==> Parameters: BOOK(String), APPOINTMENT(String), 68(Long), (String), {"patientId":1001,"slotId":69,"date":"2026-06-12","time":"09:00","bookingType":"JOINT","examType":"CT_SCAN"}(String), (String), 2026-06-09T17:04:49.392343200(LocalDateTime)
+<==      Total: 1
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4df2bffd]
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@17f83573]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@c4e440b] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1015983843 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: SELECT * FROM appointment_resource WHERE appointment_id = ? AND status = 'BOOKED'
+==> Parameters: 68(Long)
+<==    Columns: id, appointment_id, resource_slot_id, resource_id, resource_type, status, create_time, update_time
+<==        Row: 19, 68, 10, 10, ROOM, BOOKED, 2026-06-09 17:04:49.382371, 2026-06-09 17:04:49.382371
+<==        Row: 20, 68, 11, 11, EQUIPMENT, BOOKED, 2026-06-09 17:04:49.384367, 2026-06-09 17:04:49.384367
+<==        Row: 21, 68, 12, 12, NURSING, BOOKED, 2026-06-09 17:04:49.387357, 2026-06-09 17:04:49.387357
+<==      Total: 3
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@c4e440b]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6a8b47ac] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1717439131 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: SELECT id,resource_id,resource_type,slot_date,start_time,end_time,capacity,booked_count,status,version,create_time,update_time FROM resource_slot WHERE id=?
+==> Parameters: 10(Long)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 10, 10, ROOM, 2026-06-12, 08:00:00, 12:00:00, 1, 1, FULL, 1, 2026-06-09 17:04:49.368407, 2026-06-09 17:04:49.382371
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6a8b47ac]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@184e7447] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1367226395 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: SELECT id,resource_id,resource_type,slot_date,start_time,end_time,capacity,booked_count,status,version,create_time,update_time FROM resource_slot WHERE id=?
+==> Parameters: 11(Long)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 11, 11, EQUIPMENT, 2026-06-12, 08:00:00, 12:00:00, 1, 1, FULL, 1, 2026-06-09 17:04:49.368407, 2026-06-09 17:04:49.384367
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@184e7447]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6178b3bf] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@2011457497 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: SELECT id,resource_id,resource_type,slot_date,start_time,end_time,capacity,booked_count,status,version,create_time,update_time FROM resource_slot WHERE id=?
+==> Parameters: 12(Long)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 12, 12, NURSING, 2026-06-12, 08:00:00, 12:00:00, 1, 1, FULL, 1, 2026-06-09 17:04:49.368407, 2026-06-09 17:04:49.386361
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6178b3bf]
+]]></system-out>
+  </testcase>
+  <testcase name="jointBookingPartialFailureRollback" classname="com.clinic.appointment.JointBookingTest" time="0.027">
+    <system-out><![CDATA[Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1c63d92e] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1023251545 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: DELETE FROM appointment_resource
+==> Parameters: 
+<==    Updates: 3
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1c63d92e]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@18bc2d32] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1286757203 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: DELETE FROM appointment
+==> Parameters: 
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@18bc2d32]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4e9a4142] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@513100692 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: DELETE FROM schedule_slot
+==> Parameters: 
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4e9a4142]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@67b920c9] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@965711790 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: DELETE FROM doctor_schedule
+==> Parameters: 
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@67b920c9]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2583418c] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@301885251 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: DELETE FROM doctor
+==> Parameters: 
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2583418c]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3f6fa2dd] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@2056806521 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: DELETE FROM department
+==> Parameters: 
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3f6fa2dd]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4528c187] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@663646750 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: DELETE FROM resource_slot
+==> Parameters: 
+<==    Updates: 3
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4528c187]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@65354578] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1545038351 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: DELETE FROM resource
+==> Parameters: 
+<==    Updates: 3
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@65354578]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5f30bcf3] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@192555913 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: DELETE FROM exam_type
+==> Parameters: 
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5f30bcf3]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@442bb11b] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@596372611 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO department ( name, code, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ? )
+==> Parameters: 影像科(String), YINGXIANG_59735138519400(String), 1(Integer), 2026-06-09T17:04:49.403313900(LocalDateTime), 2026-06-09T17:04:49.403313900(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@442bb11b]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@79860b25] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@595214847 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO doctor ( name, employee_no, department_id, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ? )
+==> Parameters: 张医生(String), DJ_59735139101200(String), 17(Long), 1(Integer), 2026-06-09T17:04:49.404311800(LocalDateTime), 2026-06-09T17:04:49.404311800(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@79860b25]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3ac09fe2] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1188271053 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO doctor_schedule ( doctor_id, department_id, schedule_date, time_period, total_slots, booked_slots, extra_slots, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 18(Long), 17(Long), 2026-06-12(LocalDate), MORNING(String), 5(Integer), 0(Integer), 0(Integer), NORMAL(String), 2026-06-09T17:04:49.404311800(LocalDateTime), 2026-06-09T17:04:49.404311800(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3ac09fe2]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@f456711] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@2118232767 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO schedule_slot ( schedule_id, doctor_id, department_id, slot_date, slot_time, slot_no, status, is_extra, version, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 18(Long), 18(Long), 17(Long), 2026-06-12(LocalDate), 09:00(LocalTime), 1(Integer), AVAILABLE(String), 0(Integer), 0(Integer), 2026-06-09T17:04:49.405308800(LocalDateTime), 2026-06-09T17:04:49.405308800(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@f456711]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@40c0151a] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@441957172 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO resource ( name, code, type, department_id, capacity, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: CT诊室1(String), ROOM_CT1_59735140535400(String), ROOM(String), 17(Long), 1(Integer), 1(Integer), 2026-06-09T17:04:49.405308800(LocalDateTime), 2026-06-09T17:04:49.405308800(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@40c0151a]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3e0e2a80] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1298754476 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO resource ( name, code, type, department_id, capacity, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: CT设备1(String), EQUIP_CT1_59735141004700(String), EQUIPMENT(String), 17(Long), 1(Integer), 1(Integer), 2026-06-09T17:04:49.406306400(LocalDateTime), 2026-06-09T17:04:49.406306400(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3e0e2a80]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@dc1cfde] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@719866697 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO resource ( name, code, type, department_id, capacity, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 护理组1(String), NURSE_1_59735141431300(String), NURSING(String), 17(Long), 1(Integer), 1(Integer), 2026-06-09T17:04:49.406306400(LocalDateTime), 2026-06-09T17:04:49.406306400(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@dc1cfde]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@65fd3ebe] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1674513830 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO resource_slot ( resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 13(Long), ROOM(String), 2026-06-12(LocalDate), 08:00(LocalTime), 12:00(LocalTime), 1(Integer), 0(Integer), AVAILABLE(String), 0(Integer), 2026-06-09T17:04:49.407304700(LocalDateTime), 2026-06-09T17:04:49.407304700(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@65fd3ebe]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@60f3813e] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@136916074 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO resource_slot ( resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 14(Long), EQUIPMENT(String), 2026-06-12(LocalDate), 08:00(LocalTime), 12:00(LocalTime), 1(Integer), 0(Integer), AVAILABLE(String), 0(Integer), 2026-06-09T17:04:49.408301(LocalDateTime), 2026-06-09T17:04:49.408301(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@60f3813e]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4adfb1f] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@521430033 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO resource_slot ( resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 15(Long), NURSING(String), 2026-06-12(LocalDate), 08:00(LocalTime), 12:00(LocalTime), 1(Integer), 0(Integer), AVAILABLE(String), 0(Integer), 2026-06-09T17:04:49.408301(LocalDateTime), 2026-06-09T17:04:49.408301(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4adfb1f]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6392ecbc] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@572118744 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO exam_type ( name, code, need_room, need_equipment, need_nursing, patient_daily_limit, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: CT扫描(String), CT_SCAN(String), 1(Integer), 1(Integer), 1(Integer), 2(Integer), 1(Integer), 2026-06-09T17:04:49.408301(LocalDateTime), 2026-06-09T17:04:49.408301(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6392ecbc]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4907b487] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1972335962 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: SELECT id,resource_id,resource_type,slot_date,start_time,end_time,capacity,booked_count,status,version,create_time,update_time FROM resource_slot WHERE id=?
+==> Parameters: 14(Long)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 14, 14, EQUIPMENT, 2026-06-12, 08:00:00, 12:00:00, 1, 0, AVAILABLE, 0, 2026-06-09 17:04:49.408301, 2026-06-09 17:04:49.408301
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4907b487]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@18c805b] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1833904548 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: UPDATE resource_slot SET status = 'DISABLED', version = version + 1, update_time = NOW() WHERE id = ? AND version = ?
+==> Parameters: 14(Long), 0(Integer)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@18c805b]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@173398da]
+JDBC Connection [HikariProxyConnection@1724799449 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will be managed by Spring
+==>  Preparing: SELECT id,schedule_id,doctor_id,department_id,slot_date,slot_time,slot_no,status,appointment_id,is_extra,version,create_time,update_time FROM schedule_slot WHERE id=?
+==> Parameters: 70(Long)
+<==    Columns: id, schedule_id, doctor_id, department_id, slot_date, slot_time, slot_no, status, appointment_id, is_extra, version, create_time, update_time
+<==        Row: 70, 18, 18, 17, 2026-06-12, 09:00:00, 1, AVAILABLE, null, 0, 0, 2026-06-09 17:04:49.405309, 2026-06-09 17:04:49.405309
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@173398da]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@173398da] from current transaction
+==>  Preparing: SELECT * FROM exam_type WHERE code = ? AND status = 1
+==> Parameters: CT_SCAN(String)
+<==    Columns: id, name, code, need_room, need_equipment, need_nursing, equipment_code, room_code, patient_daily_limit, status, create_time, update_time
+<==        Row: 5, CT扫描, CT_SCAN, 1, 1, 1, null, null, 2, 1, 2026-06-09 17:04:49.408301, 2026-06-09 17:04:49.408301
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@173398da]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@173398da] from current transaction
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@173398da]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@173398da] from current transaction
+==>  Preparing: SELECT COUNT(*) FROM appointment WHERE patient_id = ? AND slot_date = ? AND exam_type_code = ? AND status IN ('PENDING','CONFIRMED')
+==> Parameters: 1002(Long), 2026-06-12(LocalDate), CT_SCAN(String)
+<==    Columns: COUNT(*)
+<==        Row: 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@173398da]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@173398da] from current transaction
+==>  Preparing: SELECT rs.* FROM resource_slot rs JOIN resource r ON rs.resource_id = r.id WHERE r.type = ? AND r.status = 1 AND rs.slot_date = ? AND rs.start_time <= ? AND rs.end_time > ? AND rs.status = 'AVAILABLE' AND rs.booked_count < rs.capacity ORDER BY rs.booked_count ASC, rs.start_time
+==> Parameters: ROOM(String), 2026-06-12(LocalDate), 09:00(LocalTime), 09:00(LocalTime)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 13, 13, ROOM, 2026-06-12, 08:00:00, 12:00:00, 1, 0, AVAILABLE, 0, 2026-06-09 17:04:49.407305, 2026-06-09 17:04:49.407305
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@173398da]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@173398da] from current transaction
+==>  Preparing: SELECT rs.* FROM resource_slot rs JOIN resource r ON rs.resource_id = r.id WHERE r.type = ? AND r.status = 1 AND rs.slot_date = ? AND rs.start_time <= ? AND rs.end_time > ? AND rs.status = 'AVAILABLE' AND rs.booked_count < rs.capacity ORDER BY rs.booked_count ASC, rs.start_time
+==> Parameters: EQUIPMENT(String), 2026-06-12(LocalDate), 09:00(LocalTime), 09:00(LocalTime)
+<==      Total: 0
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@173398da]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@173398da]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@173398da]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6ebdd981] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1590502119 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: SELECT id,schedule_id,doctor_id,department_id,slot_date,slot_time,slot_no,status,appointment_id,is_extra,version,create_time,update_time FROM schedule_slot WHERE id=?
+==> Parameters: 70(Long)
+<==    Columns: id, schedule_id, doctor_id, department_id, slot_date, slot_time, slot_no, status, appointment_id, is_extra, version, create_time, update_time
+<==        Row: 70, 18, 18, 17, 2026-06-12, 09:00:00, 1, AVAILABLE, null, 0, 0, 2026-06-09 17:04:49.405309, 2026-06-09 17:04:49.405309
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6ebdd981]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4b2be6f8] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@467043101 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: SELECT id,resource_id,resource_type,slot_date,start_time,end_time,capacity,booked_count,status,version,create_time,update_time FROM resource_slot WHERE id=?
+==> Parameters: 13(Long)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 13, 13, ROOM, 2026-06-12, 08:00:00, 12:00:00, 1, 0, AVAILABLE, 0, 2026-06-09 17:04:49.407305, 2026-06-09 17:04:49.407305
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4b2be6f8]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1b272037] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@743109550 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: SELECT * FROM appointment WHERE doctor_id = ? AND slot_date = ? AND status IN ('PENDING','CONFIRMED')
+==> Parameters: 18(Long), 2026-06-12(LocalDate)
+<==      Total: 0
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1b272037]
+]]></system-out>
+  </testcase>
+  <testcase name="roomCapacityRespected" classname="com.clinic.appointment.JointBookingTest" time="0.065">
+    <system-out><![CDATA[Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3842ccf9] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@388198023 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: DELETE FROM appointment_resource
+==> Parameters: 
+<==    Updates: 0
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3842ccf9]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@35a7c2cc] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1309380693 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: DELETE FROM appointment
+==> Parameters: 
+<==    Updates: 0
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@35a7c2cc]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6000b869] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1826338232 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: DELETE FROM schedule_slot
+==> Parameters: 
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6000b869]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6761bb4d] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1979324108 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: DELETE FROM doctor_schedule
+==> Parameters: 
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6761bb4d]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@105c3bea] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@555428396 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: DELETE FROM doctor
+==> Parameters: 
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@105c3bea]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4b4a5691] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1847813442 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: DELETE FROM department
+==> Parameters: 
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4b4a5691]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1fd18007] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1742963611 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: DELETE FROM resource_slot
+==> Parameters: 
+<==    Updates: 3
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1fd18007]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7e04af28] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@192470239 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: DELETE FROM resource
+==> Parameters: 
+<==    Updates: 3
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7e04af28]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@183ab40f] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1673397192 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: DELETE FROM exam_type
+==> Parameters: 
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@183ab40f]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@38988d78] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1976246416 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO department ( name, code, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ? )
+==> Parameters: 影像科(String), YINGXIANG_59735164693500(String), 1(Integer), 2026-06-09T17:04:49.430242500(LocalDateTime), 2026-06-09T17:04:49.430242500(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@38988d78]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@381c78ea] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@732929122 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO doctor ( name, employee_no, department_id, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ? )
+==> Parameters: 张医生(String), DJ_59735165220200(String), 18(Long), 1(Integer), 2026-06-09T17:04:49.430242500(LocalDateTime), 2026-06-09T17:04:49.430242500(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@381c78ea]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@57202722] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@2076394230 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO doctor_schedule ( doctor_id, department_id, schedule_date, time_period, total_slots, booked_slots, extra_slots, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 19(Long), 18(Long), 2026-06-12(LocalDate), MORNING(String), 5(Integer), 0(Integer), 0(Integer), NORMAL(String), 2026-06-09T17:04:49.430242500(LocalDateTime), 2026-06-09T17:04:49.431240300(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@57202722]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@20c3be4c] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@2010671802 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO schedule_slot ( schedule_id, doctor_id, department_id, slot_date, slot_time, slot_no, status, is_extra, version, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 19(Long), 19(Long), 18(Long), 2026-06-12(LocalDate), 09:00(LocalTime), 1(Integer), AVAILABLE(String), 0(Integer), 0(Integer), 2026-06-09T17:04:49.431240300(LocalDateTime), 2026-06-09T17:04:49.431240300(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@20c3be4c]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@21975a54] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@33227422 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO resource ( name, code, type, department_id, capacity, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: CT诊室1(String), ROOM_CT1_59735166711800(String), ROOM(String), 18(Long), 1(Integer), 1(Integer), 2026-06-09T17:04:49.432237200(LocalDateTime), 2026-06-09T17:04:49.432237200(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@21975a54]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@66a75eab] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1058098963 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO resource ( name, code, type, department_id, capacity, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: CT设备1(String), EQUIP_CT1_59735171173900(String), EQUIPMENT(String), 18(Long), 1(Integer), 1(Integer), 2026-06-09T17:04:49.436226500(LocalDateTime), 2026-06-09T17:04:49.436226500(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@66a75eab]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2cc224b7] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@124737744 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO resource ( name, code, type, department_id, capacity, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 护理组1(String), NURSE_1_59735171899700(String), NURSING(String), 18(Long), 1(Integer), 1(Integer), 2026-06-09T17:04:49.437224(LocalDateTime), 2026-06-09T17:04:49.437224(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2cc224b7]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5b610c90] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1857927480 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO resource_slot ( resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 16(Long), ROOM(String), 2026-06-12(LocalDate), 08:00(LocalTime), 12:00(LocalTime), 1(Integer), 0(Integer), AVAILABLE(String), 0(Integer), 2026-06-09T17:04:49.437224(LocalDateTime), 2026-06-09T17:04:49.437224(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5b610c90]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@53e7dfc4] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@775136432 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO resource_slot ( resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 17(Long), EQUIPMENT(String), 2026-06-12(LocalDate), 08:00(LocalTime), 12:00(LocalTime), 1(Integer), 0(Integer), AVAILABLE(String), 0(Integer), 2026-06-09T17:04:49.438221500(LocalDateTime), 2026-06-09T17:04:49.438221500(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@53e7dfc4]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7d65286a] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@2115119751 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO resource_slot ( resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 18(Long), NURSING(String), 2026-06-12(LocalDate), 08:00(LocalTime), 12:00(LocalTime), 1(Integer), 0(Integer), AVAILABLE(String), 0(Integer), 2026-06-09T17:04:49.438221500(LocalDateTime), 2026-06-09T17:04:49.438221500(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7d65286a]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1366c37e] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1292142917 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO exam_type ( name, code, need_room, need_equipment, need_nursing, patient_daily_limit, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: CT扫描(String), CT_SCAN(String), 1(Integer), 1(Integer), 1(Integer), 2(Integer), 1(Integer), 2026-06-09T17:04:49.443339800(LocalDateTime), 2026-06-09T17:04:49.443339800(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1366c37e]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@42eaa429] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@972864322 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: SELECT id,resource_id,resource_type,slot_date,start_time,end_time,capacity,booked_count,status,version,create_time,update_time FROM resource_slot WHERE id=?
+==> Parameters: 16(Long)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 16, 16, ROOM, 2026-06-12, 08:00:00, 12:00:00, 1, 0, AVAILABLE, 0, 2026-06-09 17:04:49.437224, 2026-06-09 17:04:49.437224
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@42eaa429]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3201aadd] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1529238393 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: UPDATE resource_slot SET resource_id=?, resource_type=?, slot_date=?, start_time=?, end_time=?, capacity=?, booked_count=?, status=?, version=?, create_time=?, update_time=? WHERE id=? AND version=?
+==> Parameters: 16(Long), ROOM(String), 2026-06-12(LocalDate), 08:00(LocalTime), 12:00(LocalTime), 2(Integer), 0(Integer), AVAILABLE(String), 1(Integer), 2026-06-09T17:04:49.437224(LocalDateTime), 2026-06-09T17:04:49.437224(LocalDateTime), 16(Long), 0(Integer)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3201aadd]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4cfa6fd8] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@268499886 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: SELECT id,resource_id,resource_type,slot_date,start_time,end_time,capacity,booked_count,status,version,create_time,update_time FROM resource_slot WHERE id=?
+==> Parameters: 17(Long)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 17, 17, EQUIPMENT, 2026-06-12, 08:00:00, 12:00:00, 1, 0, AVAILABLE, 0, 2026-06-09 17:04:49.438222, 2026-06-09 17:04:49.438222
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4cfa6fd8]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2fe8ec31] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1186783022 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: UPDATE resource_slot SET resource_id=?, resource_type=?, slot_date=?, start_time=?, end_time=?, capacity=?, booked_count=?, status=?, version=?, create_time=?, update_time=? WHERE id=? AND version=?
+==> Parameters: 17(Long), EQUIPMENT(String), 2026-06-12(LocalDate), 08:00(LocalTime), 12:00(LocalTime), 2(Integer), 0(Integer), AVAILABLE(String), 1(Integer), 2026-06-09T17:04:49.438222(LocalDateTime), 2026-06-09T17:04:49.438222(LocalDateTime), 17(Long), 0(Integer)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2fe8ec31]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5927fc8e] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1324196239 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: SELECT id,resource_id,resource_type,slot_date,start_time,end_time,capacity,booked_count,status,version,create_time,update_time FROM resource_slot WHERE id=?
+==> Parameters: 18(Long)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 18, 18, NURSING, 2026-06-12, 08:00:00, 12:00:00, 1, 0, AVAILABLE, 0, 2026-06-09 17:04:49.438222, 2026-06-09 17:04:49.438222
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5927fc8e]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@76e11cc] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1284944245 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: UPDATE resource_slot SET resource_id=?, resource_type=?, slot_date=?, start_time=?, end_time=?, capacity=?, booked_count=?, status=?, version=?, create_time=?, update_time=? WHERE id=? AND version=?
+==> Parameters: 18(Long), NURSING(String), 2026-06-12(LocalDate), 08:00(LocalTime), 12:00(LocalTime), 2(Integer), 0(Integer), AVAILABLE(String), 1(Integer), 2026-06-09T17:04:49.438222(LocalDateTime), 2026-06-09T17:04:49.438222(LocalDateTime), 18(Long), 0(Integer)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@76e11cc]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4bf9f44b] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@2126814619 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO schedule_slot ( schedule_id, doctor_id, department_id, slot_date, slot_time, slot_no, status, is_extra, version, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 19(Long), 19(Long), 18(Long), 2026-06-12(LocalDate), 09:10(LocalTime), 2(Integer), AVAILABLE(String), 0(Integer), 0(Integer), 2026-06-09T17:04:49.455310800(LocalDateTime), 2026-06-09T17:04:49.455310800(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4bf9f44b]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe]
+JDBC Connection [HikariProxyConnection@1961422681 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will be managed by Spring
+==>  Preparing: SELECT id,schedule_id,doctor_id,department_id,slot_date,slot_time,slot_no,status,appointment_id,is_extra,version,create_time,update_time FROM schedule_slot WHERE id=?
+==> Parameters: 71(Long)
+<==    Columns: id, schedule_id, doctor_id, department_id, slot_date, slot_time, slot_no, status, appointment_id, is_extra, version, create_time, update_time
+<==        Row: 71, 19, 19, 18, 2026-06-12, 09:00:00, 1, AVAILABLE, null, 0, 0, 2026-06-09 17:04:49.43124, 2026-06-09 17:04:49.43124
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe] from current transaction
+==>  Preparing: SELECT * FROM exam_type WHERE code = ? AND status = 1
+==> Parameters: CT_SCAN(String)
+<==    Columns: id, name, code, need_room, need_equipment, need_nursing, equipment_code, room_code, patient_daily_limit, status, create_time, update_time
+<==        Row: 6, CT扫描, CT_SCAN, 1, 1, 1, null, null, 2, 1, 2026-06-09 17:04:49.44334, 2026-06-09 17:04:49.44334
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe] from current transaction
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe] from current transaction
+==>  Preparing: SELECT COUNT(*) FROM appointment WHERE patient_id = ? AND slot_date = ? AND exam_type_code = ? AND status IN ('PENDING','CONFIRMED')
+==> Parameters: 2001(Long), 2026-06-12(LocalDate), CT_SCAN(String)
+<==    Columns: COUNT(*)
+<==        Row: 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe] from current transaction
+==>  Preparing: SELECT rs.* FROM resource_slot rs JOIN resource r ON rs.resource_id = r.id WHERE r.type = ? AND r.status = 1 AND rs.slot_date = ? AND rs.start_time <= ? AND rs.end_time > ? AND rs.status = 'AVAILABLE' AND rs.booked_count < rs.capacity ORDER BY rs.booked_count ASC, rs.start_time
+==> Parameters: ROOM(String), 2026-06-12(LocalDate), 09:00(LocalTime), 09:00(LocalTime)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 16, 16, ROOM, 2026-06-12, 08:00:00, 12:00:00, 2, 0, AVAILABLE, 1, 2026-06-09 17:04:49.437224, 2026-06-09 17:04:49.437224
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe] from current transaction
+==>  Preparing: SELECT rs.* FROM resource_slot rs JOIN resource r ON rs.resource_id = r.id WHERE r.type = ? AND r.status = 1 AND rs.slot_date = ? AND rs.start_time <= ? AND rs.end_time > ? AND rs.status = 'AVAILABLE' AND rs.booked_count < rs.capacity ORDER BY rs.booked_count ASC, rs.start_time
+==> Parameters: EQUIPMENT(String), 2026-06-12(LocalDate), 09:00(LocalTime), 09:00(LocalTime)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 17, 17, EQUIPMENT, 2026-06-12, 08:00:00, 12:00:00, 2, 0, AVAILABLE, 1, 2026-06-09 17:04:49.438222, 2026-06-09 17:04:49.438222
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe] from current transaction
+==>  Preparing: SELECT rs.* FROM resource_slot rs JOIN resource r ON rs.resource_id = r.id WHERE r.type = ? AND r.status = 1 AND rs.slot_date = ? AND rs.start_time <= ? AND rs.end_time > ? AND rs.status = 'AVAILABLE' AND rs.booked_count < rs.capacity ORDER BY rs.booked_count ASC, rs.start_time
+==> Parameters: NURSING(String), 2026-06-12(LocalDate), 09:00(LocalTime), 09:00(LocalTime)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 18, 18, NURSING, 2026-06-12, 08:00:00, 12:00:00, 2, 0, AVAILABLE, 1, 2026-06-09 17:04:49.438222, 2026-06-09 17:04:49.438222
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe] from current transaction
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe] from current transaction
+==>  Preparing: INSERT INTO appointment ( appointment_no, patient_id, patient_name, doctor_id, department_id, slot_id, slot_date, slot_time, status, source, booking_type, exam_type_code, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: APT20260609170449C60229(String), 2001(Long), 患者A(String), 19(Long), 18(Long), 71(Long), 2026-06-12(LocalDate), 09:00(LocalTime), CONFIRMED(String), ONLINE(String), JOINT(String), CT_SCAN(String), 2026-06-09T17:04:49.461295200(LocalDateTime), 2026-06-09T17:04:49.461295200(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe] from current transaction
+==>  Preparing: UPDATE schedule_slot SET status = 'BOOKED', appointment_id = ?, version = version + 1, update_time = NOW() WHERE id = ? AND status = 'AVAILABLE' AND version = ?
+==> Parameters: 69(Long), 71(Long), 0(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe] from current transaction
+==>  Preparing: SELECT id,resource_id,resource_type,slot_date,start_time,end_time,capacity,booked_count,status,version,create_time,update_time FROM resource_slot WHERE id=?
+==> Parameters: 16(Long)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 16, 16, ROOM, 2026-06-12, 08:00:00, 12:00:00, 2, 0, AVAILABLE, 1, 2026-06-09 17:04:49.437224, 2026-06-09 17:04:49.437224
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe] from current transaction
+==>  Preparing: UPDATE resource_slot SET booked_count = booked_count + 1, status = CASE WHEN booked_count + 1 >= capacity THEN 'FULL' ELSE 'AVAILABLE' END, version = version + 1, update_time = NOW() WHERE id = ? AND booked_count < capacity AND status = 'AVAILABLE' AND version = ?
+==> Parameters: 16(Long), 1(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe] from current transaction
+==>  Preparing: INSERT INTO appointment_resource ( appointment_id, resource_slot_id, resource_id, resource_type, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 69(Long), 16(Long), 16(Long), ROOM(String), BOOKED(String), 2026-06-09T17:04:49.464287400(LocalDateTime), 2026-06-09T17:04:49.464287400(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe]
+2026-06-09T17:04:49.465+08:00  INFO 30284 --- [           main] c.c.a.s.i.ResourceScheduleServiceImpl    : 资源预订成功: appointmentId=69, resourceType=ROOM, resourceSlotId=16
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe] from current transaction
+==>  Preparing: SELECT id,resource_id,resource_type,slot_date,start_time,end_time,capacity,booked_count,status,version,create_time,update_time FROM resource_slot WHERE id=?
+==> Parameters: 17(Long)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 17, 17, EQUIPMENT, 2026-06-12, 08:00:00, 12:00:00, 2, 0, AVAILABLE, 1, 2026-06-09 17:04:49.438222, 2026-06-09 17:04:49.438222
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe] from current transaction
+==>  Preparing: UPDATE resource_slot SET booked_count = booked_count + 1, status = CASE WHEN booked_count + 1 >= capacity THEN 'FULL' ELSE 'AVAILABLE' END, version = version + 1, update_time = NOW() WHERE id = ? AND booked_count < capacity AND status = 'AVAILABLE' AND version = ?
+==> Parameters: 17(Long), 1(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe] from current transaction
+==>  Preparing: INSERT INTO appointment_resource ( appointment_id, resource_slot_id, resource_id, resource_type, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 69(Long), 17(Long), 17(Long), EQUIPMENT(String), BOOKED(String), 2026-06-09T17:04:49.466282500(LocalDateTime), 2026-06-09T17:04:49.466282500(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe]
+2026-06-09T17:04:49.466+08:00  INFO 30284 --- [           main] c.c.a.s.i.ResourceScheduleServiceImpl    : 资源预订成功: appointmentId=69, resourceType=EQUIPMENT, resourceSlotId=17
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe] from current transaction
+==>  Preparing: SELECT id,resource_id,resource_type,slot_date,start_time,end_time,capacity,booked_count,status,version,create_time,update_time FROM resource_slot WHERE id=?
+==> Parameters: 18(Long)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 18, 18, NURSING, 2026-06-12, 08:00:00, 12:00:00, 2, 0, AVAILABLE, 1, 2026-06-09 17:04:49.438222, 2026-06-09 17:04:49.438222
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe] from current transaction
+==>  Preparing: UPDATE resource_slot SET booked_count = booked_count + 1, status = CASE WHEN booked_count + 1 >= capacity THEN 'FULL' ELSE 'AVAILABLE' END, version = version + 1, update_time = NOW() WHERE id = ? AND booked_count < capacity AND status = 'AVAILABLE' AND version = ?
+==> Parameters: 18(Long), 1(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe] from current transaction
+==>  Preparing: INSERT INTO appointment_resource ( appointment_id, resource_slot_id, resource_id, resource_type, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 69(Long), 18(Long), 18(Long), NURSING(String), BOOKED(String), 2026-06-09T17:04:49.467279600(LocalDateTime), 2026-06-09T17:04:49.467279600(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe]
+2026-06-09T17:04:49.468+08:00  INFO 30284 --- [           main] c.c.a.s.i.ResourceScheduleServiceImpl    : 资源预订成功: appointmentId=69, resourceType=NURSING, resourceSlotId=18
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe] from current transaction
+==>  Preparing: SELECT id,doctor_id,department_id,schedule_date,time_period,total_slots,booked_slots,extra_slots,status,create_time,update_time FROM doctor_schedule WHERE id=?
+==> Parameters: 19(Long)
+<==    Columns: id, doctor_id, department_id, schedule_date, time_period, total_slots, booked_slots, extra_slots, status, create_time, update_time
+<==        Row: 19, 19, 18, 2026-06-12, MORNING, 5, 0, 0, NORMAL, 2026-06-09 17:04:49.430243, 2026-06-09 17:04:49.43124
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe] from current transaction
+==>  Preparing: UPDATE doctor_schedule SET doctor_id=?, department_id=?, schedule_date=?, time_period=?, total_slots=?, booked_slots=?, extra_slots=?, status=?, create_time=?, update_time=? WHERE id=?
+==> Parameters: 19(Long), 18(Long), 2026-06-12(LocalDate), MORNING(String), 5(Integer), 1(Integer), 0(Integer), NORMAL(String), 2026-06-09T17:04:49.430243(LocalDateTime), 2026-06-09T17:04:49.431240(LocalDateTime), 19(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe]
+2026-06-09T17:04:49.470+08:00  INFO 30284 --- [           main] c.c.a.s.impl.AppointmentServiceImpl      : 预约成功: no=APT20260609170449C60229, patient=2001, doctor=19, date=2026-06-12, time=09:00, type=JOINT
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d313fe]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125]
+JDBC Connection [HikariProxyConnection@1609139487 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will be managed by Spring
+==>  Preparing: SELECT id,schedule_id,doctor_id,department_id,slot_date,slot_time,slot_no,status,appointment_id,is_extra,version,create_time,update_time FROM schedule_slot WHERE id=?
+==> Parameters: 72(Long)
+<==    Columns: id, schedule_id, doctor_id, department_id, slot_date, slot_time, slot_no, status, appointment_id, is_extra, version, create_time, update_time
+<==        Row: 72, 19, 19, 18, 2026-06-12, 09:10:00, 2, AVAILABLE, null, 0, 0, 2026-06-09 17:04:49.455311, 2026-06-09 17:04:49.455311
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125] from current transaction
+==>  Preparing: SELECT * FROM exam_type WHERE code = ? AND status = 1
+==> Parameters: CT_SCAN(String)
+<==    Columns: id, name, code, need_room, need_equipment, need_nursing, equipment_code, room_code, patient_daily_limit, status, create_time, update_time
+<==        Row: 6, CT扫描, CT_SCAN, 1, 1, 1, null, null, 2, 1, 2026-06-09 17:04:49.44334, 2026-06-09 17:04:49.44334
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125] from current transaction
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125] from current transaction
+==>  Preparing: SELECT COUNT(*) FROM appointment WHERE patient_id = ? AND slot_date = ? AND exam_type_code = ? AND status IN ('PENDING','CONFIRMED')
+==> Parameters: 2002(Long), 2026-06-12(LocalDate), CT_SCAN(String)
+<==    Columns: COUNT(*)
+<==        Row: 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125] from current transaction
+==>  Preparing: SELECT rs.* FROM resource_slot rs JOIN resource r ON rs.resource_id = r.id WHERE r.type = ? AND r.status = 1 AND rs.slot_date = ? AND rs.start_time <= ? AND rs.end_time > ? AND rs.status = 'AVAILABLE' AND rs.booked_count < rs.capacity ORDER BY rs.booked_count ASC, rs.start_time
+==> Parameters: ROOM(String), 2026-06-12(LocalDate), 09:10(LocalTime), 09:10(LocalTime)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 16, 16, ROOM, 2026-06-12, 08:00:00, 12:00:00, 2, 1, AVAILABLE, 2, 2026-06-09 17:04:49.437224, 2026-06-09 17:04:49.464287
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125] from current transaction
+==>  Preparing: SELECT rs.* FROM resource_slot rs JOIN resource r ON rs.resource_id = r.id WHERE r.type = ? AND r.status = 1 AND rs.slot_date = ? AND rs.start_time <= ? AND rs.end_time > ? AND rs.status = 'AVAILABLE' AND rs.booked_count < rs.capacity ORDER BY rs.booked_count ASC, rs.start_time
+==> Parameters: EQUIPMENT(String), 2026-06-12(LocalDate), 09:10(LocalTime), 09:10(LocalTime)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 17, 17, EQUIPMENT, 2026-06-12, 08:00:00, 12:00:00, 2, 1, AVAILABLE, 2, 2026-06-09 17:04:49.438222, 2026-06-09 17:04:49.466283
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125] from current transaction
+==>  Preparing: SELECT rs.* FROM resource_slot rs JOIN resource r ON rs.resource_id = r.id WHERE r.type = ? AND r.status = 1 AND rs.slot_date = ? AND rs.start_time <= ? AND rs.end_time > ? AND rs.status = 'AVAILABLE' AND rs.booked_count < rs.capacity ORDER BY rs.booked_count ASC, rs.start_time
+==> Parameters: NURSING(String), 2026-06-12(LocalDate), 09:10(LocalTime), 09:10(LocalTime)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 18, 18, NURSING, 2026-06-12, 08:00:00, 12:00:00, 2, 1, AVAILABLE, 2, 2026-06-09 17:04:49.438222, 2026-06-09 17:04:49.46728
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125] from current transaction
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125] from current transaction
+==>  Preparing: INSERT INTO appointment ( appointment_no, patient_id, patient_name, doctor_id, department_id, slot_id, slot_date, slot_time, status, source, booking_type, exam_type_code, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: APT20260609170449124BD6(String), 2002(Long), 患者B(String), 19(Long), 18(Long), 72(Long), 2026-06-12(LocalDate), 09:10(LocalTime), CONFIRMED(String), ONLINE(String), JOINT(String), CT_SCAN(String), 2026-06-09T17:04:49.474260500(LocalDateTime), 2026-06-09T17:04:49.474260500(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125] from current transaction
+==>  Preparing: UPDATE schedule_slot SET status = 'BOOKED', appointment_id = ?, version = version + 1, update_time = NOW() WHERE id = ? AND status = 'AVAILABLE' AND version = ?
+==> Parameters: 70(Long), 72(Long), 0(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125] from current transaction
+==>  Preparing: SELECT id,resource_id,resource_type,slot_date,start_time,end_time,capacity,booked_count,status,version,create_time,update_time FROM resource_slot WHERE id=?
+==> Parameters: 16(Long)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 16, 16, ROOM, 2026-06-12, 08:00:00, 12:00:00, 2, 1, AVAILABLE, 2, 2026-06-09 17:04:49.437224, 2026-06-09 17:04:49.464287
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125] from current transaction
+==>  Preparing: UPDATE resource_slot SET booked_count = booked_count + 1, status = CASE WHEN booked_count + 1 >= capacity THEN 'FULL' ELSE 'AVAILABLE' END, version = version + 1, update_time = NOW() WHERE id = ? AND booked_count < capacity AND status = 'AVAILABLE' AND version = ?
+==> Parameters: 16(Long), 2(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125] from current transaction
+==>  Preparing: INSERT INTO appointment_resource ( appointment_id, resource_slot_id, resource_id, resource_type, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 70(Long), 16(Long), 16(Long), ROOM(String), BOOKED(String), 2026-06-09T17:04:49.477252800(LocalDateTime), 2026-06-09T17:04:49.477252800(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125]
+2026-06-09T17:04:49.478+08:00  INFO 30284 --- [           main] c.c.a.s.i.ResourceScheduleServiceImpl    : 资源预订成功: appointmentId=70, resourceType=ROOM, resourceSlotId=16
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125] from current transaction
+==>  Preparing: SELECT id,resource_id,resource_type,slot_date,start_time,end_time,capacity,booked_count,status,version,create_time,update_time FROM resource_slot WHERE id=?
+==> Parameters: 17(Long)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 17, 17, EQUIPMENT, 2026-06-12, 08:00:00, 12:00:00, 2, 1, AVAILABLE, 2, 2026-06-09 17:04:49.438222, 2026-06-09 17:04:49.466283
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125] from current transaction
+==>  Preparing: UPDATE resource_slot SET booked_count = booked_count + 1, status = CASE WHEN booked_count + 1 >= capacity THEN 'FULL' ELSE 'AVAILABLE' END, version = version + 1, update_time = NOW() WHERE id = ? AND booked_count < capacity AND status = 'AVAILABLE' AND version = ?
+==> Parameters: 17(Long), 2(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125] from current transaction
+==>  Preparing: INSERT INTO appointment_resource ( appointment_id, resource_slot_id, resource_id, resource_type, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 70(Long), 17(Long), 17(Long), EQUIPMENT(String), BOOKED(String), 2026-06-09T17:04:49.479246500(LocalDateTime), 2026-06-09T17:04:49.479246500(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125]
+2026-06-09T17:04:49.479+08:00  INFO 30284 --- [           main] c.c.a.s.i.ResourceScheduleServiceImpl    : 资源预订成功: appointmentId=70, resourceType=EQUIPMENT, resourceSlotId=17
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125] from current transaction
+==>  Preparing: SELECT id,resource_id,resource_type,slot_date,start_time,end_time,capacity,booked_count,status,version,create_time,update_time FROM resource_slot WHERE id=?
+==> Parameters: 18(Long)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 18, 18, NURSING, 2026-06-12, 08:00:00, 12:00:00, 2, 1, AVAILABLE, 2, 2026-06-09 17:04:49.438222, 2026-06-09 17:04:49.46728
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125] from current transaction
+==>  Preparing: UPDATE resource_slot SET booked_count = booked_count + 1, status = CASE WHEN booked_count + 1 >= capacity THEN 'FULL' ELSE 'AVAILABLE' END, version = version + 1, update_time = NOW() WHERE id = ? AND booked_count < capacity AND status = 'AVAILABLE' AND version = ?
+==> Parameters: 18(Long), 2(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125] from current transaction
+==>  Preparing: INSERT INTO appointment_resource ( appointment_id, resource_slot_id, resource_id, resource_type, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 70(Long), 18(Long), 18(Long), NURSING(String), BOOKED(String), 2026-06-09T17:04:49.483240400(LocalDateTime), 2026-06-09T17:04:49.483240400(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125]
+2026-06-09T17:04:49.486+08:00  INFO 30284 --- [           main] c.c.a.s.i.ResourceScheduleServiceImpl    : 资源预订成功: appointmentId=70, resourceType=NURSING, resourceSlotId=18
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125] from current transaction
+==>  Preparing: SELECT id,doctor_id,department_id,schedule_date,time_period,total_slots,booked_slots,extra_slots,status,create_time,update_time FROM doctor_schedule WHERE id=?
+==> Parameters: 19(Long)
+<==    Columns: id, doctor_id, department_id, schedule_date, time_period, total_slots, booked_slots, extra_slots, status, create_time, update_time
+<==        Row: 19, 19, 18, 2026-06-12, MORNING, 5, 1, 0, NORMAL, 2026-06-09 17:04:49.430243, 2026-06-09 17:04:49.43124
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125] from current transaction
+==>  Preparing: UPDATE doctor_schedule SET doctor_id=?, department_id=?, schedule_date=?, time_period=?, total_slots=?, booked_slots=?, extra_slots=?, status=?, create_time=?, update_time=? WHERE id=?
+==> Parameters: 19(Long), 18(Long), 2026-06-12(LocalDate), MORNING(String), 5(Integer), 2(Integer), 0(Integer), NORMAL(String), 2026-06-09T17:04:49.430243(LocalDateTime), 2026-06-09T17:04:49.431240(LocalDateTime), 19(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125]
+2026-06-09T17:04:49.488+08:00  INFO 30284 --- [           main] c.c.a.s.impl.AppointmentServiceImpl      : 预约成功: no=APT20260609170449124BD6, patient=2002, doctor=19, date=2026-06-12, time=09:10, type=JOINT
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2464c125]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@426ee667] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@324149533 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: SELECT id,resource_id,resource_type,slot_date,start_time,end_time,capacity,booked_count,status,version,create_time,update_time FROM resource_slot WHERE id=?
+==> Parameters: 16(Long)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 16, 16, ROOM, 2026-06-12, 08:00:00, 12:00:00, 2, 2, FULL, 3, 2026-06-09 17:04:49.437224, 2026-06-09 17:04:49.476256
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@426ee667]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@11864fa6] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@524399590 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO audit_log ( operation, entity_type, entity_id, operator_name, detail, ip, create_time ) VALUES ( ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: BOOK(String), APPOINTMENT(String), 70(Long), (String), {"patientId":2002,"slotId":72,"date":"2026-06-12","time":"09:10","bookingType":"JOINT","examType":"CT_SCAN"}(String), (String), 2026-06-09T17:04:49.490218200(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@11864fa6]
+]]></system-out>
+  </testcase>
+  <testcase name="patientDailyLimit" classname="com.clinic.appointment.JointBookingTest" time="0.049">
+    <system-out><![CDATA[Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@ff03384] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@362497553 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: DELETE FROM appointment_resource
+==> Parameters: 
+<==    Updates: 6
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@ff03384]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2073d71b] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@581648577 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: DELETE FROM appointment
+==> Parameters: 
+<==    Updates: 2
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2073d71b]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2c492b03] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1672301397 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: DELETE FROM schedule_slot
+==> Parameters: 
+<==    Updates: 2
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2c492b03]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5dd88334] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@630029574 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: DELETE FROM doctor_schedule
+==> Parameters: 
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5dd88334]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@40f95b87] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1225213742 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: DELETE FROM doctor
+==> Parameters: 
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@40f95b87]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@50dfac19] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@519343689 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: DELETE FROM department
+==> Parameters: 
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@50dfac19]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@145bcb73] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1729548513 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: DELETE FROM resource_slot
+==> Parameters: 
+<==    Updates: 3
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@145bcb73]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4a04177e] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1882742449 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: DELETE FROM resource
+==> Parameters: 
+<==    Updates: 3
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4a04177e]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3a721396] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1806847457 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: DELETE FROM exam_type
+==> Parameters: 
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3a721396]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@167080e] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@865600325 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO department ( name, code, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ? )
+==> Parameters: 影像科(String), YINGXIANG_59735230977600(String), 1(Integer), 2026-06-09T17:04:49.496356900(LocalDateTime), 2026-06-09T17:04:49.496356900(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@167080e]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@195c5803] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1626919820 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO doctor ( name, employee_no, department_id, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ? )
+==> Parameters: 张医生(String), DJ_59735231563500(String), 19(Long), 1(Integer), 2026-06-09T17:04:49.496862600(LocalDateTime), 2026-06-09T17:04:49.496862600(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@195c5803]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@596690e5] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@714551975 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO doctor_schedule ( doctor_id, department_id, schedule_date, time_period, total_slots, booked_slots, extra_slots, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 20(Long), 19(Long), 2026-06-12(LocalDate), MORNING(String), 5(Integer), 0(Integer), 0(Integer), NORMAL(String), 2026-06-09T17:04:49.497591900(LocalDateTime), 2026-06-09T17:04:49.497591900(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@596690e5]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5170ebb6] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1999779495 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO schedule_slot ( schedule_id, doctor_id, department_id, slot_date, slot_time, slot_no, status, is_extra, version, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 20(Long), 20(Long), 19(Long), 2026-06-12(LocalDate), 09:00(LocalTime), 1(Integer), AVAILABLE(String), 0(Integer), 0(Integer), 2026-06-09T17:04:49.498224400(LocalDateTime), 2026-06-09T17:04:49.498224400(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5170ebb6]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1abe611c] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@154102502 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO resource ( name, code, type, department_id, capacity, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: CT诊室1(String), ROOM_CT1_59735233503800(String), ROOM(String), 19(Long), 1(Integer), 1(Integer), 2026-06-09T17:04:49.499087500(LocalDateTime), 2026-06-09T17:04:49.499087500(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1abe611c]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5fd40d2e] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@968200061 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO resource ( name, code, type, department_id, capacity, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: CT设备1(String), EQUIP_CT1_59735234245500(String), EQUIPMENT(String), 19(Long), 1(Integer), 1(Integer), 2026-06-09T17:04:49.499632900(LocalDateTime), 2026-06-09T17:04:49.499632900(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5fd40d2e]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@50eaafd6] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@576751479 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO resource ( name, code, type, department_id, capacity, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )
+Creating a new SqlSession
+==> Parameters: 护理组1(String), NURSE_1_59735234789100(String), NURSING(String), 19(Long), 1(Integer), 1(Integer), 2026-06-09T17:04:49.500136500(LocalDateTime), 2026-06-09T17:04:49.500136500(LocalDateTime)
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@55f4593c] was not registered for synchronization because synchronization is not active
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@50eaafd6]
+Creating a new SqlSession
+JDBC Connection [HikariProxyConnection@1530117618 wrapping conn28: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5d225368] was not registered for synchronization because synchronization is not active
+==>  Preparing: INSERT INTO audit_log ( operation, entity_type, entity_id, operator_name, detail, ip, create_time ) VALUES ( ?, ?, ?, ?, ?, ?, ? )
+JDBC Connection [HikariProxyConnection@1224339926 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO resource_slot ( resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: BOOK(String), APPOINTMENT(String), 69(Long), (String), {"patientId":2001,"slotId":71,"date":"2026-06-12","time":"09:00","bookingType":"JOINT","examType":"CT_SCAN"}(String), (String), 2026-06-09T17:04:49.500136500(LocalDateTime)
+==> Parameters: 19(Long), ROOM(String), 2026-06-12(LocalDate), 08:00(LocalTime), 12:00(LocalTime), 1(Integer), 0(Integer), AVAILABLE(String), 0(Integer), 2026-06-09T17:04:49.500136500(LocalDateTime), 2026-06-09T17:04:49.500136500(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5d225368]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4d687300] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1804934885 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO resource_slot ( resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 20(Long), EQUIPMENT(String), 2026-06-12(LocalDate), 08:00(LocalTime), 12:00(LocalTime), 1(Integer), 0(Integer), AVAILABLE(String), 0(Integer), 2026-06-09T17:04:49.501020800(LocalDateTime), 2026-06-09T17:04:49.501020800(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4d687300]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2463a9ec] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@596872183 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO resource_slot ( resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 21(Long), NURSING(String), 2026-06-12(LocalDate), 08:00(LocalTime), 12:00(LocalTime), 1(Integer), 0(Integer), AVAILABLE(String), 0(Integer), 2026-06-09T17:04:49.501526100(LocalDateTime), 2026-06-09T17:04:49.501526100(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2463a9ec]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2d6d0cf6] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1755992155 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO exam_type ( name, code, need_room, need_equipment, need_nursing, patient_daily_limit, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: CT扫描(String), CT_SCAN(String), 1(Integer), 1(Integer), 1(Integer), 2(Integer), 1(Integer), 2026-06-09T17:04:49.502528100(LocalDateTime), 2026-06-09T17:04:49.502528100(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2d6d0cf6]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04]
+JDBC Connection [HikariProxyConnection@992063733 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will be managed by Spring
+==>  Preparing: SELECT id,schedule_id,doctor_id,department_id,slot_date,slot_time,slot_no,status,appointment_id,is_extra,version,create_time,update_time FROM schedule_slot WHERE id=?
+==> Parameters: 73(Long)
+<==    Columns: id, schedule_id, doctor_id, department_id, slot_date, slot_time, slot_no, status, appointment_id, is_extra, version, create_time, update_time
+<==        Row: 73, 20, 20, 19, 2026-06-12, 09:00:00, 1, AVAILABLE, null, 0, 0, 2026-06-09 17:04:49.498224, 2026-06-09 17:04:49.498224
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04] from current transaction
+==>  Preparing: SELECT * FROM exam_type WHERE code = ? AND status = 1
+==> Parameters: CT_SCAN(String)
+<==    Columns: id, name, code, need_room, need_equipment, need_nursing, equipment_code, room_code, patient_daily_limit, status, create_time, update_time
+<==        Row: 7, CT扫描, CT_SCAN, 1, 1, 1, null, null, 2, 1, 2026-06-09 17:04:49.502528, 2026-06-09 17:04:49.502528
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04] from current transaction
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04] from current transaction
+==>  Preparing: SELECT COUNT(*) FROM appointment WHERE patient_id = ? AND slot_date = ? AND exam_type_code = ? AND status IN ('PENDING','CONFIRMED')
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@55f4593c]
+==> Parameters: 3001(Long), 2026-06-12(LocalDate), CT_SCAN(String)
+<==    Columns: COUNT(*)
+<==        Row: 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04] from current transaction
+==>  Preparing: SELECT rs.* FROM resource_slot rs JOIN resource r ON rs.resource_id = r.id WHERE r.type = ? AND r.status = 1 AND rs.slot_date = ? AND rs.start_time <= ? AND rs.end_time > ? AND rs.status = 'AVAILABLE' AND rs.booked_count < rs.capacity ORDER BY rs.booked_count ASC, rs.start_time
+==> Parameters: ROOM(String), 2026-06-12(LocalDate), 09:00(LocalTime), 09:00(LocalTime)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 19, 19, ROOM, 2026-06-12, 08:00:00, 12:00:00, 1, 0, AVAILABLE, 0, 2026-06-09 17:04:49.500137, 2026-06-09 17:04:49.500137
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04] from current transaction
+==>  Preparing: SELECT rs.* FROM resource_slot rs JOIN resource r ON rs.resource_id = r.id WHERE r.type = ? AND r.status = 1 AND rs.slot_date = ? AND rs.start_time <= ? AND rs.end_time > ? AND rs.status = 'AVAILABLE' AND rs.booked_count < rs.capacity ORDER BY rs.booked_count ASC, rs.start_time
+==> Parameters: EQUIPMENT(String), 2026-06-12(LocalDate), 09:00(LocalTime), 09:00(LocalTime)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 20, 20, EQUIPMENT, 2026-06-12, 08:00:00, 12:00:00, 1, 0, AVAILABLE, 0, 2026-06-09 17:04:49.501021, 2026-06-09 17:04:49.501021
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04] from current transaction
+==>  Preparing: SELECT rs.* FROM resource_slot rs JOIN resource r ON rs.resource_id = r.id WHERE r.type = ? AND r.status = 1 AND rs.slot_date = ? AND rs.start_time <= ? AND rs.end_time > ? AND rs.status = 'AVAILABLE' AND rs.booked_count < rs.capacity ORDER BY rs.booked_count ASC, rs.start_time
+==> Parameters: NURSING(String), 2026-06-12(LocalDate), 09:00(LocalTime), 09:00(LocalTime)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 21, 21, NURSING, 2026-06-12, 08:00:00, 12:00:00, 1, 0, AVAILABLE, 0, 2026-06-09 17:04:49.501526, 2026-06-09 17:04:49.501526
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04] from current transaction
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04] from current transaction
+==>  Preparing: INSERT INTO appointment ( appointment_no, patient_id, patient_name, doctor_id, department_id, slot_id, slot_date, slot_time, status, source, booking_type, exam_type_code, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: APT20260609170449BCEB23(String), 3001(Long), 患者C(String), 20(Long), 19(Long), 73(Long), 2026-06-12(LocalDate), 09:00(LocalTime), CONFIRMED(String), ONLINE(String), JOINT(String), CT_SCAN(String), 2026-06-09T17:04:49.507167700(LocalDateTime), 2026-06-09T17:04:49.507167700(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04] from current transaction
+==>  Preparing: UPDATE schedule_slot SET status = 'BOOKED', appointment_id = ?, version = version + 1, update_time = NOW() WHERE id = ? AND status = 'AVAILABLE' AND version = ?
+==> Parameters: 71(Long), 73(Long), 0(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04] from current transaction
+==>  Preparing: SELECT id,resource_id,resource_type,slot_date,start_time,end_time,capacity,booked_count,status,version,create_time,update_time FROM resource_slot WHERE id=?
+==> Parameters: 19(Long)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 19, 19, ROOM, 2026-06-12, 08:00:00, 12:00:00, 1, 0, AVAILABLE, 0, 2026-06-09 17:04:49.500137, 2026-06-09 17:04:49.500137
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04] from current transaction
+==>  Preparing: UPDATE resource_slot SET booked_count = booked_count + 1, status = CASE WHEN booked_count + 1 >= capacity THEN 'FULL' ELSE 'AVAILABLE' END, version = version + 1, update_time = NOW() WHERE id = ? AND booked_count < capacity AND status = 'AVAILABLE' AND version = ?
+==> Parameters: 19(Long), 0(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04] from current transaction
+==>  Preparing: INSERT INTO appointment_resource ( appointment_id, resource_slot_id, resource_id, resource_type, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 71(Long), 19(Long), 19(Long), ROOM(String), BOOKED(String), 2026-06-09T17:04:49.509162200(LocalDateTime), 2026-06-09T17:04:49.509162200(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04]
+2026-06-09T17:04:49.509+08:00  INFO 30284 --- [           main] c.c.a.s.i.ResourceScheduleServiceImpl    : 资源预订成功: appointmentId=71, resourceType=ROOM, resourceSlotId=19
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04] from current transaction
+==>  Preparing: SELECT id,resource_id,resource_type,slot_date,start_time,end_time,capacity,booked_count,status,version,create_time,update_time FROM resource_slot WHERE id=?
+==> Parameters: 20(Long)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 20, 20, EQUIPMENT, 2026-06-12, 08:00:00, 12:00:00, 1, 0, AVAILABLE, 0, 2026-06-09 17:04:49.501021, 2026-06-09 17:04:49.501021
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04] from current transaction
+==>  Preparing: UPDATE resource_slot SET booked_count = booked_count + 1, status = CASE WHEN booked_count + 1 >= capacity THEN 'FULL' ELSE 'AVAILABLE' END, version = version + 1, update_time = NOW() WHERE id = ? AND booked_count < capacity AND status = 'AVAILABLE' AND version = ?
+==> Parameters: 20(Long), 0(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04] from current transaction
+==>  Preparing: INSERT INTO appointment_resource ( appointment_id, resource_slot_id, resource_id, resource_type, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 71(Long), 20(Long), 20(Long), EQUIPMENT(String), BOOKED(String), 2026-06-09T17:04:49.511157800(LocalDateTime), 2026-06-09T17:04:49.511157800(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04]
+2026-06-09T17:04:49.511+08:00  INFO 30284 --- [           main] c.c.a.s.i.ResourceScheduleServiceImpl    : 资源预订成功: appointmentId=71, resourceType=EQUIPMENT, resourceSlotId=20
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04] from current transaction
+==>  Preparing: SELECT id,resource_id,resource_type,slot_date,start_time,end_time,capacity,booked_count,status,version,create_time,update_time FROM resource_slot WHERE id=?
+==> Parameters: 21(Long)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 21, 21, NURSING, 2026-06-12, 08:00:00, 12:00:00, 1, 0, AVAILABLE, 0, 2026-06-09 17:04:49.501526, 2026-06-09 17:04:49.501526
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04] from current transaction
+==>  Preparing: UPDATE resource_slot SET booked_count = booked_count + 1, status = CASE WHEN booked_count + 1 >= capacity THEN 'FULL' ELSE 'AVAILABLE' END, version = version + 1, update_time = NOW() WHERE id = ? AND booked_count < capacity AND status = 'AVAILABLE' AND version = ?
+==> Parameters: 21(Long), 0(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04] from current transaction
+==>  Preparing: INSERT INTO appointment_resource ( appointment_id, resource_slot_id, resource_id, resource_type, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 71(Long), 21(Long), 21(Long), NURSING(String), BOOKED(String), 2026-06-09T17:04:49.512155(LocalDateTime), 2026-06-09T17:04:49.512155(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04]
+2026-06-09T17:04:49.513+08:00  INFO 30284 --- [           main] c.c.a.s.i.ResourceScheduleServiceImpl    : 资源预订成功: appointmentId=71, resourceType=NURSING, resourceSlotId=21
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04] from current transaction
+==>  Preparing: SELECT id,doctor_id,department_id,schedule_date,time_period,total_slots,booked_slots,extra_slots,status,create_time,update_time FROM doctor_schedule WHERE id=?
+==> Parameters: 20(Long)
+<==    Columns: id, doctor_id, department_id, schedule_date, time_period, total_slots, booked_slots, extra_slots, status, create_time, update_time
+<==        Row: 20, 20, 19, 2026-06-12, MORNING, 5, 0, 0, NORMAL, 2026-06-09 17:04:49.497592, 2026-06-09 17:04:49.497592
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04] from current transaction
+==>  Preparing: UPDATE doctor_schedule SET doctor_id=?, department_id=?, schedule_date=?, time_period=?, total_slots=?, booked_slots=?, extra_slots=?, status=?, create_time=?, update_time=? WHERE id=?
+==> Parameters: 20(Long), 19(Long), 2026-06-12(LocalDate), MORNING(String), 5(Integer), 1(Integer), 0(Integer), NORMAL(String), 2026-06-09T17:04:49.497592(LocalDateTime), 2026-06-09T17:04:49.497592(LocalDateTime), 20(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04]
+2026-06-09T17:04:49.517+08:00  INFO 30284 --- [           main] c.c.a.s.impl.AppointmentServiceImpl      : 预约成功: no=APT20260609170449BCEB23, patient=3001, doctor=20, date=2026-06-12, time=09:00, type=JOINT
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2de5eb04]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@47b7bcb6] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@659954898 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO schedule_slot ( schedule_id, doctor_id, department_id, slot_date, slot_time, slot_no, status, is_extra, version, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 20(Long), 20(Long), 19(Long), 2026-06-12(LocalDate), 09:10(LocalTime), 2(Integer), AVAILABLE(String), 0(Integer), 0(Integer), 2026-06-09T17:04:49.519137500(LocalDateTime), 2026-06-09T17:04:49.519137500(LocalDateTime)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@47b7bcb6]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@73e3831e] was not registered for synchronization because synchronization is not active
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6a68ad39] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@350937668 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: SELECT id,resource_id,resource_type,slot_date,start_time,end_time,capacity,booked_count,status,version,create_time,update_time FROM resource_slot WHERE id=?
+==> Parameters: 19(Long)
+JDBC Connection [HikariProxyConnection@1689214468 wrapping conn28: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO audit_log ( operation, entity_type, entity_id, operator_name, detail, ip, create_time ) VALUES ( ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: BOOK(String), APPOINTMENT(String), 71(Long), (String), {"patientId":3001,"slotId":73,"date":"2026-06-12","time":"09:00","bookingType":"JOINT","examType":"CT_SCAN"}(String), (String), 2026-06-09T17:04:49.520133(LocalDateTime)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 19, 19, ROOM, 2026-06-12, 08:00:00, 12:00:00, 1, 1, FULL, 1, 2026-06-09 17:04:49.500137, 2026-06-09 17:04:49.509162
+<==      Total: 1
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@73e3831e]
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6a68ad39]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6ec2be63] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@2036699109 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: UPDATE resource_slot SET resource_id=?, resource_type=?, slot_date=?, start_time=?, end_time=?, capacity=?, booked_count=?, status=?, version=?, create_time=?, update_time=? WHERE id=? AND version=?
+==> Parameters: 19(Long), ROOM(String), 2026-06-12(LocalDate), 08:00(LocalTime), 12:00(LocalTime), 3(Integer), 1(Integer), AVAILABLE(String), 2(Integer), 2026-06-09T17:04:49.500137(LocalDateTime), 2026-06-09T17:04:49.509162(LocalDateTime), 19(Long), 1(Integer)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6ec2be63]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@16f108a4] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1430925564 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: SELECT id,resource_id,resource_type,slot_date,start_time,end_time,capacity,booked_count,status,version,create_time,update_time FROM resource_slot WHERE id=?
+==> Parameters: 20(Long)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 20, 20, EQUIPMENT, 2026-06-12, 08:00:00, 12:00:00, 1, 1, FULL, 1, 2026-06-09 17:04:49.501021, 2026-06-09 17:04:49.51016
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@16f108a4]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2e00ad90] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@2068780306 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: UPDATE resource_slot SET resource_id=?, resource_type=?, slot_date=?, start_time=?, end_time=?, capacity=?, booked_count=?, status=?, version=?, create_time=?, update_time=? WHERE id=? AND version=?
+==> Parameters: 20(Long), EQUIPMENT(String), 2026-06-12(LocalDate), 08:00(LocalTime), 12:00(LocalTime), 3(Integer), 1(Integer), AVAILABLE(String), 2(Integer), 2026-06-09T17:04:49.501021(LocalDateTime), 2026-06-09T17:04:49.510160(LocalDateTime), 20(Long), 1(Integer)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2e00ad90]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@656586f7] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1638696823 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: SELECT id,resource_id,resource_type,slot_date,start_time,end_time,capacity,booked_count,status,version,create_time,update_time FROM resource_slot WHERE id=?
+==> Parameters: 21(Long)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 21, 21, NURSING, 2026-06-12, 08:00:00, 12:00:00, 1, 1, FULL, 1, 2026-06-09 17:04:49.501526, 2026-06-09 17:04:49.512155
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@656586f7]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4aebdaff] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1225761077 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: UPDATE resource_slot SET resource_id=?, resource_type=?, slot_date=?, start_time=?, end_time=?, capacity=?, booked_count=?, status=?, version=?, create_time=?, update_time=? WHERE id=? AND version=?
+==> Parameters: 21(Long), NURSING(String), 2026-06-12(LocalDate), 08:00(LocalTime), 12:00(LocalTime), 3(Integer), 1(Integer), AVAILABLE(String), 2(Integer), 2026-06-09T17:04:49.501526(LocalDateTime), 2026-06-09T17:04:49.512155(LocalDateTime), 21(Long), 1(Integer)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4aebdaff]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd]
+JDBC Connection [HikariProxyConnection@288256746 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will be managed by Spring
+==>  Preparing: SELECT id,schedule_id,doctor_id,department_id,slot_date,slot_time,slot_no,status,appointment_id,is_extra,version,create_time,update_time FROM schedule_slot WHERE id=?
+==> Parameters: 74(Long)
+<==    Columns: id, schedule_id, doctor_id, department_id, slot_date, slot_time, slot_no, status, appointment_id, is_extra, version, create_time, update_time
+<==        Row: 74, 20, 20, 19, 2026-06-12, 09:10:00, 2, AVAILABLE, null, 0, 0, 2026-06-09 17:04:49.519138, 2026-06-09 17:04:49.519138
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd] from current transaction
+==>  Preparing: SELECT * FROM exam_type WHERE code = ? AND status = 1
+==> Parameters: CT_SCAN(String)
+<==    Columns: id, name, code, need_room, need_equipment, need_nursing, equipment_code, room_code, patient_daily_limit, status, create_time, update_time
+<==        Row: 7, CT扫描, CT_SCAN, 1, 1, 1, null, null, 2, 1, 2026-06-09 17:04:49.502528, 2026-06-09 17:04:49.502528
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd] from current transaction
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd] from current transaction
+==>  Preparing: SELECT COUNT(*) FROM appointment WHERE patient_id = ? AND slot_date = ? AND exam_type_code = ? AND status IN ('PENDING','CONFIRMED')
+==> Parameters: 3001(Long), 2026-06-12(LocalDate), CT_SCAN(String)
+<==    Columns: COUNT(*)
+<==        Row: 1
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd] from current transaction
+==>  Preparing: SELECT rs.* FROM resource_slot rs JOIN resource r ON rs.resource_id = r.id WHERE r.type = ? AND r.status = 1 AND rs.slot_date = ? AND rs.start_time <= ? AND rs.end_time > ? AND rs.status = 'AVAILABLE' AND rs.booked_count < rs.capacity ORDER BY rs.booked_count ASC, rs.start_time
+==> Parameters: ROOM(String), 2026-06-12(LocalDate), 09:10(LocalTime), 09:10(LocalTime)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 19, 19, ROOM, 2026-06-12, 08:00:00, 12:00:00, 3, 1, AVAILABLE, 2, 2026-06-09 17:04:49.500137, 2026-06-09 17:04:49.509162
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd] from current transaction
+==>  Preparing: SELECT rs.* FROM resource_slot rs JOIN resource r ON rs.resource_id = r.id WHERE r.type = ? AND r.status = 1 AND rs.slot_date = ? AND rs.start_time <= ? AND rs.end_time > ? AND rs.status = 'AVAILABLE' AND rs.booked_count < rs.capacity ORDER BY rs.booked_count ASC, rs.start_time
+==> Parameters: EQUIPMENT(String), 2026-06-12(LocalDate), 09:10(LocalTime), 09:10(LocalTime)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 20, 20, EQUIPMENT, 2026-06-12, 08:00:00, 12:00:00, 3, 1, AVAILABLE, 2, 2026-06-09 17:04:49.501021, 2026-06-09 17:04:49.51016
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd] from current transaction
+==>  Preparing: SELECT rs.* FROM resource_slot rs JOIN resource r ON rs.resource_id = r.id WHERE r.type = ? AND r.status = 1 AND rs.slot_date = ? AND rs.start_time <= ? AND rs.end_time > ? AND rs.status = 'AVAILABLE' AND rs.booked_count < rs.capacity ORDER BY rs.booked_count ASC, rs.start_time
+==> Parameters: NURSING(String), 2026-06-12(LocalDate), 09:10(LocalTime), 09:10(LocalTime)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 21, 21, NURSING, 2026-06-12, 08:00:00, 12:00:00, 3, 1, AVAILABLE, 2, 2026-06-09 17:04:49.501526, 2026-06-09 17:04:49.512155
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd] from current transaction
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd] from current transaction
+==>  Preparing: INSERT INTO appointment ( appointment_no, patient_id, patient_name, doctor_id, department_id, slot_id, slot_date, slot_time, status, source, booking_type, exam_type_code, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: APT202606091704490EEB69(String), 3001(Long), 患者C(String), 20(Long), 19(Long), 74(Long), 2026-06-12(LocalDate), 09:10(LocalTime), CONFIRMED(String), ONLINE(String), JOINT(String), CT_SCAN(String), 2026-06-09T17:04:49.529109600(LocalDateTime), 2026-06-09T17:04:49.529109600(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd] from current transaction
+==>  Preparing: UPDATE schedule_slot SET status = 'BOOKED', appointment_id = ?, version = version + 1, update_time = NOW() WHERE id = ? AND status = 'AVAILABLE' AND version = ?
+==> Parameters: 72(Long), 74(Long), 0(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd] from current transaction
+==>  Preparing: SELECT id,resource_id,resource_type,slot_date,start_time,end_time,capacity,booked_count,status,version,create_time,update_time FROM resource_slot WHERE id=?
+==> Parameters: 19(Long)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 19, 19, ROOM, 2026-06-12, 08:00:00, 12:00:00, 3, 1, AVAILABLE, 2, 2026-06-09 17:04:49.500137, 2026-06-09 17:04:49.509162
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd] from current transaction
+==>  Preparing: UPDATE resource_slot SET booked_count = booked_count + 1, status = CASE WHEN booked_count + 1 >= capacity THEN 'FULL' ELSE 'AVAILABLE' END, version = version + 1, update_time = NOW() WHERE id = ? AND booked_count < capacity AND status = 'AVAILABLE' AND version = ?
+==> Parameters: 19(Long), 2(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd] from current transaction
+==>  Preparing: INSERT INTO appointment_resource ( appointment_id, resource_slot_id, resource_id, resource_type, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 72(Long), 19(Long), 19(Long), ROOM(String), BOOKED(String), 2026-06-09T17:04:49.531104100(LocalDateTime), 2026-06-09T17:04:49.531104100(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd]
+2026-06-09T17:04:49.531+08:00  INFO 30284 --- [           main] c.c.a.s.i.ResourceScheduleServiceImpl    : 资源预订成功: appointmentId=72, resourceType=ROOM, resourceSlotId=19
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd] from current transaction
+==>  Preparing: SELECT id,resource_id,resource_type,slot_date,start_time,end_time,capacity,booked_count,status,version,create_time,update_time FROM resource_slot WHERE id=?
+==> Parameters: 20(Long)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 20, 20, EQUIPMENT, 2026-06-12, 08:00:00, 12:00:00, 3, 1, AVAILABLE, 2, 2026-06-09 17:04:49.501021, 2026-06-09 17:04:49.51016
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd] from current transaction
+==>  Preparing: UPDATE resource_slot SET booked_count = booked_count + 1, status = CASE WHEN booked_count + 1 >= capacity THEN 'FULL' ELSE 'AVAILABLE' END, version = version + 1, update_time = NOW() WHERE id = ? AND booked_count < capacity AND status = 'AVAILABLE' AND version = ?
+==> Parameters: 20(Long), 2(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd] from current transaction
+==>  Preparing: INSERT INTO appointment_resource ( appointment_id, resource_slot_id, resource_id, resource_type, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 72(Long), 20(Long), 20(Long), EQUIPMENT(String), BOOKED(String), 2026-06-09T17:04:49.532101300(LocalDateTime), 2026-06-09T17:04:49.532101300(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd]
+2026-06-09T17:04:49.533+08:00  INFO 30284 --- [           main] c.c.a.s.i.ResourceScheduleServiceImpl    : 资源预订成功: appointmentId=72, resourceType=EQUIPMENT, resourceSlotId=20
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd] from current transaction
+==>  Preparing: SELECT id,resource_id,resource_type,slot_date,start_time,end_time,capacity,booked_count,status,version,create_time,update_time FROM resource_slot WHERE id=?
+==> Parameters: 21(Long)
+<==    Columns: id, resource_id, resource_type, slot_date, start_time, end_time, capacity, booked_count, status, version, create_time, update_time
+<==        Row: 21, 21, NURSING, 2026-06-12, 08:00:00, 12:00:00, 3, 1, AVAILABLE, 2, 2026-06-09 17:04:49.501526, 2026-06-09 17:04:49.512155
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd] from current transaction
+==>  Preparing: UPDATE resource_slot SET booked_count = booked_count + 1, status = CASE WHEN booked_count + 1 >= capacity THEN 'FULL' ELSE 'AVAILABLE' END, version = version + 1, update_time = NOW() WHERE id = ? AND booked_count < capacity AND status = 'AVAILABLE' AND version = ?
+==> Parameters: 21(Long), 2(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd] from current transaction
+==>  Preparing: INSERT INTO appointment_resource ( appointment_id, resource_slot_id, resource_id, resource_type, status, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 72(Long), 21(Long), 21(Long), NURSING(String), BOOKED(String), 2026-06-09T17:04:49.534095700(LocalDateTime), 2026-06-09T17:04:49.534095700(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd]
+2026-06-09T17:04:49.534+08:00  INFO 30284 --- [           main] c.c.a.s.i.ResourceScheduleServiceImpl    : 资源预订成功: appointmentId=72, resourceType=NURSING, resourceSlotId=21
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd] from current transaction
+==>  Preparing: SELECT id,doctor_id,department_id,schedule_date,time_period,total_slots,booked_slots,extra_slots,status,create_time,update_time FROM doctor_schedule WHERE id=?
+==> Parameters: 20(Long)
+<==    Columns: id, doctor_id, department_id, schedule_date, time_period, total_slots, booked_slots, extra_slots, status, create_time, update_time
+<==        Row: 20, 20, 19, 2026-06-12, MORNING, 5, 1, 0, NORMAL, 2026-06-09 17:04:49.497592, 2026-06-09 17:04:49.497592
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd] from current transaction
+==>  Preparing: UPDATE doctor_schedule SET doctor_id=?, department_id=?, schedule_date=?, time_period=?, total_slots=?, booked_slots=?, extra_slots=?, status=?, create_time=?, update_time=? WHERE id=?
+==> Parameters: 20(Long), 19(Long), 2026-06-12(LocalDate), MORNING(String), 5(Integer), 2(Integer), 0(Integer), NORMAL(String), 2026-06-09T17:04:49.497592(LocalDateTime), 2026-06-09T17:04:49.497592(LocalDateTime), 20(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd]
+2026-06-09T17:04:49.536+08:00  INFO 30284 --- [           main] c.c.a.s.impl.AppointmentServiceImpl      : 预约成功: no=APT202606091704490EEB69, patient=3001, doctor=20, date=2026-06-12, time=09:10, type=JOINT
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@94d4dd]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2c0ec51f] was not registered for synchronization because synchronization is not active
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@51470a6c] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@583614190 wrapping conn27: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+JDBC Connection [HikariProxyConnection@114593564 wrapping conn28: url=jdbc:h2:mem:clinic_test user=SA] will not be managed by Spring
+==>  Preparing: INSERT INTO audit_log ( operation, entity_type, entity_id, operator_name, detail, ip, create_time ) VALUES ( ?, ?, ?, ?, ?, ?, ? )
+==>  Preparing: INSERT INTO schedule_slot ( schedule_id, doctor_id, department_id, slot_date, slot_time, slot_no, status, is_extra, version, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: BOOK(String), APPOINTMENT(String), 72(Long), (String), {"patientId":3001,"slotId":74,"date":"2026-06-12","time":"09:10","bookingType":"JOINT","examType":"CT_SCAN"}(String), (String), 2026-06-09T17:04:49.536090300(LocalDateTime)
+==> Parameters: 20(Long), 20(Long), 19(Long), 2026-06-12(LocalDate), 09:20(LocalTime), 3(Integer), AVAILABLE(String), 0(Integer), 0(Integer), 2026-06-09T17:04:49.536090300(LocalDateTime), 2026-06-09T17:04:49.536090300(LocalDateTime)
+<==    Updates: 1
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2c0ec51f]
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@51470a6c]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6c6c7ee5]
+JDBC Connection [HikariProxyConnection@656400047 wrapping conn28: url=jdbc:h2:mem:clinic_test user=SA] will be managed by Spring
+==>  Preparing: SELECT id,schedule_id,doctor_id,department_id,slot_date,slot_time,slot_no,status,appointment_id,is_extra,version,create_time,update_time FROM schedule_slot WHERE id=?
+==> Parameters: 75(Long)
+<==    Columns: id, schedule_id, doctor_id, department_id, slot_date, slot_time, slot_no, status, appointment_id, is_extra, version, create_time, update_time
+<==        Row: 75, 20, 20, 19, 2026-06-12, 09:20:00, 3, AVAILABLE, null, 0, 0, 2026-06-09 17:04:49.53609, 2026-06-09 17:04:49.53609
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6c6c7ee5]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6c6c7ee5] from current transaction
+==>  Preparing: SELECT * FROM exam_type WHERE code = ? AND status = 1
+==> Parameters: CT_SCAN(String)
+<==    Columns: id, name, code, need_room, need_equipment, need_nursing, equipment_code, room_code, patient_daily_limit, status, create_time, update_time
+<==        Row: 7, CT扫描, CT_SCAN, 1, 1, 1, null, null, 2, 1, 2026-06-09 17:04:49.502528, 2026-06-09 17:04:49.502528
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6c6c7ee5]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6c6c7ee5] from current transaction
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6c6c7ee5]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6c6c7ee5] from current transaction
+==>  Preparing: SELECT COUNT(*) FROM appointment WHERE patient_id = ? AND slot_date = ? AND exam_type_code = ? AND status IN ('PENDING','CONFIRMED')
+==> Parameters: 3001(Long), 2026-06-12(LocalDate), CT_SCAN(String)
+<==    Columns: COUNT(*)
+<==        Row: 2
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6c6c7ee5]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6c6c7ee5]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6c6c7ee5]
+]]></system-out>
+  </testcase>
+</testsuite>

@@ -87,6 +87,8 @@ CREATE TABLE IF NOT EXISTS appointment (
     slot_time      TIME         NOT NULL,
     status         VARCHAR(20)  NOT NULL DEFAULT 'PENDING',
     source         VARCHAR(20)  NOT NULL DEFAULT 'ONLINE',
+    booking_type   VARCHAR(20)  NOT NULL DEFAULT 'SINGLE',
+    exam_type_code VARCHAR(50)  DEFAULT NULL,
     original_id    BIGINT       DEFAULT NULL,
     cancel_reason  VARCHAR(500) DEFAULT '',
     create_time    TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -101,6 +103,7 @@ CREATE TABLE IF NOT EXISTS waitlist (
     department_id BIGINT      NOT NULL,
     target_date   DATE        NOT NULL,
     time_period   VARCHAR(10) NOT NULL DEFAULT 'MORNING',
+    exam_type_code VARCHAR(50) DEFAULT NULL,
     priority      INT         NOT NULL DEFAULT 0,
     status        VARCHAR(20) NOT NULL DEFAULT 'WAITING',
     appointment_id BIGINT     DEFAULT NULL,
@@ -131,4 +134,58 @@ CREATE TABLE IF NOT EXISTS audit_log (
     detail        TEXT,
     ip            VARCHAR(50)   DEFAULT '',
     create_time   TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS resource (
+    id            BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name          VARCHAR(100)  NOT NULL,
+    code          VARCHAR(50)   NOT NULL,
+    type          VARCHAR(20)   NOT NULL,
+    department_id BIGINT        DEFAULT NULL,
+    capacity      INT           NOT NULL DEFAULT 1,
+    description   VARCHAR(500)  DEFAULT '',
+    status        TINYINT       NOT NULL DEFAULT 1,
+    create_time   TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    update_time   TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS resource_slot (
+    id             BIGINT AUTO_INCREMENT PRIMARY KEY,
+    resource_id    BIGINT       NOT NULL,
+    resource_type  VARCHAR(20)  NOT NULL,
+    slot_date      DATE         NOT NULL,
+    start_time     TIME         NOT NULL,
+    end_time       TIME         NOT NULL,
+    capacity       INT          NOT NULL DEFAULT 1,
+    booked_count   INT          NOT NULL DEFAULT 0,
+    status         VARCHAR(20)  NOT NULL DEFAULT 'AVAILABLE',
+    version        INT          NOT NULL DEFAULT 0,
+    create_time    TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    update_time    TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS exam_type (
+    id                  BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name                VARCHAR(100)  NOT NULL,
+    code                VARCHAR(50)   NOT NULL,
+    need_room           TINYINT       NOT NULL DEFAULT 0,
+    need_equipment      TINYINT       NOT NULL DEFAULT 0,
+    need_nursing        TINYINT       NOT NULL DEFAULT 0,
+    equipment_code      VARCHAR(50)   DEFAULT NULL,
+    room_code           VARCHAR(50)   DEFAULT NULL,
+    patient_daily_limit INT           DEFAULT NULL,
+    status              TINYINT       NOT NULL DEFAULT 1,
+    create_time         TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    update_time         TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS appointment_resource (
+    id               BIGINT AUTO_INCREMENT PRIMARY KEY,
+    appointment_id   BIGINT       NOT NULL,
+    resource_slot_id BIGINT       NOT NULL,
+    resource_id      BIGINT       NOT NULL,
+    resource_type    VARCHAR(20)  NOT NULL,
+    status           VARCHAR(20)  NOT NULL DEFAULT 'BOOKED',
+    create_time      TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    update_time      TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP
 );

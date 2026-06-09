@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.TimeUnit;
@@ -13,6 +14,7 @@ import java.util.function.Supplier;
 
 @Slf4j
 @Service
+@Profile("!test")
 @RequiredArgsConstructor
 public class RedisLockServiceImpl implements RedisLockService {
 

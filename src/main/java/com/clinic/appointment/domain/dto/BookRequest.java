@@ -10,4 +10,8 @@ public class BookRequest {
     private String patientName;
     @NotNull(message = "号源ID不能为空")
     private Long slotId;
+    private String examTypeCode;
+    private Long roomResourceSlotId;
+    private Long equipmentResourceSlotId;
+    private Long nursingResourceSlotId;
 }

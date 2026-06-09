@@ -13,6 +13,7 @@ import com.clinic.appointment.mapper.WaitlistMapper;
 import com.clinic.appointment.service.AppointmentService;
 import com.clinic.appointment.service.AuditService;
 import com.clinic.appointment.service.RedisLockService;
+import com.clinic.appointment.service.ResourceScheduleService;
 import com.clinic.appointment.service.WaitlistService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -39,6 +40,10 @@ public class WaitlistServiceImpl implements WaitlistService {
     @Autowired
     @Lazy
     private AppointmentService appointmentService;
+
+    @Autowired
+    @Lazy
+    private ResourceScheduleService resourceScheduleService;
 
     private static final int MAX_WAITLIST_SIZE = 20;
 
@@ -72,6 +77,7 @@ public class WaitlistServiceImpl implements WaitlistService {
         waitlist.setDepartmentId(request.getDepartmentId());
         waitlist.setTargetDate(request.getTargetDate());
         waitlist.setTimePeriod(request.getTimePeriod());
+        waitlist.setExamTypeCode(request.getExamTypeCode());
         waitlist.setStatus("WAITING");
         // 候补有效期：目标日期的前一天晚上23:59过期
         waitlist.setExpireTime(request.getTargetDate().minusDays(1).atTime(23, 59, 59));
@@ -114,8 +120,13 @@ public class WaitlistServiceImpl implements WaitlistService {
     public void triggerBackfill(Long doctorId, LocalDate slotDate, LocalTime slotTime) {
         String lockKey = "lock:backfill:" + doctorId + ":" + slotDate;
         lockService.executeWithLock(lockKey, () -> {
-            // 1. 查找释放后可用的号源
+            // 1. 查找释放后可用的号源（如果指定了时间，只匹配该时间点）
             List<ScheduleSlot> available = slotMapper.findAvailable(doctorId, slotDate);
+            if (slotTime != null) {
+                available = available.stream()
+                        .filter(s -> s.getSlotTime().equals(slotTime))
+                        .toList();
+            }
             if (available.isEmpty()) {
                 log.debug("无可补位号源: doctor={}, date={}", doctorId, slotDate);
                 return null;
@@ -136,11 +147,23 @@ public class WaitlistServiceImpl implements WaitlistService {
                 ScheduleSlot targetSlot = available.get(filled);
 
                 try {
+                    // 联合预约候补：先校验资源可用性
+                    if (waiter.getExamTypeCode() != null) {
+                        boolean resourcesAvailable = resourceScheduleService.checkResourceAvailability(
+                                waiter.getExamTypeCode(), targetSlot.getSlotDate(), targetSlot.getSlotTime());
+                        if (!resourcesAvailable) {
+                            log.info("资源不可用，跳过候补补位: waitlistId={}, examType={}",
+                                    waiter.getId(), waiter.getExamTypeCode());
+                            break;
+                        }
+                    }
+
                     // 创建预约
                     BookRequest bookReq = new BookRequest();
                     bookReq.setPatientId(waiter.getPatientId());
                     bookReq.setPatientName(waiter.getPatientName());
                     bookReq.setSlotId(targetSlot.getId());
+                    bookReq.setExamTypeCode(waiter.getExamTypeCode());
 
                     Appointment appointment = appointmentService.book(bookReq);
 

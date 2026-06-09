@@ -108,6 +108,8 @@ CREATE TABLE IF NOT EXISTS appointment (
     status         VARCHAR(20)  NOT NULL DEFAULT 'PENDING'
             COMMENT 'PENDING/CONFIRMED/CANCELLED/RESCHEDULED/CHECKED_IN/MISSED',
     source         VARCHAR(20)  NOT NULL DEFAULT 'ONLINE' COMMENT 'ONLINE/WINDOW/WAITLIST',
+    booking_type   VARCHAR(20)  NOT NULL DEFAULT 'SINGLE' COMMENT 'SINGLE/JOINT',
+    exam_type_code VARCHAR(50)  DEFAULT NULL COMMENT '检查类型编码(JOINT时必填)',
     original_id    BIGINT       DEFAULT NULL COMMENT '改签时指向原预约ID',
     cancel_reason  VARCHAR(500) DEFAULT '' COMMENT '取消原因',
     create_time    DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -128,6 +130,7 @@ CREATE TABLE IF NOT EXISTS waitlist (
     department_id BIGINT      NOT NULL,
     target_date   DATE        NOT NULL,
     time_period   VARCHAR(10) NOT NULL DEFAULT 'MORNING' COMMENT '期望时段',
+    exam_type_code VARCHAR(50) DEFAULT NULL COMMENT '检查类型编码(联合预约候补)',
     priority      INT         NOT NULL DEFAULT 0 COMMENT '优先级(越小越高)',
     status        VARCHAR(20) NOT NULL DEFAULT 'WAITING' COMMENT 'WAITING/FULFILLED/EXPIRED/CANCELLED',
     appointment_id BIGINT     DEFAULT NULL COMMENT '补位成功的预约ID',
@@ -154,7 +157,76 @@ CREATE TABLE IF NOT EXISTS doctor_suspension (
     INDEX idx_status (status)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='医生停诊';
 
--- 10. 审计日志表
+-- 10. 资源表（诊室/设备/护理）
+CREATE TABLE IF NOT EXISTS resource (
+    id            BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name          VARCHAR(100)  NOT NULL COMMENT '资源名称',
+    code          VARCHAR(50)   NOT NULL COMMENT '资源编码',
+    type          VARCHAR(20)   NOT NULL COMMENT 'ROOM/EQUIPMENT/NURSING',
+    department_id BIGINT        DEFAULT NULL COMMENT '所属科室(NULL表示全院共享)',
+    capacity      INT           NOT NULL DEFAULT 1 COMMENT '并发容量',
+    description   VARCHAR(500)  DEFAULT '' COMMENT '描述',
+    status        TINYINT       NOT NULL DEFAULT 1 COMMENT '1-启用 0-停用',
+    create_time   DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    update_time   DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE KEY uk_code (code),
+    INDEX idx_type (type),
+    INDEX idx_dept (department_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='资源(诊室/设备/护理)';
+
+-- 11. 资源时段表（CAS保护）
+CREATE TABLE IF NOT EXISTS resource_slot (
+    id             BIGINT AUTO_INCREMENT PRIMARY KEY,
+    resource_id    BIGINT       NOT NULL COMMENT '资源ID',
+    resource_type  VARCHAR(20)  NOT NULL COMMENT 'ROOM/EQUIPMENT/NURSING',
+    slot_date      DATE         NOT NULL COMMENT '日期',
+    start_time     TIME         NOT NULL COMMENT '开始时间',
+    end_time       TIME         NOT NULL COMMENT '结束时间',
+    capacity       INT          NOT NULL DEFAULT 1 COMMENT '此时段最大并发数',
+    booked_count   INT          NOT NULL DEFAULT 0 COMMENT '已预约数',
+    status         VARCHAR(20)  NOT NULL DEFAULT 'AVAILABLE'
+                   COMMENT 'AVAILABLE/FULL/DISABLED/MAINTENANCE',
+    version        INT          NOT NULL DEFAULT 0 COMMENT '乐观锁版本',
+    create_time    DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    update_time    DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_resource_date (resource_id, slot_date),
+    INDEX idx_type_date (resource_type, slot_date),
+    INDEX idx_status (status)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='资源时段(CAS保护)';
+
+-- 12. 检查类型表（定义资源需求）
+CREATE TABLE IF NOT EXISTS exam_type (
+    id                  BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name                VARCHAR(100)  NOT NULL COMMENT '检查类型名称',
+    code                VARCHAR(50)   NOT NULL COMMENT '类型编码',
+    need_room           TINYINT       NOT NULL DEFAULT 0 COMMENT '是否需要诊室',
+    need_equipment      TINYINT       NOT NULL DEFAULT 0 COMMENT '是否需要设备',
+    need_nursing        TINYINT       NOT NULL DEFAULT 0 COMMENT '是否需要护理',
+    equipment_code      VARCHAR(50)   DEFAULT NULL COMMENT '指定设备编码(NULL=任意)',
+    room_code           VARCHAR(50)   DEFAULT NULL COMMENT '指定诊室编码(NULL=任意)',
+    patient_daily_limit INT           DEFAULT NULL COMMENT '患者每日此类检查上限',
+    status              TINYINT       NOT NULL DEFAULT 1 COMMENT '1-启用 0-停用',
+    create_time         DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    update_time         DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE KEY uk_code (code)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='检查类型定义';
+
+-- 13. 预约-资源关联表
+CREATE TABLE IF NOT EXISTS appointment_resource (
+    id               BIGINT AUTO_INCREMENT PRIMARY KEY,
+    appointment_id   BIGINT       NOT NULL COMMENT '预约ID',
+    resource_slot_id BIGINT       NOT NULL COMMENT '资源时段ID',
+    resource_id      BIGINT       NOT NULL COMMENT '资源ID',
+    resource_type    VARCHAR(20)  NOT NULL COMMENT 'ROOM/EQUIPMENT/NURSING',
+    status           VARCHAR(20)  NOT NULL DEFAULT 'BOOKED' COMMENT 'BOOKED/RELEASED',
+    create_time      DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    update_time      DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_appointment (appointment_id),
+    INDEX idx_resource_slot (resource_slot_id),
+    INDEX idx_resource (resource_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='预约-资源关联';
+
+-- 14. 审计日志表
 CREATE TABLE IF NOT EXISTS audit_log (
     id            BIGINT AUTO_INCREMENT PRIMARY KEY,
     operation     VARCHAR(50)   NOT NULL COMMENT '操作类型',

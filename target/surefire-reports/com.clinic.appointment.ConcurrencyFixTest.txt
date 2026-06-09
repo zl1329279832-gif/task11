@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.clinic.appointment.ConcurrencyFixTest
+-------------------------------------------------------------------------------
+Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 14.51 s -- in com.clinic.appointment.ConcurrencyFixTest

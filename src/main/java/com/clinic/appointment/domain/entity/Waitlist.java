@@ -17,6 +17,7 @@ public class Waitlist {
     private Long departmentId;
     private LocalDate targetDate;
     private String timePeriod;
+    private String examTypeCode;
     private Integer priority;
     private String status;
     private Long appointmentId;

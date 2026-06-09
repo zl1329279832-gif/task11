@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.clinic.appointment.WaitlistBackfillTest
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.063 s -- in com.clinic.appointment.WaitlistBackfillTest

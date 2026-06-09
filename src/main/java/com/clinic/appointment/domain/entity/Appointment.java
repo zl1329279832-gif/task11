@@ -22,6 +22,8 @@ public class Appointment {
     private LocalTime slotTime;
     private String status;
     private String source;
+    private String bookingType;
+    private String examTypeCode;
     private Long originalId;
     private String cancelReason;
     @TableField(fill = FieldFill.INSERT)

@@ -17,4 +17,5 @@ public class WaitlistRequest {
     @NotNull(message = "目标日期不能为空")
     private LocalDate targetDate;
     private String timePeriod = "MORNING";
+    private String examTypeCode;
 }
