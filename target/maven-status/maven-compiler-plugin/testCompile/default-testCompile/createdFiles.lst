@@ -8,6 +8,7 @@ com\clinic\appointment\SuspensionMigrationTest.class
 com\clinic\appointment\ConcurrencyFixTest$1.class
 com\clinic\appointment\JointWaitlistBackfillTest.class
 com\clinic\appointment\EquipmentDeactivationTest.class
+com\clinic\appointment\MultiResourceRollbackTest.class
 com\clinic\appointment\ConcurrencyBookingTest.class
 com\clinic\appointment\ConcurrencyFixTest$2.class
 com\clinic\appointment\ConcurrencyFixTest$3.class

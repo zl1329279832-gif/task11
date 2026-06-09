@@ -40,6 +40,7 @@ public class MultiResourceBookingServiceImpl implements MultiResourceBookingServ
     private final DoctorScheduleMapper scheduleMapper;
     private final ResourceAvailabilityMapper resourceAvailabilityMapper;
     private final AppointmentResourceMapper appointmentResourceMapper;
+    private final EquipmentMapper equipmentMapper;
     private final RedisLockService lockService;
     private final AuditService auditService;
 
@@ -161,6 +162,15 @@ public class MultiResourceBookingServiceImpl implements MultiResourceBookingServ
         }
 
         String status = appointment.getStatus();
+
+        // 幂等处理：已取消或已改签的预约直接返回
+        if (AppointmentStatus.CANCELLED.name().equals(status) ||
+            AppointmentStatus.RESCHEDULED.name().equals(status) ||
+            AppointmentStatus.MISSED.name().equals(status)) {
+            log.info("联合取消幂等处理: no={}, status={}", appointment.getAppointmentNo(), status);
+            return appointment;
+        }
+
         if (!AppointmentStatus.PENDING.name().equals(status) &&
             !AppointmentStatus.CONFIRMED.name().equals(status)) {
             throw BusinessException.invalidStatusTransition(status, "CANCELLED");
@@ -194,6 +204,15 @@ public class MultiResourceBookingServiceImpl implements MultiResourceBookingServ
             throw BusinessException.appointmentNotFound();
         }
         String freshStatus = freshAppt.getStatus();
+
+        // 幂等处理：锁内再次检查是否已被其他操作取消
+        if (AppointmentStatus.CANCELLED.name().equals(freshStatus) ||
+            AppointmentStatus.RESCHEDULED.name().equals(freshStatus) ||
+            AppointmentStatus.MISSED.name().equals(freshStatus)) {
+            log.info("联合取消幂等处理(锁内): no={}, status={}", freshAppt.getAppointmentNo(), freshStatus);
+            return freshAppt;
+        }
+
         if (!AppointmentStatus.PENDING.name().equals(freshStatus) &&
             !AppointmentStatus.CONFIRMED.name().equals(freshStatus)) {
             throw BusinessException.invalidStatusTransition(freshStatus, "CANCELLED");
@@ -289,10 +308,22 @@ public class MultiResourceBookingServiceImpl implements MultiResourceBookingServ
         // 旧资源
         List<AppointmentResource> oldResources = appointmentResourceMapper.findByAppointment(original.getId());
 
+        // 推导设备检查类型（从原预约的设备资源反查）
+        String resolvedExamType = null;
+        for (AppointmentResource ar : oldResources) {
+            if (ResourceType.EQUIPMENT.name().equals(ar.getResourceType())) {
+                Equipment equip = equipmentMapper.selectById(ar.getResourceId());
+                if (equip != null) {
+                    resolvedExamType = equip.getEquipmentType();
+                }
+                break;
+            }
+        }
+
         // 新资源候选
         ResourceCandidates newCandidates = resolveCandidates(
                 newSlot.getDepartmentId(), newSlot.getSlotDate(), newSlot.getSlotTime(),
-                null, request.getPreferredRoomId(),
+                resolvedExamType, request.getPreferredRoomId(),
                 request.getPreferredEquipmentId(), request.getPreferredNursingStaffId());
 
         // 构建联合锁集合（旧+新，去重排序）
@@ -326,17 +357,32 @@ public class MultiResourceBookingServiceImpl implements MultiResourceBookingServ
         recheckResource(newCandidates.equipment);
         recheckResource(newCandidates.nursing);
 
-        // 2. 释放旧号源
+        // 2. 释放旧号源（校验CAS结果）
         ScheduleSlot oldSlot = slotMapper.selectById(original.getSlotId());
-        if (oldSlot != null) {
-            slotMapper.casRelease(oldSlot.getId(), oldSlot.getVersion());
+        if (oldSlot != null && SlotStatus.BOOKED.name().equals(oldSlot.getStatus())) {
+            int slotReleased = slotMapper.casRelease(oldSlot.getId(), oldSlot.getVersion());
+            if (slotReleased == 0) {
+                log.error("改约释放旧号源CAS失败: slotId={}, version={}", oldSlot.getId(), oldSlot.getVersion());
+                throw BusinessException.of("SLOT_RELEASE_FAILED", "改约释放旧号源失败，请重试");
+            }
+            DoctorSchedule schedule = scheduleMapper.selectById(oldSlot.getScheduleId());
+            if (schedule != null && schedule.getBookedSlots() > 0) {
+                schedule.setBookedSlots(schedule.getBookedSlots() - 1);
+                scheduleMapper.updateById(schedule);
+            }
         }
 
-        // 3. 释放旧资源
+        // 3. 释放旧资源（校验CAS结果）
         for (AppointmentResource ar : oldResources) {
             ResourceAvailability avail = resourceAvailabilityMapper.selectById(ar.getAvailabilityId());
             if (avail != null && ResourceStatus.BOOKED.name().equals(avail.getStatus())) {
-                resourceAvailabilityMapper.casRelease(avail.getId(), avail.getVersion());
+                int released = resourceAvailabilityMapper.casRelease(avail.getId(), avail.getVersion());
+                if (released == 0) {
+                    log.error("改约释放旧资源CAS失败: type={}, availabilityId={}, version={}",
+                            ar.getResourceType(), ar.getAvailabilityId(), avail.getVersion());
+                    throw BusinessException.of("RESOURCE_RELEASE_FAILED",
+                            "改约释放" + ar.getResourceType() + "失败，请重试");
+                }
             }
         }
 
@@ -461,6 +507,11 @@ public class MultiResourceBookingServiceImpl implements MultiResourceBookingServ
         if (equipment == null) {
             throw BusinessException.resourceUnavailable("设备");
         }
+        // 设备必须为ACTIVE状态（防止停用设备窗口仍被选中）
+        Equipment equipEntity = equipmentMapper.selectById(equipment.getResourceId());
+        if (equipEntity == null || !"ACTIVE".equals(equipEntity.getStatus())) {
+            throw BusinessException.resourceUnavailable("设备");
+        }
 
         // 护理
         ResourceAvailability nursing;
@@ -501,7 +552,8 @@ public class MultiResourceBookingServiceImpl implements MultiResourceBookingServ
         if (index >= sortedKeys.size()) {
             return action.get();
         }
-        return lockService.executeWithLock(sortedKeys.get(index), 5, 30, TimeUnit.SECONDS,
+        // 租期需覆盖嵌套深度 × 等待时间 + 执行余量，防止外层锁超时自动释放
+        return lockService.executeWithLock(sortedKeys.get(index), 5, 120, TimeUnit.SECONDS,
                 () -> acquireResourceLocks(sortedKeys, index + 1, action));
     }
 

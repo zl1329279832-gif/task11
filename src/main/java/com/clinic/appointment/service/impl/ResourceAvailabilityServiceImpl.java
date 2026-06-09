@@ -6,15 +6,11 @@ import com.clinic.appointment.domain.enums.ResourceStatus;
 import com.clinic.appointment.domain.enums.ResourceType;
 import com.clinic.appointment.mapper.*;
 import com.clinic.appointment.service.AuditService;
-import com.clinic.appointment.service.MultiResourceBookingService;
 import com.clinic.appointment.service.RedisLockService;
 import com.clinic.appointment.service.ResourceAvailabilityService;
-import com.clinic.appointment.domain.dto.CancelRequest;
 import com.clinic.appointment.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,10 +34,6 @@ public class ResourceAvailabilityServiceImpl implements ResourceAvailabilityServ
     private final DoctorScheduleMapper scheduleMapper;
     private final RedisLockService lockService;
     private final AuditService auditService;
-
-    @Autowired
-    @Lazy
-    private MultiResourceBookingService multiResourceBookingService;
 
     // 默认时段配置
     private static final Map<String, LocalTime[]> TIME_PERIODS = Map.of(
@@ -134,7 +126,7 @@ public class ResourceAvailabilityServiceImpl implements ResourceAvailabilityServ
             int cancelledCount = 0;
             List<Long> cancelledAppointmentIds = new ArrayList<>();
 
-            // 3. 逐一取消受影响的预约
+            // 3. 逐一取消受影响的预约（内联取消逻辑，避免嵌套jointCancel锁冲突）
             for (ResourceAvailability window : bookedWindows) {
                 if (window.getAppointmentId() == null) continue;
 
@@ -142,29 +134,43 @@ public class ResourceAvailabilityServiceImpl implements ResourceAvailabilityServ
                 Appointment appt = appointmentMapper.selectById(appointmentId);
                 if (appt == null) continue;
 
-                try {
-                    if ("EXAM".equals(appt.getAppointmentType())) {
-                        // 联合预约：通过jointCancel释放所有资源
-                        CancelRequest cancelReq = new CancelRequest();
-                        cancelReq.setAppointmentId(appointmentId);
-                        cancelReq.setReason("设备停用: " + (request.getReason() != null ? request.getReason() : ""));
-                        multiResourceBookingService.jointCancel(cancelReq);
-                    } else {
-                        // 普通预约：直接取消
-                        appt.setStatus("CANCELLED");
-                        appt.setCancelReason("设备停用: " + (request.getReason() != null ? request.getReason() : ""));
-                        appointmentMapper.updateById(appt);
+                // 幂等：已终态的预约跳过
+                String apptStatus = appt.getStatus();
+                if ("CANCELLED".equals(apptStatus) || "RESCHEDULED".equals(apptStatus) ||
+                    "MISSED".equals(apptStatus)) {
+                    continue;
+                }
 
-                        ScheduleSlot slot = slotMapper.selectById(appt.getSlotId());
-                        if (slot != null) {
-                            slotMapper.casRelease(slot.getId(), slot.getVersion());
-                            DoctorSchedule schedule = scheduleMapper.selectById(slot.getScheduleId());
-                            if (schedule != null && schedule.getBookedSlots() > 0) {
-                                schedule.setBookedSlots(schedule.getBookedSlots() - 1);
-                                scheduleMapper.updateById(schedule);
-                            }
+                try {
+                    // 标记预约为取消
+                    appt.setStatus("CANCELLED");
+                    appt.setCancelReason("设备停用: " + (request.getReason() != null ? request.getReason() : ""));
+                    appointmentMapper.updateById(appt);
+
+                    // 释放号源
+                    ScheduleSlot slot = slotMapper.selectById(appt.getSlotId());
+                    if (slot != null && "BOOKED".equals(slot.getStatus())) {
+                        slotMapper.casRelease(slot.getId(), slot.getVersion());
+                        DoctorSchedule schedule = scheduleMapper.selectById(slot.getScheduleId());
+                        if (schedule != null && schedule.getBookedSlots() > 0) {
+                            schedule.setBookedSlots(schedule.getBookedSlots() - 1);
+                            scheduleMapper.updateById(schedule);
                         }
                     }
+
+                    // 释放联合预约的所有关联资源窗口
+                    if ("EXAM".equals(appt.getAppointmentType())) {
+                        List<AppointmentResource> apptResources =
+                                appointmentResourceMapper.findByAppointment(appointmentId);
+                        for (AppointmentResource ar : apptResources) {
+                            ResourceAvailability avail = resourceAvailabilityMapper.selectById(ar.getAvailabilityId());
+                            if (avail != null && "BOOKED".equals(avail.getStatus())) {
+                                resourceAvailabilityMapper.casRelease(avail.getId(), avail.getVersion());
+                            }
+                        }
+                        appointmentResourceMapper.deleteByAppointment(appointmentId);
+                    }
+
                     cancelledAppointmentIds.add(appointmentId);
                     cancelledCount++;
                 } catch (Exception e) {

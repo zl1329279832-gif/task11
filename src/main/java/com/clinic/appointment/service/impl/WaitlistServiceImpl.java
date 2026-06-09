@@ -193,9 +193,17 @@ public class WaitlistServiceImpl implements WaitlistService {
                         filled++;
                     }
                 } catch (Exception e) {
-                    log.error("候补补位失败，停止当前轮次以维护FIFO顺序: waitlistId={}, patient={}, error={}",
+                    // 资源全局不可用 → 停止补位（后续候补者同样无法满足）
+                    // 患者级别失败（如每日上限、并发冲突） → 跳过当前候补者继续
+                    if (e instanceof BusinessException be &&
+                        ("RESOURCE_UNAVAILABLE".equals(be.getCode()) ||
+                         "SLOT_NOT_AVAILABLE".equals(be.getCode()))) {
+                        log.warn("候补补位资源不可用，停止当前轮次: waitlistId={}, error={}",
+                                waiter.getId(), e.getMessage());
+                        break;
+                    }
+                    log.warn("候补补位患者级失败，跳过继续: waitlistId={}, patientId={}, error={}",
                             waiter.getId(), waiter.getPatientId(), e.getMessage());
-                    break;
                 }
             }
 
