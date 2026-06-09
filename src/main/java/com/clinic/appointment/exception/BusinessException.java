@@ -47,4 +47,20 @@ public class BusinessException extends RuntimeException {
     public static BusinessException waitlistFull() {
         return new BusinessException("WAITLIST_FULL", "候补队列已满");
     }
+
+    public static BusinessException resourceUnavailable(String resourceType) {
+        return new BusinessException("RESOURCE_UNAVAILABLE", resourceType + " 不可用或已被占用");
+    }
+
+    public static BusinessException resourceCasFailed(String resourceType) {
+        return new BusinessException("RESOURCE_CAS_FAILED", resourceType + " 锁定失败（并发冲突），请重试");
+    }
+
+    public static BusinessException patientLimitExceeded(int max) {
+        return new BusinessException("PATIENT_LIMIT_EXCEEDED", "患者当日预约数已达上限(" + max + ")");
+    }
+
+    public static BusinessException notJointAppointment() {
+        return new BusinessException("NOT_JOINT_APPOINTMENT", "非联合预约不可使用联合操作");
+    }
 }

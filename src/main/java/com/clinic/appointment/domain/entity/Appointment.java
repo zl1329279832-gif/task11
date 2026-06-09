@@ -24,6 +24,7 @@ public class Appointment {
     private String source;
     private Long originalId;
     private String cancelReason;
+    private String appointmentType;
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
     @TableField(fill = FieldFill.INSERT_UPDATE)

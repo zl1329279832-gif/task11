@@ -2,6 +2,8 @@ package com.clinic.appointment.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.clinic.appointment.domain.dto.BookRequest;
+import com.clinic.appointment.domain.dto.JointBookRequest;
+import com.clinic.appointment.domain.dto.JointBookingResult;
 import com.clinic.appointment.domain.dto.WaitlistRequest;
 import com.clinic.appointment.domain.entity.Appointment;
 import com.clinic.appointment.domain.entity.ScheduleSlot;
@@ -12,6 +14,7 @@ import com.clinic.appointment.mapper.ScheduleSlotMapper;
 import com.clinic.appointment.mapper.WaitlistMapper;
 import com.clinic.appointment.service.AppointmentService;
 import com.clinic.appointment.service.AuditService;
+import com.clinic.appointment.service.MultiResourceBookingService;
 import com.clinic.appointment.service.RedisLockService;
 import com.clinic.appointment.service.WaitlistService;
 import lombok.RequiredArgsConstructor;
@@ -39,6 +42,10 @@ public class WaitlistServiceImpl implements WaitlistService {
     @Autowired
     @Lazy
     private AppointmentService appointmentService;
+
+    @Autowired
+    @Lazy
+    private MultiResourceBookingService multiResourceBookingService;
 
     private static final int MAX_WAITLIST_SIZE = 20;
 
@@ -73,6 +80,8 @@ public class WaitlistServiceImpl implements WaitlistService {
         waitlist.setTargetDate(request.getTargetDate());
         waitlist.setTimePeriod(request.getTimePeriod());
         waitlist.setStatus("WAITING");
+        waitlist.setAppointmentType(request.getAppointmentType() != null ? request.getAppointmentType() : "NORMAL");
+        waitlist.setExamType(request.getExamType());
         // 候补有效期：目标日期的前一天晚上23:59过期
         waitlist.setExpireTime(request.getTargetDate().minusDays(1).atTime(23, 59, 59));
         waitlistMapper.insert(waitlist);
@@ -136,34 +145,56 @@ public class WaitlistServiceImpl implements WaitlistService {
                 ScheduleSlot targetSlot = available.get(filled);
 
                 try {
-                    // 创建预约
-                    BookRequest bookReq = new BookRequest();
-                    bookReq.setPatientId(waiter.getPatientId());
-                    bookReq.setPatientName(waiter.getPatientName());
-                    bookReq.setSlotId(targetSlot.getId());
+                    if ("EXAM".equals(waiter.getAppointmentType())) {
+                        // 联合预约候补补位：需要同时锁定多资源
+                        JointBookRequest jointReq = new JointBookRequest();
+                        jointReq.setPatientId(waiter.getPatientId());
+                        jointReq.setPatientName(waiter.getPatientName());
+                        jointReq.setSlotId(targetSlot.getId());
+                        jointReq.setExamType(waiter.getExamType());
 
-                    Appointment appointment = appointmentService.book(bookReq);
+                        JointBookingResult result = multiResourceBookingService.jointBook(jointReq);
 
-                    // 更新候补状态
-                    waiter.setStatus("FULFILLED");
-                    waiter.setAppointmentId(appointment.getId());
-                    waitlistMapper.updateById(waiter);
+                        waiter.setStatus("FULFILLED");
+                        waiter.setAppointmentId(result.getAppointment().getId());
+                        waitlistMapper.updateById(waiter);
 
-                    auditService.log("WAITLIST_BACKFILL", "APPOINTMENT", appointment.getId(),
-                            String.format("{\"waitlistId\":%d,\"patientId\":%d,\"slotId\":%d}",
-                                    waiter.getId(), waiter.getPatientId(), targetSlot.getId()));
+                        auditService.log("WAITLIST_BACKFILL_JOINT", "APPOINTMENT",
+                                result.getAppointment().getId(),
+                                String.format("{\"waitlistId\":%d,\"patientId\":%d,\"slotId\":%d}",
+                                        waiter.getId(), waiter.getPatientId(), targetSlot.getId()));
 
-                    log.info("候补补位成功: waitlistId={}, patient={}, appointment={}, slot={}",
-                            waiter.getId(), waiter.getPatientId(),
-                            appointment.getAppointmentNo(), targetSlot.getId());
+                        log.info("联合候补补位成功: waitlistId={}, patient={}, appointment={}",
+                                waiter.getId(), waiter.getPatientId(),
+                                result.getAppointment().getAppointmentNo());
 
-                    filled++;
+                        filled++;
+                    } else {
+                        // 普通预约候补补位
+                        BookRequest bookReq = new BookRequest();
+                        bookReq.setPatientId(waiter.getPatientId());
+                        bookReq.setPatientName(waiter.getPatientName());
+                        bookReq.setSlotId(targetSlot.getId());
+
+                        Appointment appointment = appointmentService.book(bookReq);
+
+                        waiter.setStatus("FULFILLED");
+                        waiter.setAppointmentId(appointment.getId());
+                        waitlistMapper.updateById(waiter);
+
+                        auditService.log("WAITLIST_BACKFILL", "APPOINTMENT", appointment.getId(),
+                                String.format("{\"waitlistId\":%d,\"patientId\":%d,\"slotId\":%d}",
+                                        waiter.getId(), waiter.getPatientId(), targetSlot.getId()));
+
+                        log.info("候补补位成功: waitlistId={}, patient={}, appointment={}, slot={}",
+                                waiter.getId(), waiter.getPatientId(),
+                                appointment.getAppointmentNo(), targetSlot.getId());
+
+                        filled++;
+                    }
                 } catch (Exception e) {
                     log.error("候补补位失败，停止当前轮次以维护FIFO顺序: waitlistId={}, patient={}, error={}",
                             waiter.getId(), waiter.getPatientId(), e.getMessage());
-                    // 严格FIFO：如果当前候补患者补位失败，停止本轮补位，
-                    // 不跳到下一位（否则违反先进先出原则）。
-                    // 下次定时补偿任务会重试。
                     break;
                 }
             }

@@ -3,6 +3,7 @@ package com.clinic.appointment.controller;
 import com.clinic.appointment.domain.dto.*;
 import com.clinic.appointment.domain.entity.Appointment;
 import com.clinic.appointment.service.AppointmentService;
+import com.clinic.appointment.service.MultiResourceBookingService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import java.util.List;
 public class AppointmentController {
 
     private final AppointmentService appointmentService;
+    private final MultiResourceBookingService multiResourceBookingService;
 
     /** 预约挂号 */
     @PostMapping("/book")
@@ -64,5 +66,23 @@ public class AppointmentController {
     public ApiResponse<List<Appointment>> getByDoctorAndDate(
             @PathVariable Long doctorId, @PathVariable LocalDate date) {
         return ApiResponse.ok(appointmentService.getByDoctorAndDate(doctorId, date));
+    }
+
+    /** 联合预约（检查型门诊） */
+    @PostMapping("/joint-book")
+    public ApiResponse<JointBookingResult> jointBook(@Valid @RequestBody JointBookRequest request) {
+        return ApiResponse.ok(multiResourceBookingService.jointBook(request));
+    }
+
+    /** 联合取消 */
+    @PostMapping("/joint-cancel")
+    public ApiResponse<Appointment> jointCancel(@Valid @RequestBody CancelRequest request) {
+        return ApiResponse.ok(multiResourceBookingService.jointCancel(request));
+    }
+
+    /** 联合改约 */
+    @PostMapping("/joint-reschedule")
+    public ApiResponse<JointBookingResult> jointReschedule(@Valid @RequestBody JointRescheduleRequest request) {
+        return ApiResponse.ok(multiResourceBookingService.jointReschedule(request));
     }
 }

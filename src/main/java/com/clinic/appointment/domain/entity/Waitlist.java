@@ -21,6 +21,8 @@ public class Waitlist {
     private String status;
     private Long appointmentId;
     private LocalDateTime expireTime;
+    private String appointmentType;
+    private String examType;
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
     @TableField(fill = FieldFill.INSERT_UPDATE)

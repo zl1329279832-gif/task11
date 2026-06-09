@@ -25,4 +25,8 @@ public interface AppointmentMapper extends BaseMapper<Appointment> {
     @Select("SELECT * FROM appointment WHERE patient_id = #{patientId} " +
             "AND status IN ('PENDING','CONFIRMED') ORDER BY slot_date, slot_time")
     List<Appointment> findActiveByPatient(@Param("patientId") Long patientId);
+
+    @Select("SELECT COUNT(*) FROM appointment WHERE patient_id = #{patientId} " +
+            "AND slot_date = #{date} AND status IN ('PENDING','CONFIRMED')")
+    long countByPatientAndDate(@Param("patientId") Long patientId, @Param("date") LocalDate date);
 }

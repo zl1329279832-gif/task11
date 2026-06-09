@@ -89,6 +89,7 @@ CREATE TABLE IF NOT EXISTS appointment (
     source         VARCHAR(20)  NOT NULL DEFAULT 'ONLINE',
     original_id    BIGINT       DEFAULT NULL,
     cancel_reason  VARCHAR(500) DEFAULT '',
+    appointment_type VARCHAR(20) NOT NULL DEFAULT 'NORMAL',
     create_time    TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
     update_time    TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
@@ -105,6 +106,8 @@ CREATE TABLE IF NOT EXISTS waitlist (
     status        VARCHAR(20) NOT NULL DEFAULT 'WAITING',
     appointment_id BIGINT     DEFAULT NULL,
     expire_time   TIMESTAMP   DEFAULT NULL,
+    appointment_type VARCHAR(20) NOT NULL DEFAULT 'NORMAL',
+    exam_type     VARCHAR(50) DEFAULT NULL,
     create_time   TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP,
     update_time   TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
@@ -131,4 +134,65 @@ CREATE TABLE IF NOT EXISTS audit_log (
     detail        TEXT,
     ip            VARCHAR(50)   DEFAULT '',
     create_time   TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+-- ================================================================
+-- 多资源联合预约相关表
+-- ================================================================
+
+CREATE TABLE IF NOT EXISTS exam_room (
+    id            BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name          VARCHAR(100)  NOT NULL,
+    code          VARCHAR(50)   NOT NULL,
+    department_id BIGINT        NOT NULL,
+    location      VARCHAR(200)  DEFAULT '',
+    status        VARCHAR(20)   NOT NULL DEFAULT 'ACTIVE',
+    create_time   TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    update_time   TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS equipment (
+    id             BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name           VARCHAR(100)  NOT NULL,
+    code           VARCHAR(50)   NOT NULL,
+    equipment_type VARCHAR(50)   NOT NULL,
+    department_id  BIGINT        NOT NULL,
+    exam_room_id   BIGINT        DEFAULT NULL,
+    status         VARCHAR(20)   NOT NULL DEFAULT 'ACTIVE',
+    create_time    TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    update_time    TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS nursing_staff (
+    id            BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name          VARCHAR(50)   NOT NULL,
+    employee_no   VARCHAR(50)   NOT NULL,
+    department_id BIGINT        NOT NULL,
+    qualification VARCHAR(50)   DEFAULT '',
+    status        TINYINT       NOT NULL DEFAULT 1,
+    create_time   TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    update_time   TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS resource_availability (
+    id             BIGINT AUTO_INCREMENT PRIMARY KEY,
+    resource_type  VARCHAR(30)   NOT NULL,
+    resource_id    BIGINT        NOT NULL,
+    avail_date     DATE          NOT NULL,
+    start_time     TIME          NOT NULL,
+    end_time       TIME          NOT NULL,
+    status         VARCHAR(20)   NOT NULL DEFAULT 'AVAILABLE',
+    appointment_id BIGINT        DEFAULT NULL,
+    version        INT           NOT NULL DEFAULT 0,
+    create_time    TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    update_time    TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS appointment_resource (
+    id              BIGINT AUTO_INCREMENT PRIMARY KEY,
+    appointment_id  BIGINT       NOT NULL,
+    resource_type   VARCHAR(30)  NOT NULL,
+    resource_id     BIGINT       NOT NULL,
+    availability_id BIGINT       NOT NULL,
+    create_time     TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP
 );

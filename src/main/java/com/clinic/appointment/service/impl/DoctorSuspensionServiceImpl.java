@@ -1,11 +1,13 @@
 package com.clinic.appointment.service.impl;
 
+import com.clinic.appointment.domain.dto.CancelRequest;
 import com.clinic.appointment.domain.dto.SuspendRequest;
 import com.clinic.appointment.domain.entity.*;
 import com.clinic.appointment.domain.enums.SlotStatus;
 import com.clinic.appointment.mapper.*;
 import com.clinic.appointment.service.AuditService;
 import com.clinic.appointment.service.DoctorSuspensionService;
+import com.clinic.appointment.service.MultiResourceBookingService;
 import com.clinic.appointment.service.RedisLockService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +30,10 @@ public class DoctorSuspensionServiceImpl implements DoctorSuspensionService {
     private final AppointmentMapper appointmentMapper;
     private final RedisLockService lockService;
     private final AuditService auditService;
+
+    @org.springframework.beans.factory.annotation.Autowired
+    @org.springframework.context.annotation.Lazy
+    private MultiResourceBookingService multiResourceBookingService;
 
     @Override
     @Transactional
@@ -92,10 +98,27 @@ public class DoctorSuspensionServiceImpl implements DoctorSuspensionService {
                     // ── 取消模式：直接取消预约（号源已SUSPENDED，无需释放） ──
                     String reason = "医生停诊: " + suspension.getReason();
                     for (Appointment appt : affected) {
-                        appt.setStatus("CANCELLED");
-                        appt.setCancelReason(reason);
-                        appointmentMapper.updateById(appt);
-                        cancelledCount++;
+                        if ("EXAM".equals(appt.getAppointmentType())) {
+                            // 联合预约需要通过jointCancel释放所有资源
+                            try {
+                                CancelRequest cancelReq = new CancelRequest();
+                                cancelReq.setAppointmentId(appt.getId());
+                                cancelReq.setReason(reason);
+                                multiResourceBookingService.jointCancel(cancelReq);
+                                cancelledCount++;
+                            } catch (Exception e) {
+                                log.error("联合预约取消失败: appointmentId={}, error={}", appt.getId(), e.getMessage());
+                                appt.setStatus("CANCELLED");
+                                appt.setCancelReason(reason);
+                                appointmentMapper.updateById(appt);
+                                cancelledCount++;
+                            }
+                        } else {
+                            appt.setStatus("CANCELLED");
+                            appt.setCancelReason(reason);
+                            appointmentMapper.updateById(appt);
+                            cancelledCount++;
+                        }
                     }
                     details.add(String.format("取消%d个预约", cancelledCount));
 
