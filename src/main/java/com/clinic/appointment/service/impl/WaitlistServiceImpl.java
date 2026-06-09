@@ -72,11 +72,14 @@ public class WaitlistServiceImpl implements WaitlistService {
         waitlist.setDepartmentId(request.getDepartmentId());
         waitlist.setTargetDate(request.getTargetDate());
         waitlist.setTimePeriod(request.getTimePeriod());
-        waitlist.setPriority((int) count); // 序号作为优先级
         waitlist.setStatus("WAITING");
         // 候补有效期：目标日期的前一天晚上23:59过期
         waitlist.setExpireTime(request.getTargetDate().minusDays(1).atTime(23, 59, 59));
         waitlistMapper.insert(waitlist);
+
+        // 使用自增ID作为优先级，保证严格FIFO（AUTO_INCREMENT保证唯一递增）
+        waitlist.setPriority(waitlist.getId().intValue());
+        waitlistMapper.updateById(waitlist);
 
         auditService.log("JOIN_WAITLIST", "WAITLIST", waitlist.getId(),
                 String.format("{\"patientId\":%d,\"doctorId\":%d,\"date\":\"%s\"}",
@@ -118,14 +121,14 @@ public class WaitlistServiceImpl implements WaitlistService {
                 return null;
             }
 
-            // 2. 获取候补队列（按优先级排序）
+            // 2. 获取候补队列（按优先级即ID排序，严格FIFO）
             List<Waitlist> waitingList = waitlistMapper.findWaiting(doctorId, slotDate);
             if (waitingList.isEmpty()) {
                 log.debug("无候补患者: doctor={}, date={}", doctorId, slotDate);
                 return null;
             }
 
-            // 3. 逐一补位
+            // 3. 严格按顺序逐一补位
             int filled = 0;
             for (Waitlist waiter : waitingList) {
                 if (available.size() <= filled) break;
@@ -156,9 +159,12 @@ public class WaitlistServiceImpl implements WaitlistService {
 
                     filled++;
                 } catch (Exception e) {
-                    log.error("候补补位失败: waitlistId={}, patient={}, error={}",
+                    log.error("候补补位失败，停止当前轮次以维护FIFO顺序: waitlistId={}, patient={}, error={}",
                             waiter.getId(), waiter.getPatientId(), e.getMessage());
-                    // 跳过该患者，继续处理下一个
+                    // 严格FIFO：如果当前候补患者补位失败，停止本轮补位，
+                    // 不跳到下一位（否则违反先进先出原则）。
+                    // 下次定时补偿任务会重试。
+                    break;
                 }
             }
 

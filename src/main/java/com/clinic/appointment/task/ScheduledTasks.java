@@ -2,10 +2,12 @@ package com.clinic.appointment.task;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.clinic.appointment.domain.entity.Appointment;
+import com.clinic.appointment.domain.entity.DoctorSuspension;
 import com.clinic.appointment.domain.entity.ScheduleSlot;
 import com.clinic.appointment.domain.enums.AppointmentStatus;
 import com.clinic.appointment.domain.enums.SlotStatus;
 import com.clinic.appointment.mapper.AppointmentMapper;
+import com.clinic.appointment.mapper.DoctorSuspensionMapper;
 import com.clinic.appointment.mapper.ScheduleSlotMapper;
 import com.clinic.appointment.service.WaitlistService;
 import lombok.RequiredArgsConstructor;
@@ -31,10 +33,12 @@ public class ScheduledTasks {
 
     private final ScheduleSlotMapper slotMapper;
     private final AppointmentMapper appointmentMapper;
+    private final DoctorSuspensionMapper suspensionMapper;
     private final WaitlistService waitlistService;
 
     /**
      * 每小时：清理过期号源（当天已过时间的AVAILABLE号源标记为EXPIRED）
+     * 注意：不会清理SUSPENDED状态的号源（停诊号源不可被重新释放）
      */
     @Scheduled(cron = "0 0 * * * ?")
     public void expireSlots() {
@@ -105,13 +109,18 @@ public class ScheduledTasks {
     /**
      * 每15分钟：候补补位补偿任务
      * 扫描当前有可用号源且有候补队列的情况，触发补位
+     *
+     * 安全保证：
+     * - 只扫描AVAILABLE状态的号源（SUSPENDED号源不会被扫描到）
+     * - 触发补位前检查是否有活跃停诊记录
+     * - 补位操作会尝试获取backfill锁，若停诊正在处理中则会阻塞/跳过
      */
     @Scheduled(cron = "0 */15 * * * ?")
     public void waitlistBackfillCompensation() {
         LocalDate today = LocalDate.now();
         LocalDate endDate = today.plusDays(7);
 
-        // 查找未来7天内状态为AVAILABLE的号源，按doctor+date分组
+        // 只查找AVAILABLE状态的号源（SUSPENDED/RELEASED/EXPIRED不会被选中）
         LambdaQueryWrapper<ScheduleSlot> qw = new LambdaQueryWrapper<>();
         qw.eq(ScheduleSlot::getStatus, SlotStatus.AVAILABLE.name())
           .ge(ScheduleSlot::getSlotDate, today)
@@ -126,6 +135,16 @@ public class ScheduledTasks {
                 .forEach((key, slots) -> {
                     Long doctorId = slots.get(0).getDoctorId();
                     LocalDate date = slots.get(0).getSlotDate();
+
+                    // ── 安全检查：跳过有活跃停诊的医生+日期 ──
+                    DoctorSuspension suspension = suspensionMapper
+                            .findActiveByDoctorAndDate(doctorId, date);
+                    if (suspension != null) {
+                        log.debug("跳过停诊医生的候补补位: doctor={}, date={}, suspensionId={}",
+                                doctorId, date, suspension.getId());
+                        return;
+                    }
+
                     try {
                         waitlistService.triggerBackfill(doctorId, date, null);
                     } catch (Exception e) {

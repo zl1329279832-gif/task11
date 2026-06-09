@@ -13,20 +13,20 @@ import java.util.List;
 public interface WaitlistMapper extends BaseMapper<Waitlist> {
 
     /**
-     * 查找指定医生、日期的候补队列（按优先级+创建时间排序）
+     * 查找指定医生、日期的候补队列（按ID升序 = 严格FIFO进入顺序）
      */
     @Select("SELECT * FROM waitlist WHERE doctor_id = #{doctorId} " +
             "AND target_date = #{targetDate} AND status = 'WAITING' " +
-            "ORDER BY priority ASC, create_time ASC")
+            "ORDER BY id ASC")
     List<Waitlist> findWaiting(@Param("doctorId") Long doctorId,
                                 @Param("targetDate") LocalDate targetDate);
 
     /**
-     * 查找指定科室、日期的候补队列（用于停诊迁移后匹配新医生）
+     * 查找指定科室、日期的候补队列（按ID升序 = 严格FIFO）
      */
     @Select("SELECT * FROM waitlist WHERE department_id = #{deptId} " +
             "AND target_date = #{targetDate} AND status = 'WAITING' " +
-            "ORDER BY priority ASC, create_time ASC")
+            "ORDER BY id ASC")
     List<Waitlist> findWaitingByDept(@Param("deptId") Long deptId,
                                       @Param("targetDate") LocalDate targetDate);
 }

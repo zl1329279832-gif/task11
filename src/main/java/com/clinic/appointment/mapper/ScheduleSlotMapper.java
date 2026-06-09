@@ -24,12 +24,20 @@ public interface ScheduleSlotMapper extends BaseMapper<ScheduleSlot> {
                 @Param("version") Integer version);
 
     /**
-     * 原子CAS释放号源
+     * 原子CAS释放号源（回到AVAILABLE）
      */
     @Update("UPDATE schedule_slot SET status = 'AVAILABLE', appointment_id = NULL, " +
             "version = version + 1, update_time = NOW() " +
             "WHERE id = #{slotId} AND status = 'BOOKED' AND version = #{version}")
     int casRelease(@Param("slotId") Long slotId, @Param("version") Integer version);
+
+    /**
+     * 原子CAS将号源标记为SUSPENDED（停诊，终态，不可被重新预约）
+     */
+    @Update("UPDATE schedule_slot SET status = 'SUSPENDED', appointment_id = NULL, " +
+            "version = version + 1, update_time = NOW() " +
+            "WHERE id = #{slotId} AND status IN ('BOOKED','AVAILABLE') AND version = #{version}")
+    int casSuspend(@Param("slotId") Long slotId, @Param("version") Integer version);
 
     /**
      * 查找某日某医生可用号源
@@ -40,7 +48,17 @@ public interface ScheduleSlotMapper extends BaseMapper<ScheduleSlot> {
                                       @Param("slotDate") LocalDate slotDate);
 
     /**
-     * 批量释放某医生指定日期范围的号源
+     * 批量将某医生指定日期范围内的AVAILABLE和BOOKED号源标记为SUSPENDED（停诊专用）
+     */
+    @Update("UPDATE schedule_slot SET status = 'SUSPENDED', update_time = NOW(), version = version + 1 " +
+            "WHERE doctor_id = #{doctorId} AND slot_date BETWEEN #{start} AND #{end} " +
+            "AND status IN ('AVAILABLE','BOOKED')")
+    int batchSuspend(@Param("doctorId") Long doctorId,
+                     @Param("start") LocalDate start,
+                     @Param("end") LocalDate end);
+
+    /**
+     * 批量释放某医生指定日期范围的AVAILABLE号源（已废弃，停诊请用batchSuspend）
      */
     @Update("UPDATE schedule_slot SET status = 'RELEASED', update_time = NOW(), version = version + 1 " +
             "WHERE doctor_id = #{doctorId} AND slot_date BETWEEN #{start} AND #{end} " +

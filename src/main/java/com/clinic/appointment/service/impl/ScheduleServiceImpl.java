@@ -66,6 +66,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         for (LocalDate date = start; !date.isAfter(end); date = date.plusDays(1)) {
             // 映射日期到 dayOfWeek (1=Mon..7=Sun)
             int dow = date.getDayOfWeek().getValue();
+            final LocalDate currentDate = date;
 
             for (ScheduleTemplate template : templates) {
                 if (template.getDayOfWeek() != dow) continue;
@@ -73,11 +74,11 @@ public class ScheduleServiceImpl implements ScheduleService {
                 // 检查是否已存在该排班
                 boolean exists = existing.stream().anyMatch(e ->
                         e.getDoctorId().equals(doctorId) &&
-                        e.getScheduleDate().equals(date) &&
+                        e.getScheduleDate().equals(currentDate) &&
                         e.getTimePeriod().equals(template.getTimePeriod()));
                 if (exists) continue;
 
-                boolean isHoliday = holidayDates.contains(date);
+                boolean isHoliday = holidayDates.contains(currentDate);
 
                 // 创建日排班
                 DoctorSchedule schedule = new DoctorSchedule();

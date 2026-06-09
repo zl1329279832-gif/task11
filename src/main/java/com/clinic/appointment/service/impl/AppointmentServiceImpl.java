@@ -22,6 +22,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronization;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -120,18 +122,35 @@ public class AppointmentServiceImpl implements AppointmentService {
             throw BusinessException.invalidStatusTransition(status, "CANCELLED");
         }
 
-        // 分布式锁保护
-        String lockKey = "lock:appointment:" + appointment.getId();
+        // 分布式锁保护：使用slot粒度锁，与book()保持一致，防止同一号源被并发操作
+        String lockKey = "lock:slot:" + appointment.getSlotId();
         return lockService.executeWithLock(lockKey, () -> {
-            // 更新预约状态
-            appointment.setStatus(AppointmentStatus.CANCELLED.name());
-            appointment.setCancelReason(request.getReason() != null ? request.getReason() : "");
-            appointmentMapper.updateById(appointment);
+            // 锁内重新校验预约状态（防止并发取消）
+            Appointment freshAppt = appointmentMapper.selectById(request.getAppointmentId());
+            if (freshAppt == null) {
+                throw BusinessException.appointmentNotFound();
+            }
+            String freshStatus = freshAppt.getStatus();
+            if (!AppointmentStatus.PENDING.name().equals(freshStatus) &&
+                !AppointmentStatus.CONFIRMED.name().equals(freshStatus)) {
+                throw BusinessException.invalidStatusTransition(freshStatus, "CANCELLED");
+            }
 
-            // 释放号源
-            ScheduleSlot slot = slotMapper.selectById(appointment.getSlotId());
-            if (slot != null) {
-                slotMapper.casRelease(slot.getId(), slot.getVersion());
+            // 重新读取号源（锁内）
+            ScheduleSlot slot = slotMapper.selectById(freshAppt.getSlotId());
+
+            // 更新预约状态
+            freshAppt.setStatus(AppointmentStatus.CANCELLED.name());
+            freshAppt.setCancelReason(request.getReason() != null ? request.getReason() : "");
+            appointmentMapper.updateById(freshAppt);
+
+            // 释放号源并检查返回值
+            if (slot != null && SlotStatus.BOOKED.name().equals(slot.getStatus())) {
+                int released = slotMapper.casRelease(slot.getId(), slot.getVersion());
+                if (released == 0) {
+                    throw BusinessException.of("SLOT_RELEASE_FAILED",
+                            "号源释放失败（已被其他操作修改），请重试");
+                }
 
                 // 更新排班已预约数
                 DoctorSchedule schedule = scheduleMapper.selectById(slot.getScheduleId());
@@ -141,20 +160,32 @@ public class AppointmentServiceImpl implements AppointmentService {
                 }
             }
 
-            auditService.log("CANCEL", "APPOINTMENT", appointment.getId(),
+            auditService.log("CANCEL", "APPOINTMENT", freshAppt.getId(),
                     String.format("{\"reason\":\"%s\"}", request.getReason()));
 
-            log.info("取消预约: no={}, reason={}", appointment.getAppointmentNo(), request.getReason());
+            log.info("取消预约: no={}, reason={}", freshAppt.getAppointmentNo(), request.getReason());
 
-            // 异步触发候补补位
-            try {
-                waitlistService.triggerBackfill(appointment.getDoctorId(),
-                        appointment.getSlotDate(), appointment.getSlotTime());
-            } catch (Exception e) {
-                log.error("候补补位触发失败，将由定时任务补偿: {}", e.getMessage());
+            // 事务提交后再触发候补补位，避免：
+            // 1. 补位事务嵌套导致号源状态不可见
+            // 2. 补位抢锁与当前cancel锁冲突
+            // 3. 补位失败回滚整个cancel事务
+            final Long doctorId = freshAppt.getDoctorId();
+            final LocalDate slotDate = freshAppt.getSlotDate();
+            final java.time.LocalTime slotTime = freshAppt.getSlotTime();
+            if (TransactionSynchronizationManager.isActualTransactionActive()) {
+                TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
+                    @Override
+                    public void afterCommit() {
+                        try {
+                            waitlistService.triggerBackfill(doctorId, slotDate, slotTime);
+                        } catch (Exception e) {
+                            log.error("候补补位触发失败，将由定时任务补偿: {}", e.getMessage());
+                        }
+                    }
+                });
             }
 
-            return appointment;
+            return freshAppt;
         });
     }
 
@@ -232,12 +263,21 @@ public class AppointmentServiceImpl implements AppointmentService {
                         original.getAppointmentNo(), newAppointment.getAppointmentNo(),
                         original.getPatientId());
 
-                // 旧号源释放后触发候补
-                try {
-                    waitlistService.triggerBackfill(original.getDoctorId(),
-                            original.getSlotDate(), original.getSlotTime());
-                } catch (Exception e) {
-                    log.error("改签后候补补位触发失败: {}", e.getMessage());
+                // 事务提交后触发旧号源的候补补位
+                final Long oldDoctorId = original.getDoctorId();
+                final LocalDate oldDate = original.getSlotDate();
+                final java.time.LocalTime oldTime = original.getSlotTime();
+                if (TransactionSynchronizationManager.isActualTransactionActive()) {
+                    TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
+                        @Override
+                        public void afterCommit() {
+                            try {
+                                waitlistService.triggerBackfill(oldDoctorId, oldDate, oldTime);
+                            } catch (Exception e) {
+                                log.error("改签后候补补位触发失败: {}", e.getMessage());
+                            }
+                        }
+                    });
                 }
 
                 return newAppointment;

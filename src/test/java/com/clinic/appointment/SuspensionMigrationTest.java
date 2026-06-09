@@ -1,5 +1,6 @@
 package com.clinic.appointment;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.clinic.appointment.domain.dto.BookRequest;
 import com.clinic.appointment.domain.dto.SuspendRequest;
 import com.clinic.appointment.domain.entity.*;
@@ -167,10 +168,16 @@ public class SuspensionMigrationTest {
             assertEquals(doctorBId, a.getDoctorId(), "新预约医生应为B");
         }
 
-        // 验证医生A的号源已释放
-        List<ScheduleSlot> slotsA = slotMapper.findAvailable(doctorAId, targetDate);
-        // 所有号源应为RELEASED状态（batchRelease已执行）
-        assertEquals(5, slotsA.size(), "医生A的所有号源应被释放为AVAILABLE（然后被batchRelease为RELEASED）");
+        // 验证医生A的号源已释放为SUSPENDED状态
+        LambdaQueryWrapper<ScheduleSlot> slotQw = new LambdaQueryWrapper<>();
+        slotQw.eq(ScheduleSlot::getDoctorId, doctorAId)
+              .eq(ScheduleSlot::getSlotDate, targetDate);
+        List<ScheduleSlot> slotsA = slotMapper.selectList(slotQw);
+        // 所有号源应为SUSPENDED状态
+        for (ScheduleSlot s : slotsA) {
+            assertEquals(SlotStatus.SUSPENDED.name(), s.getStatus(),
+                    "停诊后号源应为SUSPENDED");
+        }
     }
 
     @Test
