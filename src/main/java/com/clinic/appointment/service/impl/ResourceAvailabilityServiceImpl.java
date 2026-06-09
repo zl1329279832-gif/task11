@@ -172,7 +172,15 @@ public class ResourceAvailabilityServiceImpl implements ResourceAvailabilityServ
                 }
             }
 
-            // 4. 更新设备状态
+            // 4. 再次封锁因取消预约而释放回AVAILABLE的窗口
+            int reblocked = resourceAvailabilityMapper.batchBlock(
+                    ResourceType.EQUIPMENT.name(), equipmentId, effectiveDate);
+            if (reblocked > 0) {
+                log.info("设备停用-二次封锁释放窗口: equipmentId={}, reblocked={}", equipmentId, reblocked);
+                blocked += reblocked;
+            }
+
+            // 5. 更新设备状态
             equipment.setStatus("INACTIVE");
             equipmentMapper.updateById(equipment);
 

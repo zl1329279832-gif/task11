@@ -254,7 +254,7 @@ public class JointWaitlistBackfillTest {
         normalWlReq.setTargetDate(tomorrow);
         normalWlReq.setTimePeriod("MORNING");
         normalWlReq.setAppointmentType("NORMAL");
-        waitlistService.join(normalWlReq);
+        Waitlist normalWaitlist = waitlistService.join(normalWlReq);
 
         // 加入EXAM类型候补
         WaitlistRequest examWlReq = new WaitlistRequest();
@@ -266,7 +266,7 @@ public class JointWaitlistBackfillTest {
         examWlReq.setTimePeriod("MORNING");
         examWlReq.setAppointmentType("EXAM");
         examWlReq.setExamType("CT");
-        waitlistService.join(examWlReq);
+        Waitlist examWaitlist = waitlistService.join(examWlReq);
 
         // 手动释放slot1来模拟取消后触发backfill
         ScheduleSlot freshSlot1 = slotMapper.selectById(slot1.getId());
@@ -278,18 +278,16 @@ public class JointWaitlistBackfillTest {
         waitlistService.triggerBackfill(testDoctorId, tomorrow, LocalTime.of(9, 0));
 
         // 验证：NORMAL候补应成功补位（FIFO顺序第一个）
-        List<Waitlist> allWaitlists = waitlistService.getWaitingByDoctorAndDate(testDoctorId, tomorrow);
-        Waitlist normalWl = allWaitlists.stream()
-                .filter(w -> w.getPatientId().equals(10006L)).findFirst().orElse(null);
+        Waitlist normalWl = waitlistMapper.selectById(normalWaitlist.getId());
         assertNotNull(normalWl);
         assertEquals("FULFILLED", normalWl.getStatus(), "NORMAL候补应补位成功");
 
         // EXAM候补可能仍是WAITING（因为普通backfill只处理了slot1释放的一个号源）
         // 或者也可能FULFILLED（如果slot2也被处理了）
+        Waitlist examWl = waitlistMapper.selectById(examWaitlist.getId());
         log.info("混合候补测试结果: normalWl={}, examWl={}",
                 normalWl.getStatus(),
-                allWaitlists.stream().filter(w -> w.getPatientId().equals(10007L))
-                        .findFirst().map(Waitlist::getStatus).orElse("unknown"));
+                examWl != null ? examWl.getStatus() : "unknown");
     }
 
     private ScheduleSlot createSlot(int no, LocalTime time) {

@@ -10,6 +10,7 @@ com\clinic\appointment\domain\entity\DoctorSchedule.class
 com\clinic\appointment\mapper\WaitlistMapper.class
 com\clinic\appointment\domain\dto\EquipmentDeactivateRequest.class
 com\clinic\appointment\controller\ResourceController.class
+com\clinic\appointment\config\MybatisPlusConfig.class
 com\clinic\appointment\mapper\DoctorSuspensionMapper.class
 com\clinic\appointment\controller\SuspensionController.class
 com\clinic\appointment\domain\entity\Department.class
@@ -52,6 +53,7 @@ com\clinic\appointment\domain\dto\SuspendRequest.class
 com\clinic\appointment\domain\dto\CancelRequest.class
 com\clinic\appointment\domain\entity\Equipment.class
 com\clinic\appointment\service\AppointmentService.class
+com\clinic\appointment\config\MyBatisPlusAutoFillHandler.class
 com\clinic\appointment\domain\entity\AppointmentResource.class
 com\clinic\appointment\service\WaitlistService.class
 com\clinic\appointment\domain\dto\RescheduleRequest.class

@@ -40,6 +40,7 @@ public class MultiResourceBookingServiceImpl implements MultiResourceBookingServ
     private final DoctorScheduleMapper scheduleMapper;
     private final ResourceAvailabilityMapper resourceAvailabilityMapper;
     private final AppointmentResourceMapper appointmentResourceMapper;
+    private final EquipmentMapper equipmentMapper;
     private final RedisLockService lockService;
     private final AuditService auditService;
 
@@ -91,6 +92,9 @@ public class MultiResourceBookingServiceImpl implements MultiResourceBookingServ
         recheckResource(candidates.room);
         recheckResource(candidates.equipment);
         recheckResource(candidates.nursing);
+
+        // 1.5 锁内重新校验患者当日预约数（防止并发突破上限）
+        validatePatientLimits(request.getPatientId(), freshSlot.getSlotDate());
 
         // 2. 创建预约记录
         Appointment appointment = new Appointment();
@@ -161,6 +165,11 @@ public class MultiResourceBookingServiceImpl implements MultiResourceBookingServ
         }
 
         String status = appointment.getStatus();
+        // 幂等：已取消的预约直接返回
+        if (AppointmentStatus.CANCELLED.name().equals(status)) {
+            log.info("联合预约已取消，幂等返回(预检查): id={}", appointment.getId());
+            return appointment;
+        }
         if (!AppointmentStatus.PENDING.name().equals(status) &&
             !AppointmentStatus.CONFIRMED.name().equals(status)) {
             throw BusinessException.invalidStatusTransition(status, "CANCELLED");
@@ -194,6 +203,11 @@ public class MultiResourceBookingServiceImpl implements MultiResourceBookingServ
             throw BusinessException.appointmentNotFound();
         }
         String freshStatus = freshAppt.getStatus();
+        // 幂等：已取消的预约直接返回，不抛异常
+        if (AppointmentStatus.CANCELLED.name().equals(freshStatus)) {
+            log.info("联合预约已取消，幂等返回: id={}", freshAppt.getId());
+            return freshAppt;
+        }
         if (!AppointmentStatus.PENDING.name().equals(freshStatus) &&
             !AppointmentStatus.CONFIRMED.name().equals(freshStatus)) {
             throw BusinessException.invalidStatusTransition(freshStatus, "CANCELLED");
@@ -289,11 +303,27 @@ public class MultiResourceBookingServiceImpl implements MultiResourceBookingServ
         // 旧资源
         List<AppointmentResource> oldResources = appointmentResourceMapper.findByAppointment(original.getId());
 
+        // 改约时从原资源推导 preferred（如果请求未指定）
+        Long preferredRoomId = request.getPreferredRoomId();
+        Long preferredEquipmentId = request.getPreferredEquipmentId();
+        Long preferredNursingId = request.getPreferredNursingStaffId();
+        for (AppointmentResource ar : oldResources) {
+            if (preferredRoomId == null && ResourceType.EXAM_ROOM.name().equals(ar.getResourceType())) {
+                preferredRoomId = ar.getResourceId();
+            }
+            if (preferredEquipmentId == null && ResourceType.EQUIPMENT.name().equals(ar.getResourceType())) {
+                preferredEquipmentId = ar.getResourceId();
+            }
+            if (preferredNursingId == null && ResourceType.NURSING_STAFF.name().equals(ar.getResourceType())) {
+                preferredNursingId = ar.getResourceId();
+            }
+        }
+
         // 新资源候选
         ResourceCandidates newCandidates = resolveCandidates(
                 newSlot.getDepartmentId(), newSlot.getSlotDate(), newSlot.getSlotTime(),
-                null, request.getPreferredRoomId(),
-                request.getPreferredEquipmentId(), request.getPreferredNursingStaffId());
+                null, preferredRoomId,
+                preferredEquipmentId, preferredNursingId);
 
         // 构建联合锁集合（旧+新，去重排序）
         Set<String> lockKeySet = new TreeSet<>();
@@ -326,17 +356,23 @@ public class MultiResourceBookingServiceImpl implements MultiResourceBookingServ
         recheckResource(newCandidates.equipment);
         recheckResource(newCandidates.nursing);
 
-        // 2. 释放旧号源
+        // 2. 释放旧号源（检查返回值，失败则回滚）
         ScheduleSlot oldSlot = slotMapper.selectById(original.getSlotId());
-        if (oldSlot != null) {
-            slotMapper.casRelease(oldSlot.getId(), oldSlot.getVersion());
+        if (oldSlot != null && SlotStatus.BOOKED.name().equals(oldSlot.getStatus())) {
+            int released = slotMapper.casRelease(oldSlot.getId(), oldSlot.getVersion());
+            if (released == 0) {
+                throw BusinessException.of("SLOT_RELEASE_FAILED", "旧号源释放失败，请重试");
+            }
         }
 
-        // 3. 释放旧资源
+        // 3. 释放旧资源（检查返回值，失败则回滚）
         for (AppointmentResource ar : oldResources) {
             ResourceAvailability avail = resourceAvailabilityMapper.selectById(ar.getAvailabilityId());
             if (avail != null && ResourceStatus.BOOKED.name().equals(avail.getStatus())) {
-                resourceAvailabilityMapper.casRelease(avail.getId(), avail.getVersion());
+                int released = resourceAvailabilityMapper.casRelease(avail.getId(), avail.getVersion());
+                if (released == 0) {
+                    throw BusinessException.resourceCasFailed(ar.getResourceType());
+                }
             }
         }
 
@@ -445,6 +481,11 @@ public class MultiResourceBookingServiceImpl implements MultiResourceBookingServ
         // 设备
         ResourceAvailability equipment;
         if (preferredEquipmentId != null) {
+            // 校验指定设备是否处于激活状态（防止命中已停用设备）
+            Equipment preferredEquip = equipmentMapper.selectById(preferredEquipmentId);
+            if (preferredEquip == null || !"ACTIVE".equals(preferredEquip.getStatus())) {
+                throw BusinessException.resourceUnavailable("设备");
+            }
             List<ResourceAvailability> windows = resourceAvailabilityMapper.findAvailableWindow(
                     ResourceType.EQUIPMENT.name(), preferredEquipmentId, date, time);
             equipment = windows.isEmpty() ? null : windows.get(0);

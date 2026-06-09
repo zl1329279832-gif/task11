@@ -191,19 +191,21 @@ public class ConcurrentMultiResourceBookingTest {
         ScheduleSlot freshSlot = slotMapper.selectById(slot.getId());
         assertEquals(SlotStatus.BOOKED.name(), freshSlot.getStatus());
 
-        // 验证资源窗口状态
-        List<ResourceAvailability> bookedResources = resourceAvailabilityMapper
-                .findBookedFrom(ResourceType.EXAM_ROOM.name(), 0L, tomorrow.minusDays(1));
-        // 至少有诊室窗口被BOOKED
-        assertTrue(bookedResources.stream().anyMatch(r ->
-                ResourceStatus.BOOKED.name().equals(r.getStatus())), "诊室窗口应被预约");
-
         // 验证关联记录
         List<Appointment> appointments = appointmentMapper.findByDoctorAndDate(testDoctorId, tomorrow);
         assertEquals(1, appointments.size());
         List<AppointmentResource> resources = appointmentResourceMapper.findByAppointment(
                 appointments.get(0).getId());
         assertEquals(3, resources.size(), "应有3条资源关联记录（诊室+设备+护理）");
+
+        // 验证资源窗口状态 - 从关联记录获取实际resourceId
+        Long roomResourceId = resources.stream()
+                .filter(r -> ResourceType.EXAM_ROOM.name().equals(r.getResourceType()))
+                .findFirst().map(AppointmentResource::getResourceId).orElseThrow();
+        List<ResourceAvailability> bookedResources = resourceAvailabilityMapper
+                .findBookedFrom(ResourceType.EXAM_ROOM.name(), roomResourceId, tomorrow.minusDays(1));
+        assertTrue(bookedResources.stream().anyMatch(r ->
+                ResourceStatus.BOOKED.name().equals(r.getStatus())), "诊室窗口应被预约");
     }
 
     @Test
