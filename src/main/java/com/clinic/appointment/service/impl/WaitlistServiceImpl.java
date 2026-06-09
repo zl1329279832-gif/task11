@@ -6,7 +6,6 @@ import com.clinic.appointment.domain.dto.WaitlistRequest;
 import com.clinic.appointment.domain.entity.Appointment;
 import com.clinic.appointment.domain.entity.ScheduleSlot;
 import com.clinic.appointment.domain.entity.Waitlist;
-import com.clinic.appointment.domain.enums.SlotStatus;
 import com.clinic.appointment.exception.BusinessException;
 import com.clinic.appointment.mapper.ScheduleSlotMapper;
 import com.clinic.appointment.mapper.WaitlistMapper;
@@ -14,33 +13,56 @@ import com.clinic.appointment.service.AppointmentService;
 import com.clinic.appointment.service.AuditService;
 import com.clinic.appointment.service.RedisLockService;
 import com.clinic.appointment.service.WaitlistService;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
+/**
+ * 候补服务实现
+ *
+ * 并发安全设计：
+ * - triggerBackfill 使用 backfill 锁保证同一医生同一天只有一个补位操作
+ * - 每次补位使用独立事务（TransactionTemplate），一个失败不影响其他
+ * - 每次循环重新查询可用号源，避免卡在同一个不可用号源上
+ * - 使用 findAvailableWithScheduleCheck 排除已停诊排班的号源
+ * - 候补队列严格按 priority ASC, create_time ASC 排序补位
+ */
 @Slf4j
 @Service
-@RequiredArgsConstructor
 public class WaitlistServiceImpl implements WaitlistService {
 
     private final WaitlistMapper waitlistMapper;
     private final ScheduleSlotMapper slotMapper;
     private final RedisLockService lockService;
     private final AuditService auditService;
+    private final TransactionTemplate txTemplate;
 
     @Autowired
     @Lazy
     private AppointmentService appointmentService;
 
     private static final int MAX_WAITLIST_SIZE = 20;
+
+    public WaitlistServiceImpl(WaitlistMapper waitlistMapper,
+                               ScheduleSlotMapper slotMapper,
+                               RedisLockService lockService,
+                               AuditService auditService,
+                               PlatformTransactionManager txManager) {
+        this.waitlistMapper = waitlistMapper;
+        this.slotMapper = slotMapper;
+        this.lockService = lockService;
+        this.auditService = auditService;
+        this.txTemplate = new TransactionTemplate(txManager);
+    }
 
     @Override
     @Transactional
@@ -72,9 +94,8 @@ public class WaitlistServiceImpl implements WaitlistService {
         waitlist.setDepartmentId(request.getDepartmentId());
         waitlist.setTargetDate(request.getTargetDate());
         waitlist.setTimePeriod(request.getTimePeriod());
-        waitlist.setPriority((int) count); // 序号作为优先级
+        waitlist.setPriority((int) count);
         waitlist.setStatus("WAITING");
-        // 候补有效期：目标日期的前一天晚上23:59过期
         waitlist.setExpireTime(request.getTargetDate().minusDays(1).atTime(23, 59, 59));
         waitlistMapper.insert(waitlist);
 
@@ -106,59 +127,81 @@ public class WaitlistServiceImpl implements WaitlistService {
         return waitlist;
     }
 
+    /**
+     * 触发候补补位
+     *
+     * 关键设计：
+     * 1. 不在外层开事务，每次补位操作（book + 更新候补状态）使用独立事务
+     *    → 一个候补失败不会导致其他已成功的候补回滚
+     * 2. 每次循环重新查询可用号源（含排班状态校验）
+     *    → 避免book失败后卡在同一个不可用号源上
+     * 3. 严格按 findWaiting 返回顺序（priority ASC, create_time ASC）补位
+     *    → 保证先到先得
+     * 4. backfill 锁保证同一医生同一天同时只有一个补位操作
+     *    → 防止定时任务和取消触发的补位并发执行导致重复补位
+     */
     @Override
-    @Transactional
     public void triggerBackfill(Long doctorId, LocalDate slotDate, LocalTime slotTime) {
         String lockKey = "lock:backfill:" + doctorId + ":" + slotDate;
         lockService.executeWithLock(lockKey, () -> {
-            // 1. 查找释放后可用的号源
-            List<ScheduleSlot> available = slotMapper.findAvailable(doctorId, slotDate);
-            if (available.isEmpty()) {
-                log.debug("无可补位号源: doctor={}, date={}", doctorId, slotDate);
-                return null;
-            }
-
-            // 2. 获取候补队列（按优先级排序）
+            // 获取候补队列（严格排序：priority ASC, create_time ASC）
             List<Waitlist> waitingList = waitlistMapper.findWaiting(doctorId, slotDate);
             if (waitingList.isEmpty()) {
                 log.debug("无候补患者: doctor={}, date={}", doctorId, slotDate);
                 return null;
             }
 
-            // 3. 逐一补位
             int filled = 0;
             for (Waitlist waiter : waitingList) {
-                if (available.size() <= filled) break;
+                // 每次循环重新查询可用号源（含排班状态校验，排除已停诊）
+                List<ScheduleSlot> available = slotMapper.findAvailableWithScheduleCheck(doctorId, slotDate);
+                if (available.isEmpty()) {
+                    log.debug("无可补位号源: doctor={}, date={}", doctorId, slotDate);
+                    break;
+                }
 
-                ScheduleSlot targetSlot = available.get(filled);
+                // 重新检查候补状态（可能被并发cancel或expire）
+                Waitlist freshWaiter = waitlistMapper.selectById(waiter.getId());
+                if (freshWaiter == null || !"WAITING".equals(freshWaiter.getStatus())) {
+                    continue;
+                }
+
+                ScheduleSlot targetSlot = available.get(0);
 
                 try {
-                    // 创建预约
+                    // book() 有自己的分布式锁和事务，独立完成
                     BookRequest bookReq = new BookRequest();
-                    bookReq.setPatientId(waiter.getPatientId());
-                    bookReq.setPatientName(waiter.getPatientName());
+                    bookReq.setPatientId(freshWaiter.getPatientId());
+                    bookReq.setPatientName(freshWaiter.getPatientName());
                     bookReq.setSlotId(targetSlot.getId());
 
                     Appointment appointment = appointmentService.book(bookReq);
 
-                    // 更新候补状态
-                    waiter.setStatus("FULFILLED");
-                    waiter.setAppointmentId(appointment.getId());
-                    waitlistMapper.updateById(waiter);
+                    // book成功后，独立事务更新候补状态为FULFILLED
+                    txTemplate.execute(s -> {
+                        Waitlist latestWaiter = waitlistMapper.selectById(freshWaiter.getId());
+                        if (latestWaiter != null && "WAITING".equals(latestWaiter.getStatus())) {
+                            latestWaiter.setStatus("FULFILLED");
+                            latestWaiter.setAppointmentId(appointment.getId());
+                            waitlistMapper.updateById(latestWaiter);
+                        }
+                        return null;
+                    });
 
                     auditService.log("WAITLIST_BACKFILL", "APPOINTMENT", appointment.getId(),
                             String.format("{\"waitlistId\":%d,\"patientId\":%d,\"slotId\":%d}",
-                                    waiter.getId(), waiter.getPatientId(), targetSlot.getId()));
+                                    freshWaiter.getId(), freshWaiter.getPatientId(), targetSlot.getId()));
 
                     log.info("候补补位成功: waitlistId={}, patient={}, appointment={}, slot={}",
-                            waiter.getId(), waiter.getPatientId(),
+                            freshWaiter.getId(), freshWaiter.getPatientId(),
                             appointment.getAppointmentNo(), targetSlot.getId());
 
                     filled++;
                 } catch (Exception e) {
-                    log.error("候补补位失败: waitlistId={}, patient={}, error={}",
-                            waiter.getId(), waiter.getPatientId(), e.getMessage());
-                    // 跳过该患者，继续处理下一个
+                    log.error("候补补位失败: waitlistId={}, patient={}, slot={}, error={}",
+                            freshWaiter.getId(), freshWaiter.getPatientId(),
+                            targetSlot.getId(), e.getMessage());
+                    // 继续下一个候补患者（号源会在下次循环重新查询）
                 }
             }
 

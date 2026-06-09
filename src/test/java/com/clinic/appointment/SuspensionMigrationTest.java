@@ -1,5 +1,6 @@
 package com.clinic.appointment;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.clinic.appointment.domain.dto.BookRequest;
 import com.clinic.appointment.domain.dto.SuspendRequest;
 import com.clinic.appointment.domain.entity.*;
@@ -28,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * 场景：
  * 1. 医生A发布停诊 → 受影响预约自动迁移到同科室医生B
  * 2. 无可迁移医生时 → 降级为批量取消
- * 3. 迁移后验证：原预约RESCHEDULED，新预约CONFIRMED，新号源BOOKED
+ * 3. 迁移后验证：原预约RESCHEDULED，新预约CONFIRMED，号源SUSPENDED（终态）
  */
 @Slf4j
 @SpringBootTest
@@ -44,6 +45,7 @@ public class SuspensionMigrationTest {
     @Autowired private AppointmentMapper appointmentMapper;
     @Autowired private AppointmentService appointmentService;
     @Autowired private DoctorSuspensionService suspensionService;
+    @Autowired private DoctorSuspensionMapper suspensionMapper;
 
     private Long deptId;
     private Long doctorAId;
@@ -53,6 +55,7 @@ public class SuspensionMigrationTest {
     @BeforeEach
     void setup() {
         // 清理
+        suspensionMapper.delete(null);
         appointmentMapper.delete(null);
         slotMapper.delete(null);
         scheduleMapper.delete(null);
@@ -132,7 +135,7 @@ public class SuspensionMigrationTest {
 
     @Test
     @Order(1)
-    @DisplayName("停诊迁移模式：预约迁移到同科室其他医生")
+    @DisplayName("停诊迁移模式：预约迁移到同科室其他医生，号源变为SUSPENDED终态")
     void suspendWithMigration() {
         SuspendRequest req = new SuspendRequest();
         req.setDoctorId(doctorAId);
@@ -151,35 +154,46 @@ public class SuspensionMigrationTest {
         assertEquals(0, ((Number) result.get("cancelledCount")).intValue(),
                 "不应有取消");
 
-        // 验证医生A的预约全部变为RESCHEDULED
-        List<Appointment> oldAppts = appointmentMapper.findByDoctorAndDate(doctorAId, targetDate);
-        for (Appointment a : oldAppts) {
-            assertEquals(AppointmentStatus.RESCHEDULED.name(), a.getStatus(),
-                    "原预约应为RESCHEDULED");
-        }
+        // 验证医生A的预约全部变为RESCHEDULED（用selectList查所有状态）
+        LambdaQueryWrapper<Appointment> apptQw = new LambdaQueryWrapper<>();
+        apptQw.eq(Appointment::getDoctorId, doctorAId)
+              .eq(Appointment::getSlotDate, targetDate);
+        List<Appointment> oldAppts = appointmentMapper.selectList(apptQw);
+        long rescheduledCount = oldAppts.stream()
+                .filter(a -> AppointmentStatus.RESCHEDULED.name().equals(a.getStatus()))
+                .count();
+        assertEquals(3, rescheduledCount, "原预约应全部为RESCHEDULED");
 
-        // 验证医生B新增了3个预约
-        List<Appointment> newAppts = appointmentMapper.findByDoctorAndDate(doctorBId, targetDate);
+        // 验证医生B新增了3个CONFIRMED预约
+        LambdaQueryWrapper<Appointment> newApptQw = new LambdaQueryWrapper<>();
+        newApptQw.eq(Appointment::getDoctorId, doctorBId)
+                 .eq(Appointment::getSlotDate, targetDate)
+                 .eq(Appointment::getStatus, AppointmentStatus.CONFIRMED.name());
+        List<Appointment> newAppts = appointmentMapper.selectList(newApptQw);
         assertEquals(3, newAppts.size(), "医生B应有3个新预约");
         for (Appointment a : newAppts) {
-            assertEquals(AppointmentStatus.CONFIRMED.name(), a.getStatus(),
-                    "新预约应为CONFIRMED");
             assertEquals(doctorBId, a.getDoctorId(), "新预约医生应为B");
         }
 
-        // 验证医生A的号源已释放
-        List<ScheduleSlot> slotsA = slotMapper.findAvailable(doctorAId, targetDate);
-        // 所有号源应为RELEASED状态（batchRelease已执行）
-        assertEquals(5, slotsA.size(), "医生A的所有号源应被释放为AVAILABLE（然后被batchRelease为RELEASED）");
+        // 验证医生A的所有号源已变为SUSPENDED终态（不可被重新激活）
+        LambdaQueryWrapper<ScheduleSlot> slotQw = new LambdaQueryWrapper<>();
+        slotQw.eq(ScheduleSlot::getDoctorId, doctorAId)
+              .eq(ScheduleSlot::getSlotDate, targetDate);
+        List<ScheduleSlot> slotsA = slotMapper.selectList(slotQw);
+        for (ScheduleSlot s : slotsA) {
+            assertEquals(SlotStatus.SUSPENDED.name(), s.getStatus(),
+                    "停诊后号源应为SUSPENDED终态");
+        }
+
+        // 验证findAvailable不返回已停诊号源
+        List<ScheduleSlot> available = slotMapper.findAvailable(doctorAId, targetDate);
+        assertEquals(0, available.size(), "停诊后不应有可用号源");
     }
 
     @Test
     @Order(2)
-    @DisplayName("停诊取消模式：无迁移直接批量取消")
+    @DisplayName("停诊取消模式：批量取消预约，号源变为SUSPENDED终态")
     void suspendWithCancel() {
-        // 重新设置（清理迁移产生的数据）
-        setup();
-
         SuspendRequest req = new SuspendRequest();
         req.setDoctorId(doctorAId);
         req.setStartDate(targetDate);
@@ -196,11 +210,29 @@ public class SuspensionMigrationTest {
         assertEquals(0, ((Number) result.get("migratedCount")).intValue(),
                 "不应有迁移");
 
-        // 验证医生A的预约全部CANCELLED
-        List<Appointment> appts = appointmentMapper.findByDoctorAndDate(doctorAId, targetDate);
+        // 验证预约全部CANCELLED
+        LambdaQueryWrapper<Appointment> apptQw = new LambdaQueryWrapper<>();
+        apptQw.eq(Appointment::getDoctorId, doctorAId)
+              .eq(Appointment::getSlotDate, targetDate);
+        List<Appointment> appts = appointmentMapper.selectList(apptQw);
+        long cancelledCount = appts.stream()
+                .filter(a -> AppointmentStatus.CANCELLED.name().equals(a.getStatus()))
+                .count();
+        assertEquals(3, cancelledCount, "所有预约应为CANCELLED");
         for (Appointment a : appts) {
-            assertEquals(AppointmentStatus.CANCELLED.name(), a.getStatus());
-            assertTrue(a.getCancelReason().contains("停诊"), "取消原因应包含'停诊'");
+            if (AppointmentStatus.CANCELLED.name().equals(a.getStatus())) {
+                assertTrue(a.getCancelReason().contains("停诊"), "取消原因应包含'停诊'");
+            }
+        }
+
+        // 验证号源为SUSPENDED终态
+        LambdaQueryWrapper<ScheduleSlot> slotQw = new LambdaQueryWrapper<>();
+        slotQw.eq(ScheduleSlot::getDoctorId, doctorAId)
+              .eq(ScheduleSlot::getSlotDate, targetDate);
+        List<ScheduleSlot> slots = slotMapper.selectList(slotQw);
+        for (ScheduleSlot s : slots) {
+            assertEquals(SlotStatus.SUSPENDED.name(), s.getStatus(),
+                    "停诊后号源应为SUSPENDED终态");
         }
     }
 
@@ -209,6 +241,7 @@ public class SuspensionMigrationTest {
     @DisplayName("停诊迁移降级：同科室无其他医生时降级为取消")
     void suspendMigrateDegradedToCancel() {
         // 清理并只创建医生A（无替代医生）
+        suspensionMapper.delete(null);
         appointmentMapper.delete(null);
         slotMapper.delete(null);
         scheduleMapper.delete(null);
@@ -252,5 +285,15 @@ public class SuspensionMigrationTest {
         // 应降级为取消
         assertEquals(1, ((Number) result.get("cancelledCount")).intValue(),
                 "无可迁移医生时应降级取消");
+
+        // 验证号源为SUSPENDED
+        LambdaQueryWrapper<ScheduleSlot> slotQw = new LambdaQueryWrapper<>();
+        slotQw.eq(ScheduleSlot::getDoctorId, soloDoc.getId())
+              .eq(ScheduleSlot::getSlotDate, targetDate);
+        List<ScheduleSlot> allSlots = slotMapper.selectList(slotQw);
+        for (ScheduleSlot s : allSlots) {
+            assertEquals(SlotStatus.SUSPENDED.name(), s.getStatus(),
+                    "降级取消后号源也应为SUSPENDED终态");
+        }
     }
 }

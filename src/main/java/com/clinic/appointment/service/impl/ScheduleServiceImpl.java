@@ -64,8 +64,9 @@ public class ScheduleServiceImpl implements ScheduleService {
         List<DoctorSchedule> result = new ArrayList<>();
 
         for (LocalDate date = start; !date.isAfter(end); date = date.plusDays(1)) {
+            final LocalDate currentDate = date;
             // 映射日期到 dayOfWeek (1=Mon..7=Sun)
-            int dow = date.getDayOfWeek().getValue();
+            int dow = currentDate.getDayOfWeek().getValue();
 
             for (ScheduleTemplate template : templates) {
                 if (template.getDayOfWeek() != dow) continue;
@@ -73,17 +74,17 @@ public class ScheduleServiceImpl implements ScheduleService {
                 // 检查是否已存在该排班
                 boolean exists = existing.stream().anyMatch(e ->
                         e.getDoctorId().equals(doctorId) &&
-                        e.getScheduleDate().equals(date) &&
+                        e.getScheduleDate().equals(currentDate) &&
                         e.getTimePeriod().equals(template.getTimePeriod()));
                 if (exists) continue;
 
-                boolean isHoliday = holidayDates.contains(date);
+                boolean isHoliday = holidayDates.contains(currentDate);
 
                 // 创建日排班
                 DoctorSchedule schedule = new DoctorSchedule();
                 schedule.setDoctorId(doctorId);
                 schedule.setDepartmentId(doctor.getDepartmentId());
-                schedule.setScheduleDate(date);
+                schedule.setScheduleDate(currentDate);
                 schedule.setTimePeriod(template.getTimePeriod());
                 schedule.setTotalSlots(template.getTotalSlots());
                 schedule.setBookedSlots(0);
@@ -96,7 +97,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 
                 result.add(schedule);
                 log.info("生成排班: doctor={}, date={}, period={}, slots={}, holiday={}",
-                        doctorId, date, template.getTimePeriod(), template.getTotalSlots(), isHoliday);
+                        doctorId, currentDate, template.getTimePeriod(), template.getTotalSlots(), isHoliday);
             }
         }
 

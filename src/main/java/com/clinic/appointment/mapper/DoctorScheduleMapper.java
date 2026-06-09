@@ -20,8 +20,10 @@ public interface DoctorScheduleMapper extends BaseMapper<DoctorSchedule> {
                                                    @Param("end") LocalDate end);
 
     @Update("UPDATE doctor_schedule SET status = #{status}, update_time = NOW() " +
-            "WHERE doctor_id = #{doctorId} AND schedule_date >= #{fromDate} AND status = 'NORMAL'")
+            "WHERE doctor_id = #{doctorId} " +
+            "AND schedule_date BETWEEN #{fromDate} AND #{toDate} AND status = 'NORMAL'")
     int batchUpdateStatus(@Param("doctorId") Long doctorId,
                           @Param("fromDate") LocalDate fromDate,
+                          @Param("toDate") LocalDate toDate,
                           @Param("status") String status);
 }

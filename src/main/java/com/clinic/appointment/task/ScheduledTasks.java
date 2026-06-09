@@ -18,11 +18,14 @@ import java.time.LocalTime;
 import java.util.List;
 
 /**
- * 定时任务：
- * 1. 过期号源清理
- * 2. 未签到自动过号
- * 3. 候补队列过期清理
- * 4. 候补定时补位（补偿异步触发失败的情况）
+ * 定时任务
+ *
+ * 并发安全设计：
+ * - expireSlots 只处理 AVAILABLE 状态的号源，已停诊(SUSPENDED)号源不受影响
+ * - markMissedAppointments 只处理 CONFIRMED 状态的预约
+ * - waitlistBackfillCompensation 触发的 triggerBackfill 内部使用
+ *   findAvailableWithScheduleCheck 排除已停诊排班的号源，
+ *   不会对已停诊的号源触发补位
  */
 @Slf4j
 @Component
@@ -35,6 +38,7 @@ public class ScheduledTasks {
 
     /**
      * 每小时：清理过期号源（当天已过时间的AVAILABLE号源标记为EXPIRED）
+     * 注意：SUSPENDED 状态的号源不会被处理（只查 AVAILABLE）
      */
     @Scheduled(cron = "0 0 * * * ?")
     public void expireSlots() {
@@ -79,7 +83,7 @@ public class ScheduledTasks {
             appointmentMapper.updateById(appt);
 
             ScheduleSlot slot = slotMapper.selectById(appt.getSlotId());
-            if (slot != null) {
+            if (slot != null && SlotStatus.BOOKED.name().equals(slot.getStatus())) {
                 slot.setStatus(SlotStatus.MISSED.name());
                 slotMapper.updateById(slot);
             }
@@ -104,14 +108,17 @@ public class ScheduledTasks {
 
     /**
      * 每15分钟：候补补位补偿任务
-     * 扫描当前有可用号源且有候补队列的情况，触发补位
+     *
+     * 扫描有可用号源且有候补队列的情况，触发补位。
+     * triggerBackfill 内部使用 findAvailableWithScheduleCheck 排除已停诊排班，
+     * 不会对已停诊的号源触发补位。
      */
     @Scheduled(cron = "0 */15 * * * ?")
     public void waitlistBackfillCompensation() {
         LocalDate today = LocalDate.now();
         LocalDate endDate = today.plusDays(7);
 
-        // 查找未来7天内状态为AVAILABLE的号源，按doctor+date分组
+        // 查找未来7天内 AVAILABLE 的号源（SUSPENDED号源不在此列）
         LambdaQueryWrapper<ScheduleSlot> qw = new LambdaQueryWrapper<>();
         qw.eq(ScheduleSlot::getStatus, SlotStatus.AVAILABLE.name())
           .ge(ScheduleSlot::getSlotDate, today)

@@ -40,12 +40,24 @@ public interface ScheduleSlotMapper extends BaseMapper<ScheduleSlot> {
                                       @Param("slotDate") LocalDate slotDate);
 
     /**
-     * 批量释放某医生指定日期范围的号源
+     * 批量释放某医生指定日期范围的号源（仅释放AVAILABLE状态）
      */
     @Update("UPDATE schedule_slot SET status = 'RELEASED', update_time = NOW(), version = version + 1 " +
             "WHERE doctor_id = #{doctorId} AND slot_date BETWEEN #{start} AND #{end} " +
             "AND status = 'AVAILABLE'")
     int batchRelease(@Param("doctorId") Long doctorId,
+                     @Param("start") LocalDate start,
+                     @Param("end") LocalDate end);
+
+    /**
+     * 停诊批量冻结：将所有非终态号源（AVAILABLE/BOOKED/RELEASED）标记为SUSPENDED终态。
+     * 确保停诊后不论号源处于何种中间状态，都不会被定时任务或候补补位重新激活。
+     */
+    @Update("UPDATE schedule_slot SET status = 'SUSPENDED', appointment_id = NULL, " +
+            "update_time = NOW(), version = version + 1 " +
+            "WHERE doctor_id = #{doctorId} AND slot_date BETWEEN #{start} AND #{end} " +
+            "AND status IN ('AVAILABLE', 'BOOKED', 'RELEASED')")
+    int suspendSlots(@Param("doctorId") Long doctorId,
                      @Param("start") LocalDate start,
                      @Param("end") LocalDate end);
 
@@ -57,4 +69,15 @@ public interface ScheduleSlotMapper extends BaseMapper<ScheduleSlot> {
     List<ScheduleSlot> findBookedInRange(@Param("doctorId") Long doctorId,
                                           @Param("start") LocalDate start,
                                           @Param("end") LocalDate end);
+
+    /**
+     * 查找可用号源时排除已停诊排班
+     */
+    @Select("SELECT s.* FROM schedule_slot s " +
+            "INNER JOIN doctor_schedule ds ON s.schedule_id = ds.id " +
+            "WHERE s.doctor_id = #{doctorId} AND s.slot_date = #{slotDate} " +
+            "AND s.status = 'AVAILABLE' AND ds.status = 'NORMAL' " +
+            "ORDER BY s.slot_time")
+    List<ScheduleSlot> findAvailableWithScheduleCheck(@Param("doctorId") Long doctorId,
+                                                       @Param("slotDate") LocalDate slotDate);
 }
